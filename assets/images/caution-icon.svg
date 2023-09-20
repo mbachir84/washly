@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" viewBox="0 0 110 110">
+    <defs>
+        <clipPath id="mntvrdd4ua">
+            <path data-name="Rectangle 551" style="fill:#ff8d41" d="M0 0h49.849v44.333H0z"/>
+        </clipPath>
+    </defs>
+    <g transform="translate(-160 -436)">
+        <circle data-name="Ellipse 148" cx="55" cy="55" r="55" transform="translate(160 436)" style="fill:#fff0e6"/>
+        <g data-name="Group 514" transform="translate(3.544 -.821)">
+            <rect data-name="Rectangle 552" width="9" height="30" rx="4.5" transform="translate(207.381 479.782)" style="fill:#fff0e6"/>
+            <g data-name="Group 513">
+                <g data-name="Group 512" style="clip-path:url(#mntvrdd4ua)" transform="translate(186.456 468.821)">
+                    <path data-name="Path 292" d="M24.843 44.33H4.612a4.279 4.279 0 0 1-4.543-3.619 4.041 4.041 0 0 1 .537-2.837q5.181-8.994 10.373-17.982 4.889-8.471 9.775-16.942A5.329 5.329 0 0 1 23.177.389a4.174 4.174 0 0 1 5.482 1.837c2.941 5.048 5.857 10.115 8.78 15.174q5.725 9.906 11.461 19.807c.851 1.461 1.326 2.944.587 4.55a4.276 4.276 0 0 1-4.225 2.575q-9.608-.011-19.215 0h-1.2m2.7-23c0-1.846.01-3.691 0-5.537a2.276 2.276 0 0 0-2.559-2.55c-1.77-.009-2.661.82-2.667 2.533q-.018 5.536 0 11.073a2.273 2.273 0 0 0 2.558 2.556c1.774.011 2.655-.815 2.668-2.539.014-1.845 0-3.691 0-5.536m-5.23 14.591a2.613 2.613 0 1 0 5.221-.093 2.611 2.611 0 1 0-5.221.093" style="fill:#ff8d41"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

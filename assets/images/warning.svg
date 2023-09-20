@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.517" height="18.247" viewBox="0 0 20.517 18.247">
+    <defs>
+        <clipPath id="a4dzfxrhea">
+            <path data-name="Rectangle 551" style="fill:#ff4141" d="M0 0h20.517v18.247H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Group 518" transform="translate(-186.456 -468.821)">
+        <rect data-name="Rectangle 552" width="3.704" height="12.347" rx="1.852" transform="translate(194.863 473.332)" style="fill:#fff"/>
+        <g data-name="Group 513">
+            <g data-name="Group 512" style="clip-path:url(#a4dzfxrhea)" transform="translate(186.456 468.821)">
+                <path data-name="Path 292" d="M10.225 18.245H1.898a1.761 1.761 0 0 1-1.87-1.488 1.663 1.663 0 0 1 .221-1.168q2.133-3.7 4.269-7.4l4.024-6.975A2.193 2.193 0 0 1 9.54.16a1.718 1.718 0 0 1 2.26.756c1.212 2.078 2.41 4.163 3.614 6.245q2.356 4.077 4.716 8.152a1.933 1.933 0 0 1 .242 1.873 1.76 1.76 0 0 1-1.739 1.06H10.23m1.107-9.466V6.501a.937.937 0 0 0-1.053-1.05c-.728 0-1.1.337-1.1 1.043q-.007 2.279 0 4.557a.936.936 0 0 0 1.054 1.049c.73 0 1.093-.336 1.1-1.045.006-.759 0-1.519 0-2.279m-2.152 6a1.075 1.075 0 1 0 2.149-.038 1.075 1.075 0 1 0-2.149.038" style="fill:#ff4141"/>
+            </g>
+        </g>
+    </g>
+</svg>

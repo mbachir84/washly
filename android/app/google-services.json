@@ -1,0 +1,89 @@
+{
+  "project_info": {
+    "project_number": "810638852135",
+    "project_id": "washly-b8ab4",
+    "storage_bucket": "washly-b8ab4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810638852135:android:458680e3eb6091dab48e02",
+        "android_client_info": {
+          "package_name": "com.example.washly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810638852135-di4ilqsbmqcd6m8dlt73uq0cgftl2c5q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.washly",
+            "certificate_hash": "d8732a2c30947641b38bcfc2cc212f97ba3ee56e"
+          }
+        },
+        {
+          "client_id": "810638852135-hih35vvqrfk70k1je2c446t7qbdutfq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.washly",
+            "certificate_hash": "27ba42d7b0395ad936b38d1db87ea2a6acd60bb0"
+          }
+        },
+        {
+          "client_id": "810638852135-hps55mtcj8jrj899enpv30pae940pjbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.washly",
+            "certificate_hash": "0dda889661c5103b555338dbc44e26546184d186"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByew2vsadLXa8GLYx2sBwgtArokXbLbpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810638852135-50qkoqaiiu23m18su6mevnurhegtns4r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.washly.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810638852135:android:6aa07b1fb1269065b48e02",
+        "android_client_info": {
+          "package_name": "com.example.washly_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByew2vsadLXa8GLYx2sBwgtArokXbLbpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810638852135-50qkoqaiiu23m18su6mevnurhegtns4r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.washly.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

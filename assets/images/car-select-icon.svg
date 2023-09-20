@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+    <g transform="translate(-43 -564)">
+        <circle data-name="Ellipse 140" cx="21" cy="21" r="21" transform="translate(43 564)" style="fill:#edf0f2"/>
+        <g transform="translate(55.467 577.538)">
+            <path data-name="Path 94" d="M74.984 191.524a1 1 0 1 0 1 1 1 1 0 0 0-1-1z" transform="translate(-70.668 -183.49)" style="fill:#698695"/>
+            <path data-name="Path 95" d="m23.853 36.455-1.113-3.444-.007-.022a2.333 2.333 0 0 0-2.2-1.563H13.1a2.333 2.333 0 0 0-2.2 1.563l-1.124 3.47a3.014 3.014 0 0 0-1.788 2.75v5.519a2.007 2.007 0 1 0 4.014 0h9.634a2.007 2.007 0 1 0 4.014 0v-5.519a3.014 3.014 0 0 0-1.797-2.754zM12.8 33.643a.324.324 0 0 1 .3-.209h7.435a.323.323 0 0 1 .3.21l.826 2.556h-9.692zm10.848 8.076a1 1 0 0 1-1 1H11a1 1 0 0 1-1-1v-2.51a1 1 0 0 1 1-1h11.64a1 1 0 0 1 1 1z" transform="translate(-7.988 -31.426)" style="fill:#698695"/>
+            <rect data-name="Rectangle 55" width="4.566" height="2.007" rx="1.004" transform="translate(6.573 8.034)" style="fill:#698695"/>
+            <path data-name="Path 96" d="M255.96 191.524a1 1 0 1 0 1 1 1 1 0 0 0-1-1z" transform="translate(-242.563 -183.49)" style="fill:#698695"/>
+        </g>
+    </g>
+</svg>
