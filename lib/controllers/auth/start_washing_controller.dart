@@ -14,11 +14,11 @@ class StartWashingController extends GetxController {
     
     await getUserFromSession().then((value) async {
       user = value;
-       getUserFromDb(value.uid).then((value)async {
+        getUserFromDb(value.uid).then((value)async {
         WUser user = value;
         saveToSession(user); 
         update();
-         await FirebaseFirestore.instance
+          await FirebaseFirestore.instance
           .collection('w_users')
           .doc(user.uid)
           .update({'current_page': "homeScreen"}).then((value) async {

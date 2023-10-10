@@ -282,7 +282,7 @@ class AddAddressScreen extends StatelessWidget {
                           borderRadius: 17.0.r,
                           onToggle: (val) {
                             controller.switchValue = val;
-                            controller.submit();
+                            controller.update();
                           },
                         ),
                         19.horizontalSpace,
