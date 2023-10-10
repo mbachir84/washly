@@ -11,6 +11,8 @@ class AddressesListController extends GetxController {
   String snackBarTitle = "";
   String snackBarSubTitle = "";
   bool state = false;
+  String addressSelected = "";
+  List<String> addressInfo = [];
 
   showScnackbar(text, subtext, status) {
     height = 137;
@@ -29,7 +31,7 @@ class AddressesListController extends GetxController {
     isLoading.toggle();
     update();
     await getUserFromSession().then((value) {
-      user = value; 
+      user = value;
       isLoading.toggle();
       update();
     });

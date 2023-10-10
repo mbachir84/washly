@@ -10,6 +10,7 @@ import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/utils/glassmorphism.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
+import 'package:washly/views/screens/client/select_address.dart';
 
 import '../../../controllers/client/main_controller.dart';
 
@@ -208,7 +209,7 @@ class MainScreen extends StatelessWidget {
                                               controller.update();
                                             },
                                             child: Container(
-                                                width: 184.w,
+                                                width: 184.w,                                                                                
                                                 height: 94.h,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
@@ -280,7 +281,7 @@ class MainScreen extends StatelessWidget {
                                                         ],
                                                       ),
                                                       Radio<WashType>(
-                                                          fillColor:
+                                                          fillColor:                                            
                                                               MaterialStateColor
                                                                   .resolveWith(
                                                             (states) => controller
@@ -615,7 +616,7 @@ class MainScreen extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           Get.to(
-                                              () => const AddressesListScreen(),
+                                              () => const SelectAdressScreeen(),
                                               transition: Transition
                                                   .leftToRightWithFade,
                                               duration: const Duration(
@@ -700,7 +701,7 @@ class MainScreen extends StatelessWidget {
                                                           ],
                                                         )
                                                       : Text(
-                                                          'addaddresswi',
+                                                          'Select address',
                                                           style: TextStyle(
                                                               color: const Color(
                                                                   0xff313131),
