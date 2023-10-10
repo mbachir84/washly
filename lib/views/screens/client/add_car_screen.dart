@@ -31,7 +31,7 @@ class AddCarScreen extends StatelessWidget {
                   allowed: controller.isVerified,
                   text: 'savecar',
                   onpress: () {
-                    print("hello");
+                    
                     controller.submit();
                   },
                 ),

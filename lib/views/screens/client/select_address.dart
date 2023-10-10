@@ -85,6 +85,23 @@ class SelectAdressScreeen extends StatelessWidget {
                                         Center(
                                             child: InkWell(
                                           onTap: () {
+                                            // if (controller.addressSelected.isNotEmpty) {
+                                            //   controller.user.addresses!.reversed
+                                            //     .toList()[index]
+                                            //     .isDefault = true;
+                                            // }
+                                            controller.addressInfo[
+                                                    "address_name"] =
+                                                controller
+                                                    .user.addresses!.reversed
+                                                    .toList()[index]
+                                                    .name!;
+                                            controller.addressInfo[
+                                                    "address_description"] =
+                                                controller
+                                                    .user.addresses!.reversed
+                                                    .toList()[index]
+                                                    .description!;
                                             //address name should be unique
                                             controller.addressSelected =
                                                 controller
@@ -92,9 +109,6 @@ class SelectAdressScreeen extends StatelessWidget {
                                                     .toList()[index]
                                                     .name!;
                                             controller.update();
-
-                                          
-                                            
                                           },
                                           child: Container(
                                             height: 97.h,
@@ -180,7 +194,7 @@ class SelectAdressScreeen extends StatelessWidget {
                                                               : Container(),
                                                         ],
                                                       ),
-                                                      1.verticalSpace,
+                                                      0.verticalSpace,
                                                       Row(children: [
                                                         SizedBox(
                                                           width: 150.w,

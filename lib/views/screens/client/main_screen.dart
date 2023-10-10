@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/addresses_list_controller.dart';
 import 'package:washly/controllers/client/home_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
@@ -638,86 +639,94 @@ class MainScreen extends StatelessWidget {
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 19.w),
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/images/location-select-icon.svg',
-                                                      height: 42.h,
-                                                      width: 42.w,
-                                                      fit: BoxFit.cover),
-                                                  10.horizontalSpace,
-                                                  controller.address.isNotEmpty
-                                                      ? Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              controller.user
-                                                                  .addresses!
-                                                                  .where((element) =>
-                                                                      element
-                                                                          .isDefault ==
-                                                                      true)
-                                                                  .first
-                                                                  .name!,
-                                                              style: TextStyle(
-                                                                  color: const Color(
-                                                                      0xff313131),
-                                                                  fontSize:
-                                                                      16.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            4.verticalSpace,
-                                                            SizedBox(
-                                                              width: 200.w,
-                                                              child: Text(
-                                                                controller.user
-                                                                    .addresses!
-                                                                    .where((element) =>
-                                                                        element
-                                                                            .isDefault ==
-                                                                        true)
-                                                                    .first
-                                                                    .description!,
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                maxLines: 1,
-                                                                style:
-                                                                    TextStyle(
-                                                                  color:
-                                                                      titleColor,
-                                                                  fontSize:
-                                                                      13.sp,
+                                              child: GetBuilder<AddressesListController>(
+                                                init: AddressesListController(),
+                                                builder: (cont) => 
+                                                Row(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                        'assets/images/location-select-icon.svg',
+                                                        height: 42.h,
+                                                        width: 42.w,
+                                                        fit: BoxFit.cover),
+                                                    10.horizontalSpace,
+                                                    cont.addressInfo.isNotEmpty
+                                                        ? Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                cont.addressInfo[
+                                                    "address_name"]!,
+                                                                // controller.user
+                                                                //     .addresses!
+                                                                //     .where((element) =>
+                                                                //         element
+                                                                //             .isDefault ==
+                                                                //         true)
+                                                                //     .first
+                                                                //     .name!,
+                                                                style: TextStyle(
+                                                                    color: const Color(
+                                                                        0xff313131),
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              4.verticalSpace,
+                                                              SizedBox(
+                                                                width: 200.w,
+                                                                child: Text(
+                                                                  cont.addressInfo[
+                                                    "address_description"]!,
+                                                                  // controller.user
+                                                                  //     .addresses!
+                                                                  //     .where((element) =>
+                                                                  //         element
+                                                                  //             .isDefault ==
+                                                                  //         true)
+                                                                  //     .first
+                                                                  //     .description!,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  maxLines: 1,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color:
+                                                                        titleColor,
+                                                                    fontSize:
+                                                                        13.sp,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : Text(
-                                                          'Select address',
-                                                          style: TextStyle(
-                                                              color: const Color(
-                                                                  0xff313131),
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ).tr(),
-                                                  const Spacer(),
-                                                  Icon(
-                                                    Icons.arrow_forward_ios,
-                                                    color:
-                                                        const Color(0xff313131),
-                                                    size: 16.sp,
-                                                  )
-                                                ],
+                                                            ],
+                                                          )
+                                                        : Text(
+                                                            'Select address',
+                                                            style: TextStyle(
+                                                                color: const Color(
+                                                                    0xff313131),
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ).tr(),
+                                                    const Spacer(),
+                                                    Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color:
+                                                          const Color(0xff313131),
+                                                      size: 16.sp,
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             )),
                                       ),

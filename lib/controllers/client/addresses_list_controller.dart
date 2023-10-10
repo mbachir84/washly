@@ -12,7 +12,7 @@ class AddressesListController extends GetxController {
   String snackBarSubTitle = "";
   bool state = false;
   String addressSelected = "";
-  List<String> addressInfo = [];
+  Map<String,String> addressInfo = {};
 
   showScnackbar(text, subtext, status) {
     height = 137;
