@@ -11,6 +11,7 @@ import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/utils/glassmorphism.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
+import 'package:washly/views/screens/client/choose_car_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
 
 import '../../../controllers/client/main_controller.dart';
@@ -210,7 +211,7 @@ class MainScreen extends StatelessWidget {
                                               controller.update();
                                             },
                                             child: Container(
-                                                width: 184.w,                                                                                
+                                                width: 184.w,
                                                 height: 94.h,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
@@ -282,7 +283,7 @@ class MainScreen extends StatelessWidget {
                                                         ],
                                                       ),
                                                       Radio<WashType>(
-                                                          fillColor:                                            
+                                                          fillColor:
                                                               MaterialStateColor
                                                                   .resolveWith(
                                                             (states) => controller
@@ -516,9 +517,10 @@ class MainScreen extends StatelessWidget {
                                       10.verticalSpace,
                                       InkWell(
                                         onTap: () {
-                                          final homeController =
-                                              Get.put(HomeController());
-                                          homeController.changeScreen(1);
+                                          // final homeController =
+                                          //     Get.put(HomeController());
+                                          // homeController.changeScreen(1);
+                                          Get.to(ChooseCarScreen());
                                         },
                                         child: Container(
                                             height: 70.h,
@@ -639,10 +641,10 @@ class MainScreen extends StatelessWidget {
                                             child: Padding(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 19.w),
-                                              child: GetBuilder<AddressesListController>(
+                                              child: GetBuilder<
+                                                  AddressesListController>(
                                                 init: AddressesListController(),
-                                                builder: (cont) => 
-                                                Row(
+                                                builder: (cont) => Row(
                                                   children: [
                                                     SvgPicture.asset(
                                                         'assets/images/location-select-icon.svg',
@@ -661,7 +663,7 @@ class MainScreen extends StatelessWidget {
                                                             children: [
                                                               Text(
                                                                 cont.addressInfo[
-                                                    "address_name"]!,
+                                                                    "address_name"]!,
                                                                 // controller.user
                                                                 //     .addresses!
                                                                 //     .where((element) =>
@@ -684,7 +686,7 @@ class MainScreen extends StatelessWidget {
                                                                 width: 200.w,
                                                                 child: Text(
                                                                   cont.addressInfo[
-                                                    "address_description"]!,
+                                                                      "address_description"]!,
                                                                   // controller.user
                                                                   //     .addresses!
                                                                   //     .where((element) =>
@@ -721,8 +723,8 @@ class MainScreen extends StatelessWidget {
                                                     const Spacer(),
                                                     Icon(
                                                       Icons.arrow_forward_ios,
-                                                      color:
-                                                          const Color(0xff313131),
+                                                      color: const Color(
+                                                          0xff313131),
                                                       size: 16.sp,
                                                     )
                                                   ],
