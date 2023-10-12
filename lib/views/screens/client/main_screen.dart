@@ -11,6 +11,7 @@ import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/utils/glassmorphism.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
+import 'package:washly/views/screens/client/choose_address_screen.dart';
 import 'package:washly/views/screens/client/choose_car_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
 
@@ -619,7 +620,7 @@ class MainScreen extends StatelessWidget {
                                       InkWell(
                                         onTap: () {
                                           Get.to(
-                                              () => const SelectAdressScreeen(),
+                                              () => const ChosseAddressScreen(),
                                               transition: Transition
                                                   .leftToRightWithFade,
                                               duration: const Duration(

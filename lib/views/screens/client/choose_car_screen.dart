@@ -92,9 +92,9 @@ class ChooseCarScreen extends StatelessWidget {
                                             child: Container(
                                               height: 118.h,
                                               width: double.infinity,
-                                              decoration: BoxDecoration(
+                                              decoration: BoxDecoration(                                        
                                                   border: Border.all(
-                                                      color: controller
+                                                      color: controller                                 
                                                                   .selectedCar ==
                                                               controller.user
                                                                   .cars[index]

@@ -102,6 +102,7 @@ class SelectAdressScreeen extends StatelessWidget {
                                                     .user.addresses!.reversed
                                                     .toList()[index]
                                                     .description!;
+
                                             //address name should be unique
                                             controller.addressSelected =
                                                 controller
@@ -115,15 +116,15 @@ class SelectAdressScreeen extends StatelessWidget {
                                             width: double.infinity,
                                             decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: controller
+                                                    color: (controller
                                                                 .addressSelected ==
                                                             controller
                                                                 .user
                                                                 .addresses!
                                                                 .reversed
                                                                 .toList()[index]
-                                                                .name!
-                                                        ? const Color(
+                                                                .name!) 
+                                                              ? const Color(
                                                             0xff10a7f5)
                                                         : Colors.transparent,
                                                     width: 2.w),
@@ -168,7 +169,7 @@ class SelectAdressScreeen extends StatelessWidget {
                                                                   .addresses!
                                                                   .reversed
                                                                   .toList()[
-                                                                      index]
+                                                                      index]                         
                                                                   .isDefault!
                                                               ? Container(
                                                                   width: 106.w,
@@ -223,18 +224,26 @@ class SelectAdressScreeen extends StatelessWidget {
                                                             fillColor:
                                                                 MaterialStateColor
                                                                     .resolveWith(
-                                                              (states) => controller
-                                                                          .addressSelected !=
+                                                              (states) => 
+                                                              (controller                                      
+                                                                          .addressSelected ==
                                                                       controller
                                                                           .user
                                                                           .addresses!
                                                                           .reversed
                                                                           .toList()[
                                                                               index]
-                                                                          .name!
-                                                                  ? titleColor
-                                                                  : const Color(
-                                                                      0xFF10a7f5),
+                                                                          .name!) 
+                                                              // !controller
+                                                              //     .user
+                                                              //     .addresses!
+                                                              //     .reversed
+                                                              //     .toList()[
+                                                              //         index]
+                                                              //     .isDefault!
+                                                                  ? const Color(
+                                                                      0xFF10a7f5)
+                                                                  : titleColor
                                                             ),
                                                             activeColor:
                                                                 Colors.white,

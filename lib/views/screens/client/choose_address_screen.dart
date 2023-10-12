@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/addresses_list_controller.dart';
 import 'package:washly/controllers/client/choose_address_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/models/address.dart';
+import 'package:washly/views/screens/client/add_address_screen.dart';
 
 import '../../../utils/constants.dart';
 
@@ -21,14 +23,18 @@ class ChosseAddressScreen extends StatelessWidget {
         child: GradientButton(
           text: 'addaddress',
           onpress: () {
-            // controller.addAddress();
+            Get.to(
+                () => const AddAddressScreen(),
+                duration: const Duration(milliseconds: 500),
+                transition: Transition.rightToLeftWithFade,
+              );
           },
         ),
       ),
       backgroundColor: const Color(0xffeaeff0),
       body: SingleChildScrollView(
-        child: GetBuilder<ChooseAddressController>(
-            init: ChooseAddressController(),
+        child: GetBuilder<AddressesListController>(
+            init: AddressesListController(),
             builder: (controller) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -47,7 +53,7 @@ class ChosseAddressScreen extends StatelessWidget {
                               child: SvgPicture.asset(
                                   'assets/images/arrow-back.svg'))),
                       16.horizontalSpace,
-                      Text('selectcar',
+                      Text('Select address',
                               style: TextStyle(
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w700,
@@ -55,8 +61,8 @@ class ChosseAddressScreen extends StatelessWidget {
                           .tr()
                     ]),
                     28.verticalSpace,
-                    GetBuilder<ChooseAddressController>(
-                        init: ChooseAddressController(),
+                    GetBuilder<AddressesListController>(
+                        init: AddressesListController(),
                         builder: (controller) {
                           return controller.isLoading.value
                               ? const Center(child: Text('loading ...'))
@@ -71,7 +77,8 @@ class ChosseAddressScreen extends StatelessWidget {
                                             child: InkWell(
                                           onTap: () {
                                             controller.selectedAddress =
-                                                controller.addresses[index];
+                                                controller
+                                                    .user.addresses![index];
                                             controller.update();
                                           },
                                           child: Container(
@@ -81,8 +88,8 @@ class ChosseAddressScreen extends StatelessWidget {
                                                 border: Border.all(
                                                     color: controller
                                                                 .selectedAddress ==
-                                                            controller
-                                                                    .addresses[
+                                                            controller.user
+                                                                    .addresses![
                                                                 index]
                                                         ? primaryColor
                                                         : Colors.transparent,
@@ -109,8 +116,8 @@ class ChosseAddressScreen extends StatelessWidget {
                                                         children: [
                                                           Text(
                                                             controller
-                                                                .addresses[
-                                                                    index]
+                                                                .user.addresses!
+                                                                .toList()[index]
                                                                 .name!,
                                                             style: TextStyle(
                                                                 fontSize: 16.sp,
@@ -120,9 +127,12 @@ class ChosseAddressScreen extends StatelessWidget {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          100.horizontalSpace,
+                                                          80.horizontalSpace,
                                                           controller
-                                                                  .addresses[
+                                                                  .user
+                                                                  .addresses!
+                                                                  .reversed
+                                                                  .toList()[
                                                                       index]
                                                                   .isDefault!
                                                               ? Container(
@@ -154,7 +164,10 @@ class ChosseAddressScreen extends StatelessWidget {
                                                         width: 150.w,
                                                         child: Text(
                                                           controller
-                                                              .addresses[index]
+                                                              .user
+                                                              .addresses!
+                                                              .reversed
+                                                              .toList()[index]
                                                               .description!,
                                                           overflow: TextOverflow
                                                               .ellipsis,
@@ -178,19 +191,21 @@ class ChosseAddressScreen extends StatelessWidget {
                                                           const EdgeInsets.all(
                                                               0),
                                                       child: Radio<Address>(
-                                                          fillColor: MaterialStateColor.resolveWith(
-                                                              (states) => controller
+                                                          fillColor: MaterialStateColor
+                                                              .resolveWith((states) => controller
                                                                           .selectedAddress ==
                                                                       controller
-                                                                              .addresses[
+                                                                              .user
+                                                                              .addresses![
                                                                           index]
                                                                   ? primaryColor
                                                                   : const Color(
                                                                       0xff698695)),
                                                           activeColor:
                                                               Colors.white,
-                                                          value: controller
-                                                              .addresses[index],
+                                                          value: controller.user
+                                                                  .addresses![
+                                                              index],
                                                           groupValue: controller
                                                               .selectedAddress,
                                                           onChanged: (value) {
@@ -208,12 +223,12 @@ class ChosseAddressScreen extends StatelessWidget {
                                             ),
                                           ),
                                         )),
-                                        index != controller.addresses.length - 1
+                                        index != controller.user.addresses!.length - 1
                                             ? Container()
-                                            : 100  .verticalSpace,
+                                            : 100.verticalSpace,
                                       ],
                                     ),
-                                    itemCount: controller.addresses.length,
+                                    itemCount: controller.user.addresses!.length,
                                     separatorBuilder:
                                         (BuildContext context, int index) =>
                                             10.verticalSpace,

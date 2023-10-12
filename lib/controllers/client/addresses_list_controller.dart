@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:washly/utils/models/address.dart';
 import 'package:washly/utils/models/w_user.dart';
 
 import '../../utils/services.dart';
@@ -12,7 +13,8 @@ class AddressesListController extends GetxController {
   String snackBarSubTitle = "";
   bool state = false;
   String addressSelected = "";
-  Map<String,String> addressInfo = {};
+  Address selectedAddress = Address();
+  Map<String, String> addressInfo = {};
 
   showScnackbar(text, subtext, status) {
     height = 137;
@@ -33,6 +35,7 @@ class AddressesListController extends GetxController {
     await getUserFromSession().then((value) {
       user = value;
       isLoading.toggle();
+      selectedAddress = user.addresses![0];
       update();
     });
     super.onInit();
