@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:washly/utils/models/address.dart';
 import 'package:washly/utils/models/w_user.dart';
@@ -12,9 +13,8 @@ class AddressesListController extends GetxController {
   String snackBarTitle = "";
   String snackBarSubTitle = "";
   bool state = false;
-  String addressSelected = "";
   Address selectedAddress = Address();
-  Map<String, String> addressInfo = {};
+  Map<String, String> addressSelectedMap = {};
 
   showScnackbar(text, subtext, status) {
     height = 137;
@@ -28,15 +28,19 @@ class AddressesListController extends GetxController {
     });
   }
 
+
+
   @override
   Future<void> onInit() async {
     isLoading.toggle();
     update();
     await getUserFromSession().then((value) {
       user = value;
-      isLoading.toggle();
       selectedAddress = user.addresses![0];
+      isLoading.toggle();
+  
       update();
+      
     });
     super.onInit();
   }

@@ -80,21 +80,24 @@ class ChooseCarScreen extends StatelessWidget {
                                       shrinkWrap: true,
                                       itemBuilder:
                                           (BuildContext context, int index) =>
-                                              Column(
+                                              Column(                              
                                         children: [
                                           Center(
                                               child: InkWell(
                                             onTap: () {
                                               controller.selectedCar =
                                                   controller.user.cars[index];
+                                                  
+                                              controller.user.cars[index]
+                                                  .isSelected = true;
                                               controller.update();
                                             },
                                             child: Container(
                                               height: 118.h,
                                               width: double.infinity,
-                                              decoration: BoxDecoration(                                        
+                                              decoration: BoxDecoration(
                                                   border: Border.all(
-                                                      color: controller                                 
+                                                      color: controller
                                                                   .selectedCar ==
                                                               controller.user
                                                                   .cars[index]
@@ -129,7 +132,8 @@ class ChooseCarScreen extends StatelessWidget {
                                                                     CircularProgressIndicator()),
                                                         errorWidget: (context,
                                                                 url, error) =>
-                                                            const Icon(Icons.error),
+                                                            const Icon(
+                                                                Icons.error),
                                                       ),
                                                     ),
                                                     16.horizontalSpace,

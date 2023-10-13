@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:washly/controllers/client/addresses_list_controller.dart';
+import 'package:washly/controllers/client/choose_car_controller.dart';
 import 'package:washly/controllers/client/home_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
@@ -13,6 +14,7 @@ import 'package:washly/utils/glassmorphism.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
 import 'package:washly/views/screens/client/choose_address_screen.dart';
 import 'package:washly/views/screens/client/choose_car_screen.dart';
+import 'package:washly/views/screens/client/notifications_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
 
 import '../../../controllers/client/main_controller.dart';
@@ -77,8 +79,11 @@ class MainScreen extends StatelessWidget {
                           SizedBox(
                             width: 51.w,
                             height: 51.w,
-                            child: Icon(CupertinoIcons.bell,
-                                color: Colors.white, size: 30.sp),
+                            child: InkWell(
+                              onTap: () =>Get.to(()=> NotificationScreen()),
+                              child: Icon(CupertinoIcons.bell,
+                                  color: Colors.white, size: 30.sp),
+                            ),
                           ),
                           Positioned(
                             top: 14.h,
@@ -523,90 +528,89 @@ class MainScreen extends StatelessWidget {
                                           // homeController.changeScreen(1);
                                           Get.to(ChooseCarScreen());
                                         },
-                                        child: Container(
-                                            height: 70.h,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(9.r),
-                                              boxShadow: const [
-                                                BoxShadow(
-                                                    color: Color(0x1a000000),
-                                                    blurRadius: 5)
-                                              ],
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 19.w),
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/images/car-select-icon.svg',
-                                                      height: 42.h,
-                                                      width: 42.w,
-                                                      fit: BoxFit.cover),
-                                                  10.horizontalSpace,
-                                                  controller
-                                                          .user.cars.isNotEmpty
-                                                      ? Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              controller
-                                                                  .user
-                                                                  .cars
-                                                                  .first
-                                                                  .make!,
-                                                              style: TextStyle(
-                                                                  color: const Color(
-                                                                      0xff313131),
-                                                                  fontSize:
-                                                                      16.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            4.verticalSpace,
-                                                            Text(
-                                                              controller
-                                                                  .user
-                                                                  .cars
-                                                                  .first
-                                                                  .licencePlate!,
-                                                              style: TextStyle(
-                                                                color:
-                                                                    titleColor,
-                                                                fontSize: 13.sp,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : Text(
-                                                          'addcar',
-                                                          style: TextStyle(
-                                                              color: const Color(
-                                                                  0xff313131),
-                                                              fontSize: 16.sp,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ).tr(),
-                                                  const Spacer(),
-                                                  Icon(
-                                                    Icons.arrow_forward_ios,
-                                                    color:
-                                                        const Color(0xff313131),
-                                                    size: 16.sp,
-                                                  )
+                                        child: GetBuilder<ChooseCarController>(
+                                          init: ChooseCarController(),
+                                          builder: (contr) => 
+                                          Container(
+                                              height: 70.h,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(9.r),
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                      color: Color(0x1a000000),
+                                                      blurRadius: 5)
                                                 ],
                                               ),
-                                            )),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 19.w),
+                                                child: Row(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                        'assets/images/car-select-icon.svg',
+                                                        height: 42.h,
+                                                        width: 42.w,
+                                                        fit: BoxFit.cover),
+                                                    10.horizontalSpace,
+                                                    controller
+                                                            .user.cars.isNotEmpty
+                                                        ? Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(                                                         
+                                                                contr
+                                                                    .selectedCar
+                                                                    .make!,
+                                                                style: TextStyle(
+                                                                    color: const Color(
+                                                                        0xff313131),
+                                                                    fontSize:
+                                                                        16.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              4.verticalSpace,
+                                                              Text(
+                                                                contr.selectedCar
+                                                                    .licencePlate!,
+                                                                style: TextStyle(
+                                                                  color:
+                                                                      titleColor,
+                                                                  fontSize: 13.sp,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : Text(
+                                                            'Select Car',
+                                                            style: TextStyle(
+                                                                color: const Color(
+                                                                    0xff313131),
+                                                                fontSize: 16.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ).tr(),
+                                                    const Spacer(),
+                                                    Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color:
+                                                          const Color(0xff313131),
+                                                      size: 16.sp,
+                                                    )
+                                                  ],
+                                                ),
+                                              )),
+                                        ),
                                       ),
                                       16.verticalSpace,
                                       Text(
@@ -653,7 +657,7 @@ class MainScreen extends StatelessWidget {
                                                         width: 42.w,
                                                         fit: BoxFit.cover),
                                                     10.horizontalSpace,
-                                                    cont.addressInfo.isNotEmpty
+                                                    cont.selectedAddress != null
                                                         ? Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -663,16 +667,8 @@ class MainScreen extends StatelessWidget {
                                                                     .start,
                                                             children: [
                                                               Text(
-                                                                cont.addressInfo[
-                                                                    "address_name"]!,
-                                                                // controller.user
-                                                                //     .addresses!
-                                                                //     .where((element) =>
-                                                                //         element
-                                                                //             .isDefault ==
-                                                                //         true)
-                                                                //     .first
-                                                                //     .name!,
+                                                                cont.selectedAddress.name!,
+                                                              
                                                                 style: TextStyle(
                                                                     color: const Color(
                                                                         0xff313131),
@@ -686,16 +682,8 @@ class MainScreen extends StatelessWidget {
                                                               SizedBox(
                                                                 width: 200.w,
                                                                 child: Text(
-                                                                  cont.addressInfo[
-                                                                      "address_description"]!,
-                                                                  // controller.user
-                                                                  //     .addresses!
-                                                                  //     .where((element) =>
-                                                                  //         element
-                                                                  //             .isDefault ==
-                                                                  //         true)
-                                                                  //     .first
-                                                                  //     .description!,
+                                                                  cont.selectedAddress.description!,
+                                                                  
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis,

@@ -46,7 +46,7 @@ class WUser {
     this.totalRatings,
     this.isDeleted,
     this.createdAt,
-    this.cars  = const [],
+    this.cars = const [],
   });
 
   factory WUser.fromJson(Map<String, dynamic> json) => WUser(
@@ -95,9 +95,8 @@ class WUser {
         "total_ratings": totalRatings,
         "is_deleted": isDeleted,
         "created_at": createdAt,
-        "cars": cars == null
-            ? []
-            : List<dynamic>.from(cars.map((x) => x.toJson())),
+        "cars":
+            cars == null ? [] : List<dynamic>.from(cars.map((x) => x.toJson())),
       };
 }
 
@@ -117,6 +116,7 @@ class Car {
   String? make;
   String? model;
   String? image;
+  bool? isSelected;
 
   Car({
     this.uid,
@@ -126,6 +126,7 @@ class Car {
     this.make,
     this.model,
     this.image,
+    this.isSelected,
   });
 
   factory Car.fromJson(Map<String, dynamic> json) => Car(

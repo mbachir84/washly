@@ -24,10 +24,10 @@ class ChosseAddressScreen extends StatelessWidget {
           text: 'addaddress',
           onpress: () {
             Get.to(
-                () => const AddAddressScreen(),
-                duration: const Duration(milliseconds: 500),
-                transition: Transition.rightToLeftWithFade,
-              );
+              () => const AddAddressScreen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeftWithFade,
+            );
           },
         ),
       ),
@@ -76,6 +76,10 @@ class ChosseAddressScreen extends StatelessWidget {
                                         Center(
                                             child: InkWell(
                                           onTap: () {
+                                            ///////
+
+                                            ///////
+
                                             controller.selectedAddress =
                                                 controller
                                                     .user.addresses![index];
@@ -116,8 +120,9 @@ class ChosseAddressScreen extends StatelessWidget {
                                                         children: [
                                                           Text(
                                                             controller
-                                                                .user.addresses!
-                                                                .toList()[index]
+                                                                .user
+                                                                .addresses![
+                                                                    index]
                                                                 .name!,
                                                             style: TextStyle(
                                                                 fontSize: 16.sp,
@@ -127,12 +132,10 @@ class ChosseAddressScreen extends StatelessWidget {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          80.horizontalSpace,
+                                                          60.horizontalSpace,
                                                           controller
                                                                   .user
-                                                                  .addresses!
-                                                                  .reversed
-                                                                  .toList()[
+                                                                  .addresses![
                                                                       index]
                                                                   .isDefault!
                                                               ? Container(
@@ -166,8 +169,7 @@ class ChosseAddressScreen extends StatelessWidget {
                                                           controller
                                                               .user
                                                               .addresses!
-                                                              .reversed
-                                                              .toList()[index]
+                                                              [index]
                                                               .description!,
                                                           overflow: TextOverflow
                                                               .ellipsis,
@@ -223,12 +225,16 @@ class ChosseAddressScreen extends StatelessWidget {
                                             ),
                                           ),
                                         )),
-                                        index != controller.user.addresses!.length - 1
+                                        index !=
+                                                controller.user.addresses!
+                                                        .length -
+                                                    1
                                             ? Container()
                                             : 100.verticalSpace,
                                       ],
                                     ),
-                                    itemCount: controller.user.addresses!.length,
+                                    itemCount:
+                                        controller.user.addresses!.length,
                                     separatorBuilder:
                                         (BuildContext context, int index) =>
                                             10.verticalSpace,

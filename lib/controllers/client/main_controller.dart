@@ -12,8 +12,8 @@ class MainController extends GetxController {
   WUser user = WUser();
   RxBool isLoading = false.obs;
   String address = "";
-  getUserLocation() async { 
-    if (user.addresses!.isNotEmpty) { 
+  getUserLocation() async {
+    if (user.addresses!.isNotEmpty) {
       List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
           user.addresses![0].latitude!, user.addresses![0].longitude!,
           localeIdentifier: "fr_FR");
@@ -25,8 +25,7 @@ class MainController extends GetxController {
         }
       }
       update();
-    } else { 
-    }
+    } else {}
   }
 
   void showDialog(BuildContext context) {
@@ -35,6 +34,10 @@ class MainController extends GetxController {
       allowBackNavigation: true,
     );
   }
+
+  // void isCarSelected() {
+  //   user.cars.map((e) => e.isSelected! ? e.make : null);
+  // }
 
   @override
   void onInit() {
