@@ -76,14 +76,11 @@ class ChosseAddressScreen extends StatelessWidget {
                                         Center(
                                             child: InkWell(
                                           onTap: () {
-                                            ///////
-
-                                            ///////
-
                                             controller.selectedAddress =
                                                 controller
                                                     .user.addresses![index];
                                             controller.update();
+                                            Get.back();
                                           },
                                           child: Container(
                                             height: 118.h,
@@ -168,8 +165,7 @@ class ChosseAddressScreen extends StatelessWidget {
                                                         child: Text(
                                                           controller
                                                               .user
-                                                              .addresses!
-                                                              [index]
+                                                              .addresses![index]
                                                               .description!,
                                                           overflow: TextOverflow
                                                               .ellipsis,

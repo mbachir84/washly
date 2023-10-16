@@ -80,17 +80,18 @@ class ChooseCarScreen extends StatelessWidget {
                                       shrinkWrap: true,
                                       itemBuilder:
                                           (BuildContext context, int index) =>
-                                              Column(                              
+                                              Column(
                                         children: [
                                           Center(
                                               child: InkWell(
                                             onTap: () {
                                               controller.selectedCar =
                                                   controller.user.cars[index];
-                                                  
+
                                               controller.user.cars[index]
                                                   .isSelected = true;
                                               controller.update();
+                                              Get.back();
                                             },
                                             child: Container(
                                               height: 118.h,

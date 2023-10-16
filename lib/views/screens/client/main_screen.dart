@@ -16,6 +16,7 @@ import 'package:washly/views/screens/client/choose_address_screen.dart';
 import 'package:washly/views/screens/client/choose_car_screen.dart';
 import 'package:washly/views/screens/client/notifications_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
+import 'package:washly/views/screens/client/wallet_screen.dart';
 
 import '../../../controllers/client/main_controller.dart';
 
@@ -47,27 +48,32 @@ class MainScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SvgPicture.asset('assets/images/wallet.svg', width: 23.3.w),
-                    12.horizontalSpace,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'walletbalance',
-                          style: TextStyle(
-                              color: const Color(0xffaedaf1),
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold),
-                        ).tr(),
-                        5.verticalSpace,
-                        Text(
-                          '500 MAD',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold),
-                        ).tr(),
-                      ],
+                    InkWell(
+                      onTap:()=> Get.to(()=>const WalletScreen()),
+                      child: Row(
+                        children: [SvgPicture.asset('assets/images/wallet.svg', width: 23.3.w),
+                      12.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'walletbalance',
+                            style: TextStyle(
+                                color: const Color(0xffaedaf1),
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold),
+                          ).tr(),
+                          5.verticalSpace,
+                          Text(
+                            '500 MAD',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold),
+                          ).tr(),
+                        ],
+                      ),],
+                      ),
                     ),
                     const Spacer(),
                     Glassmorphism(
@@ -155,13 +161,15 @@ class MainScreen extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(8.r))),
                                 onPressed: () {},
-                                child: Text(
-                                  'invitefriend',
-                                  style: TextStyle(
-                                      color: const Color(0xff030303),
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold),
-                                ).tr()),
+                                child: Center(
+                                  child: Text(
+                                    'invitefriend',
+                                    style: TextStyle(
+                                        color: const Color(0xff030303),
+                                        fontSize: 11.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ).tr(),
+                                )),
                           )
                         ],
                       ),
@@ -526,7 +534,11 @@ class MainScreen extends StatelessWidget {
                                           // final homeController =
                                           //     Get.put(HomeController());
                                           // homeController.changeScreen(1);
-                                          Get.to(ChooseCarScreen());
+                                          Get.to(const ChooseCarScreen(),
+                                          transition: Transition
+                                                  .leftToRightWithFade,
+                                              duration: const Duration(
+                                                  milliseconds: 500));
                                         },
                                         child: GetBuilder<ChooseCarController>(
                                           init: ChooseCarController(),
