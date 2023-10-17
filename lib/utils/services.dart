@@ -64,7 +64,7 @@ Future<Widget> initWidget() async {
 
 handlerPermission() async {
   var permission = await Permission.sensors.status;
-  if(Platform.isIOS){
+  if (Platform.isIOS) {
     Geolocator.requestPermission();
   }
   if (permission.isDenied) {
@@ -144,4 +144,18 @@ String generateRandomString(int length) {
       (index) => availableChars[random.nextInt(availableChars.length)]).join();
 
   return randomString;
+}
+
+////
+void updateCarsDocument() async {
+  var collection = FirebaseFirestore.instance.collection("cars");
+  var allDocs = await collection.get();
+
+  for (var i = 0; i < allDocs.docs.length; i++) {
+    print("doc $i ${allDocs.docs[i].id}");
+    collection.doc(allDocs.docs[i].id).update
+    ({"uid": allDocs.docs[i].id},).then((value) => print("added"));
+  }
+  var docID = allDocs.docs[2].id;
+  print("car document is $docID");
 }

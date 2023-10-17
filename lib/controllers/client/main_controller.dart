@@ -28,6 +28,19 @@ class MainController extends GetxController {
     } else {}
   }
 
+  // String typeWash() {
+  //   switch (WashType) {
+  //     case WashType.basic:
+  //       return "Basic wash";
+  //     case WashType.full:
+  //       return "Full wash";
+  //     case WashType.premium:
+  //       return "Premium wash";
+  //     default:
+  //       return;
+  //   }
+  // }
+
   void showDialog(BuildContext context) {
     showBottomDialog(
       context: context,
@@ -41,6 +54,7 @@ class MainController extends GetxController {
 
   @override
   void onInit() {
+    // updateCarsDocument();
     handlerPermission();
     isLoading.toggle();
     update();

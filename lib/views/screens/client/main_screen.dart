@@ -14,7 +14,9 @@ import 'package:washly/utils/glassmorphism.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
 import 'package:washly/views/screens/client/choose_address_screen.dart';
 import 'package:washly/views/screens/client/choose_car_screen.dart';
+import 'package:washly/views/screens/client/my_coupons_page.dart';
 import 'package:washly/views/screens/client/notifications_screen.dart';
+import 'package:washly/views/screens/client/promo_code_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
 import 'package:washly/views/screens/client/wallet_screen.dart';
 
@@ -49,30 +51,33 @@ class MainScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     InkWell(
-                      onTap:()=> Get.to(()=>const WalletScreen()),
+                      onTap: () => Get.to(() => const WalletScreen()),
                       child: Row(
-                        children: [SvgPicture.asset('assets/images/wallet.svg', width: 23.3.w),
-                      12.horizontalSpace,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'walletbalance',
-                            style: TextStyle(
-                                color: const Color(0xffaedaf1),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold),
-                          ).tr(),
-                          5.verticalSpace,
-                          Text(
-                            '500 MAD',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold),
-                          ).tr(),
+                          SvgPicture.asset('assets/images/wallet.svg',
+                              width: 23.3.w),
+                          12.horizontalSpace,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'walletbalance',
+                                style: TextStyle(
+                                    color: const Color(0xffaedaf1),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold),
+                              ).tr(),
+                              5.verticalSpace,
+                              Text(
+                                '500 MAD',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold),
+                              ).tr(),
+                            ],
+                          ),
                         ],
-                      ),],
                       ),
                     ),
                     const Spacer(),
@@ -86,7 +91,7 @@ class MainScreen extends StatelessWidget {
                             width: 51.w,
                             height: 51.w,
                             child: InkWell(
-                              onTap: () =>Get.to(()=> NotificationScreen()),
+                              onTap: () => Get.to(() => NotificationScreen()),
                               child: Icon(CupertinoIcons.bell,
                                   color: Colors.white, size: 30.sp),
                             ),
@@ -160,7 +165,9 @@ class MainScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.r))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(() => const PromoCodeScreen());
+                                },
                                 child: Center(
                                   child: Text(
                                     'invitefriend',
@@ -535,15 +542,14 @@ class MainScreen extends StatelessWidget {
                                           //     Get.put(HomeController());
                                           // homeController.changeScreen(1);
                                           Get.to(const ChooseCarScreen(),
-                                          transition: Transition
+                                              transition: Transition
                                                   .leftToRightWithFade,
                                               duration: const Duration(
                                                   milliseconds: 500));
                                         },
                                         child: GetBuilder<ChooseCarController>(
                                           init: ChooseCarController(),
-                                          builder: (contr) => 
-                                          Container(
+                                          builder: (contr) => Container(
                                               height: 70.h,
                                               width: double.infinity,
                                               decoration: BoxDecoration(
@@ -567,8 +573,8 @@ class MainScreen extends StatelessWidget {
                                                         width: 42.w,
                                                         fit: BoxFit.cover),
                                                     10.horizontalSpace,
-                                                    controller
-                                                            .user.cars.isNotEmpty
+                                                    controller.user.cars
+                                                            .isNotEmpty
                                                         ? Column(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
@@ -577,7 +583,7 @@ class MainScreen extends StatelessWidget {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Text(                                                         
+                                                              Text(
                                                                 contr
                                                                     .selectedCar
                                                                     .make!,
@@ -592,12 +598,15 @@ class MainScreen extends StatelessWidget {
                                                               ),
                                                               4.verticalSpace,
                                                               Text(
-                                                                contr.selectedCar
+                                                                contr
+                                                                    .selectedCar
                                                                     .licencePlate!,
-                                                                style: TextStyle(
+                                                                style:
+                                                                    TextStyle(
                                                                   color:
                                                                       titleColor,
-                                                                  fontSize: 13.sp,
+                                                                  fontSize:
+                                                                      13.sp,
                                                                 ),
                                                               ),
                                                             ],
@@ -615,8 +624,8 @@ class MainScreen extends StatelessWidget {
                                                     const Spacer(),
                                                     Icon(
                                                       Icons.arrow_forward_ios,
-                                                      color:
-                                                          const Color(0xff313131),
+                                                      color: const Color(
+                                                          0xff313131),
                                                       size: 16.sp,
                                                     )
                                                   ],
@@ -679,8 +688,8 @@ class MainScreen extends StatelessWidget {
                                                                     .start,
                                                             children: [
                                                               Text(
-                                                                cont.selectedAddress.name!,
-                                                              
+                                                                cont.selectedAddress
+                                                                    .name!,
                                                                 style: TextStyle(
                                                                     color: const Color(
                                                                         0xff313131),
@@ -694,8 +703,8 @@ class MainScreen extends StatelessWidget {
                                                               SizedBox(
                                                                 width: 200.w,
                                                                 child: Text(
-                                                                  cont.selectedAddress.description!,
-                                                                  
+                                                                  cont.selectedAddress
+                                                                      .description!,
                                                                   overflow:
                                                                       TextOverflow
                                                                           .ellipsis,

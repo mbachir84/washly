@@ -49,7 +49,7 @@ class NotificationScreen extends StatelessWidget {
                                   color: const Color(0xff030303)))
                           .tr()
                     ]),
-                    0.verticalSpace,
+                    28.verticalSpace,
                     GetBuilder<AddressesListController>(                        
                         init: AddressesListController(),
                         builder: (controller) {
@@ -57,6 +57,7 @@ class NotificationScreen extends StatelessWidget {
                               ? const Center(child: Text('loading ...'))
                               : Container(
                                   child: ListView.separated(
+                                    padding: EdgeInsets.zero,
                                     shrinkWrap: true,
                                     itemBuilder:
                                         (BuildContext context, int index) =>

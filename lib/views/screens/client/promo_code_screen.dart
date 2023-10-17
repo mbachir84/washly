@@ -29,6 +29,7 @@ class PromoCodeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            30.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.w),
               child: Row(
