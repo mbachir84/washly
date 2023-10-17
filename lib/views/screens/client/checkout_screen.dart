@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/addresses_list_controller.dart';
 import 'package:washly/controllers/client/checkout_controller.dart';
+import 'package:washly/controllers/client/choose_car_controller.dart';
 import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
@@ -28,7 +30,7 @@ class CheckoutScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                       child: GetBuilder<MainController>(
                         init: MainController(),
-                        builder: (cont) =>  Column(
+                        builder: (cont) => Column(
                           children: [
                             80.verticalSpace,
                             Row(
@@ -63,7 +65,7 @@ class CheckoutScreen extends StatelessWidget {
                               children: [
                                 SvgPicture.asset('assets/images/wash-icon.svg'),
                                 14.horizontalSpace,
-                                Text(cont.washType.toString(),
+                                Text(cont.typeWash(),
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.bold,
@@ -78,9 +80,10 @@ class CheckoutScreen extends StatelessWidget {
                                     height: 35.w,
                                     width: 35.w,
                                     decoration: BoxDecoration(
-                                        color:
-                                            const Color(0xff10a7f5).withOpacity(0.07),
-                                        borderRadius: BorderRadius.circular(5.r)),
+                                        color: const Color(0xff10a7f5)
+                                            .withOpacity(0.07),
+                                        borderRadius:
+                                            BorderRadius.circular(5.r)),
                                     child: Icon(
                                       Icons.info_outline,
                                       size: 20.sp,
@@ -89,7 +92,7 @@ class CheckoutScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                Text('20 MAD',
+                                Text('${cont.priceWash()} MAD',
                                         style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.bold,
@@ -112,35 +115,39 @@ class CheckoutScreen extends StatelessWidget {
                                   duration: const Duration(milliseconds: 500),
                                 );
                               },
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                      'assets/images/car-select-icon.svg'),
-                                  14.horizontalSpace,
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Mercedes-Benz',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xff030303),
-                                          )).tr(),
-                                      Text('57631 | 8',
-                                          style: TextStyle(
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xff698695),
-                                          )).tr(),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: const Color(0xff313131),
-                                    size: 16.sp,
-                                  ),
-                                ],
+                              child: GetBuilder<ChooseCarController>(
+                                init: ChooseCarController(),
+                                builder: (contr) => Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/images/car-select-icon.svg'),
+                                    14.horizontalSpace,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(contr.selectedCar.make!,
+                                            style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xff030303),
+                                            )).tr(),
+                                        Text(contr.selectedCar.licencePlate!,
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xff698695),
+                                            )).tr(),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: const Color(0xff313131),
+                                      size: 16.sp,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             18.5.verticalSpace,
@@ -158,35 +165,39 @@ class CheckoutScreen extends StatelessWidget {
                                   duration: const Duration(milliseconds: 500),
                                 );
                               },
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                      'assets/images/location-select-icon.svg'),
-                                  14.horizontalSpace,
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Home',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xff030303),
-                                          )).tr(),
-                                      Text('Rez de, 443 Bd Al Hassan Al Alaoui',
-                                          style: TextStyle(
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xff698695),
-                                          )).tr(),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: const Color(0xff313131),
-                                    size: 16.sp,
-                                  ),
-                                ],
+                              child: GetBuilder<AddressesListController>(
+                                init: AddressesListController(),
+                                builder: (cont) => Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/images/location-select-icon.svg'),
+                                    14.horizontalSpace,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(cont.selectedAddress.name!,
+                                            style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xff030303),
+                                            )).tr(),
+                                        Text(cont.selectedAddress.description!,
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xff698695),
+                                            )).tr(),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: const Color(0xff313131),
+                                      size: 16.sp,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                             18.5.verticalSpace,
@@ -210,7 +221,8 @@ class CheckoutScreen extends StatelessWidget {
                                       'assets/images/booking-select-icon.svg'),
                                   14.horizontalSpace,
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text('April 24, 2023',
                                           style: TextStyle(
@@ -326,10 +338,12 @@ class CheckoutScreen extends StatelessWidget {
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,
-                                              backgroundColor: const Color(0xffb6e4fc),
+                                              backgroundColor:
+                                                  const Color(0xffb6e4fc),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(6.r),
+                                                  topRight:
+                                                      Radius.circular(6.r),
                                                   bottomRight:
                                                       Radius.circular(6.r),
                                                 ),
@@ -366,7 +380,8 @@ class CheckoutScreen extends StatelessWidget {
                                       fit: BoxFit.cover),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       14.horizontalSpace,
                                       SvgPicture.asset(
@@ -440,7 +455,7 @@ class CheckoutScreen extends StatelessWidget {
                                   ),
                                 ).tr(),
                                 Text(
-                                  '20 MAD',
+                                  '${cont.priceWash()} MAD',
                                   style: TextStyle(
                                     color: const Color(0xff698695),
                                     fontSize: 14.sp,
@@ -462,7 +477,7 @@ class CheckoutScreen extends StatelessWidget {
                                   ),
                                 ).tr(),
                                 Text(
-                                  '20 MAD',
+                                  '${cont.priceWash()} MAD',
                                   style: TextStyle(
                                     color: const Color(0xff030303),
                                     fontSize: 20.sp,

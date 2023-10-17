@@ -28,18 +28,32 @@ class MainController extends GetxController {
     } else {}
   }
 
-  // String typeWash() {
-  //   switch (WashType) {
-  //     case WashType.basic:
-  //       return "Basic wash";
-  //     case WashType.full:
-  //       return "Full wash";
-  //     case WashType.premium:
-  //       return "Premium wash";
-  //     default:
-  //       return;
-  //   }
-  // }
+String typeWash() {
+  switch (washType) {
+    case WashType.basic:
+      return "Basic wash";
+    case WashType.full:
+      return "Full wash";
+    case WashType.premium:
+      return "Premium wash";
+    default:
+      return "Unknown wash"; // Provide a default value
+  }
+}
+
+String priceWash() {
+  switch (washType) {
+    case WashType.basic:
+      return "20";
+    case WashType.full:
+      return "40";
+    case WashType.premium:
+      return "40";
+    default:
+      return "Unknown wash"; // Provide a default value
+  }
+}
+
 
   void showDialog(BuildContext context) {
     showBottomDialog(

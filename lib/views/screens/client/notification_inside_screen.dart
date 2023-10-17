@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:washly/utils/buttons.dart';
 
 class NotificationInside extends StatelessWidget {
   const NotificationInside({super.key});
@@ -14,6 +15,20 @@ class NotificationInside extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Padding(
+          padding: EdgeInsets.symmetric(vertical: 38.h, horizontal: 24.w),
+          child: GradientButton(
+            text: 'Contact Washer',
+            onpress: () {
+              // Get.to(
+              //   () => const AddFundsScreeen(),
+              //   duration: const Duration(milliseconds: 500),
+              //   transition: Transition.rightToLeftWithFade,
+              // );
+            },
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Padding(
