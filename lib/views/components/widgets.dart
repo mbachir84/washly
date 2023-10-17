@@ -1,5 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
 
+import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:easy_localization/easy_localization.dart' as u;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import 'package:washly/controllers/client/add_car_controller.dart';
 import 'package:washly/controllers/client/add_manually_controller.dart';
 import 'package:washly/controllers/client/appoitment_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
-import 'package:easy_localization/easy_localization.dart' as u;
-
-import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
 import 'package:washly/views/screens/client/home_screen.dart';
 
@@ -357,7 +358,8 @@ Future showBottomDialog<T>(
                                                         color: selectedTime ==
                                                                 index
                                                             ? primaryColor
-                                                            : const Color(0xff030303),
+                                                            : const Color(
+                                                                0xff030303),
                                                         fontWeight:
                                                             FontWeight.bold))
                                                 .tr(),
@@ -613,7 +615,9 @@ Future showPayementStatusDialog<T>(
                       height: 110.w,
                       width: 110.w,
                       decoration: BoxDecoration(
-                        color: !status ? const Color(0xfffff0e6) : const Color(0xffcbf4df),
+                        color: !status
+                            ? const Color(0xfffff0e6)
+                            : const Color(0xffcbf4df),
                         borderRadius: BorderRadius.circular(55.r),
                       ),
                       child: Column(
@@ -1500,7 +1504,9 @@ class AppointmentWidget extends StatelessWidget {
                 Text(
                   'Mercedes-Benz  |  57631  8',
                   style: TextStyle(
-                    color: status ? const Color(0xff698695) : const Color(0xffb3c2c9),
+                    color: status
+                        ? const Color(0xff698695)
+                        : const Color(0xffb3c2c9),
                     fontWeight: FontWeight.w600,
                     fontSize: 15.sp,
                   ),
@@ -1805,4 +1811,48 @@ Future appointmentCanceled<T>(
       ),
     ),
   );
+}
+
+class ChargeMethode extends StatelessWidget {
+  Widget? icon;
+  String? paymentType;
+  ChargeMethode({
+    Key? key,
+    this.icon,
+    this.paymentType,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 382.w,
+      height: 97.h,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            icon!,
+            20.horizontalSpace,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text(paymentType!), Text("number")],
+                ),
+                170.horizontalSpace,
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: const Color(0xff313131),
+                  size: 16.sp,
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }

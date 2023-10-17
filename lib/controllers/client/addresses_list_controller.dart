@@ -28,8 +28,6 @@ class AddressesListController extends GetxController {
     });
   }
 
-
-
   @override
   Future<void> onInit() async {
     isLoading.toggle();
@@ -38,9 +36,8 @@ class AddressesListController extends GetxController {
       user = value;
       selectedAddress = user.addresses![0];
       isLoading.toggle();
-  
+
       update();
-      
     });
     super.onInit();
   }

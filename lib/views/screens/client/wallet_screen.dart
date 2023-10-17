@@ -17,20 +17,20 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
-        child: GradientButton(
-          text: '+ Add funds',
-          onpress: () {
-            Get.to(
-              () => const AddFundsScreeen(),
-              duration: const Duration(milliseconds: 500),
-              transition: Transition.rightToLeftWithFade,
-            );
-          },
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Padding(
+          padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
+          child: GradientButton(
+            text: '+ Add funds',
+            onpress: () {
+              Get.to(
+                () => const AddFundsScreeen(),
+                duration: const Duration(milliseconds: 500),
+                transition: Transition.rightToLeftWithFade,
+              );
+            },
+          ),
         ),
-      ),
         body: SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -61,6 +61,14 @@ class WalletScreen extends StatelessWidget {
                         height: 116.h,
                         width: 380.w,
                         decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.11),
+                              offset: Offset(0,
+                                  9), // (0, 9) corresponds to the x and y offset
+                              blurRadius: 33,
+                            ),
+                          ],
                           gradient: LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
@@ -96,7 +104,7 @@ class WalletScreen extends StatelessWidget {
                       106.verticalSpace,
                       Text(
                         "Transactions history",
-                        style: TextStyle(fontSize: 15,color: titleColor),
+                        style: TextStyle(fontSize: 15, color: titleColor),
                       ),
                       Container(
                         height: 400,
@@ -104,41 +112,54 @@ class WalletScreen extends StatelessWidget {
                         child: ListView.separated(
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Divider(
-                                        color: darkColor,
-                                        // thickness: 1,
-                                      ),
-                                  Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        
-                                        Text("Transaction ID: 2536987",
-                                        style: TextStyle(fontSize: 16),),
-                                        6.verticalSpace,
-                                        Text(
-                                          "April 4, 2023 at 18:30",
-                                          style: TextStyle(
-                                              fontSize: 13, color: Color(0xFF698695)),
-                                        ),
-                                      ]),
-                                      Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text("-20 MAD",
-                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
-                                        ],
-                                      )]
+                              return Column(children: [
+                                Divider(
+                                  color: darkColor,
+                                  // thickness: 1,
                                 ),
-                                index == 5? Divider(color: darkColor,):Container()
-                                ]
-                              );
+                                Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Transaction ID: 2536987",
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            6.verticalSpace,
+                                            Text(
+                                              "April 4, 2023 at 18:30",
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Color(0xFF698695)),
+                                            ),
+                                          ]),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "-20 MAD",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      )
+                                    ]),
+                                index == 5
+                                    ? Divider(
+                                        color: darkColor,
+                                      )
+                                    : Container()
+                              ]);
                             },
                             separatorBuilder: (context, index) {
                               return Container();

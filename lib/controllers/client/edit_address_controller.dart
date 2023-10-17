@@ -77,6 +77,7 @@ class EditAddressController extends GetxController {
         'addresses': user.addresses!.map((e) => e.toJson()).toList()
       }).then((value) async {
         Get.find<AddressesListController>().user.addresses = user.addresses!;
+        Get.find<AddressesListController>().selectedAddress = address;
         Get.find<MainController>().user.addresses = user.addresses!;
         Get.find<MainController>().update();
         Get.find<AddressesListController>().showScnackbar(
@@ -96,7 +97,8 @@ class EditAddressController extends GetxController {
     loading.toggle();
     update();
     user.addresses!.removeWhere((element) => element.uid == address.uid);
-    if(user.addresses!.isNotEmpty && user.addresses!.where((element) => element.isDefault!).isEmpty){
+    if (user.addresses!.isNotEmpty &&
+        user.addresses!.where((element) => element.isDefault!).isEmpty) {
       user.addresses!.first.isDefault = true;
       update();
     }
@@ -109,8 +111,8 @@ class EditAddressController extends GetxController {
       Get.find<AddressesListController>().user.addresses = user.addresses!;
       Get.find<MainController>().user.addresses = user.addresses!;
       Get.find<MainController>().update();
-      Get.find<AddressesListController>()
-          .showScnackbar('addressdeleted'.tr(), "addressdeletedsuccessfully".tr(), true);
+      Get.find<AddressesListController>().showScnackbar(
+          'addressdeleted'.tr(), "addressdeletedsuccessfully".tr(), true);
       Get.find<AddressesListController>().update();
       Get.delete<EditAddressController>();
       Get.back();

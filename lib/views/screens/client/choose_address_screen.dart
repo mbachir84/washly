@@ -79,6 +79,9 @@ class ChosseAddressScreen extends StatelessWidget {
                                             controller.selectedAddress =
                                                 controller
                                                     .user.addresses![index];
+                                            print(
+                                                "my address $index is :${controller
+                                                    .user.addresses![index].name}");
                                             controller.update();
                                             Get.back();
                                           },

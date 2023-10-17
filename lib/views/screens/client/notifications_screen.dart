@@ -8,6 +8,7 @@ import 'package:washly/controllers/client/choose_address_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/models/address.dart';
 import 'package:washly/views/screens/client/add_address_screen.dart';
+import 'package:washly/views/screens/client/notification_inside_screen.dart';
 
 import '../../../utils/constants.dart';
 
@@ -17,7 +18,6 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: const Color(0xffeaeff0),
       body: SingleChildScrollView(
         child: GetBuilder<AddressesListController>(
@@ -36,7 +36,6 @@ class NotificationScreen extends StatelessWidget {
                             Get.back();
                           },
                           child: SizedBox(
-                            
                               height: 20.h,
                               width: 20.w,
                               child: SvgPicture.asset(
@@ -50,7 +49,7 @@ class NotificationScreen extends StatelessWidget {
                           .tr()
                     ]),
                     28.verticalSpace,
-                    GetBuilder<AddressesListController>(                        
+                    GetBuilder<AddressesListController>(
                         init: AddressesListController(),
                         builder: (controller) {
                           return controller.isLoading.value
@@ -66,6 +65,7 @@ class NotificationScreen extends StatelessWidget {
                                         Center(
                                             child: InkWell(
                                           onTap: () {
+                                            Get.to(() => NotificationInside());
                                             ///////
                                             // controller.addressSelectedMap[
                                             //         "address_name"] =
@@ -116,7 +116,7 @@ class NotificationScreen extends StatelessWidget {
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
-                                                    children: [                                           
+                                                    children: [
                                                       Row(
                                                         children: [
                                                           Text(
@@ -236,12 +236,16 @@ class NotificationScreen extends StatelessWidget {
                                             ),
                                           ),
                                         )),
-                                        index != controller.user.addresses!.length - 1
+                                        index !=
+                                                controller.user.addresses!
+                                                        .length -
+                                                    1
                                             ? Container()
                                             : 80.verticalSpace,
                                       ],
                                     ),
-                                    itemCount: controller.user.addresses!.length,
+                                    itemCount:
+                                        controller.user.addresses!.length,
                                     separatorBuilder:
                                         (BuildContext context, int index) =>
                                             10.verticalSpace,

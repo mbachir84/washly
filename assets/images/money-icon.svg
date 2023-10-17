@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+    <defs>
+        <clipPath id="re3i2844ua">
+            <path data-name="Rectangle 585" style="fill:#698695" d="M0 0h26.96v17.211H0z"/>
+        </clipPath>
+    </defs>
+    <g transform="translate(-43 -679)">
+        <circle data-name="Ellipse 142" cx="25" cy="25" r="25" transform="translate(43 679)" style="fill:#edf0f2"/>
+        <g data-name="Group 605" style="clip-path:url(#re3i2844ua)" transform="translate(54.521 694.672)">
+            <path data-name="Path 332" d="M26.957 8.191V3.36A3.377 3.377 0 0 0 23.592 0H3.352A3.324 3.324 0 0 0 1 .991a3.319 3.319 0 0 0-.99 2.353C0 6.972 0 10.515.006 13.874a3.379 3.379 0 0 0 3.318 3.331c2.421 0 4.86.005 7.293.005h13.017a3.1 3.1 0 0 0 1.654-.472 3.328 3.328 0 0 0 1.667-2.961c.008-1.006 0-5.536 0-5.582m-2.61-1.409V13.636c0 .675-.284.963-.947.963H3.541c-.643 0-.93-.291-.93-.945V3.543c0-.644.291-.931.943-.931h19.86c.643 0 .931.291.934.942v3.228z" style="fill:#698695"/>
+            <path data-name="Path 333" d="M169.1 80.616a4.62 4.62 0 1 1 4.589 4.635 4.624 4.624 0 0 1-4.589-4.635m6.927.007a2.309 2.309 0 1 0-2.323 2.308 2.31 2.31 0 0 0 2.323-2.308" transform="translate(-160.244 -72.023)" style="fill:#698695"/>
+            <path data-name="Path 334" d="M387.551 143.438a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15" transform="translate(-365.065 -134.833)" style="fill:#698695"/>
+            <path data-name="Path 335" d="M87.679 143.438a1.15 1.15 0 1 1-1.15-1.15 1.15 1.15 0 0 1 1.15 1.15" transform="translate(-80.905 -134.833)" style="fill:#698695"/>
+        </g>
+    </g>
+</svg>
