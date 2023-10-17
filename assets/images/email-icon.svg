@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+    <defs>
+        <clipPath id="tvgfr6ug8a">
+            <path data-name="Rectangle 581" style="fill:#10a7f5" d="M0 0h22.569v16.766H0z"/>
+        </clipPath>
+    </defs>
+    <g transform="translate(-43.073 -679.073)">
+        <circle data-name="Ellipse 142" cx="22" cy="22" r="22" transform="translate(43.073 679.073)" style="fill:#e2f3fb"/>
+        <g data-name="Group 586" style="clip-path:url(#tvgfr6ug8a)" transform="translate(54.074 693.073)">
+            <path data-name="Path 329" d="M19.5 0H3.05A2.916 2.916 0 0 0 0 3.043v10.681a2.915 2.915 0 0 0 3.052 3.041h16.453a2.929 2.929 0 0 0 3.064-3.057V3.055A2.929 2.929 0 0 0 19.5 0M3.1 14.321c-.5 0-.655-.153-.655-.656V4.19l1.549 1.151c2.243 1.667 4.562 3.391 6.839 5.091a.677.677 0 0 0 .9 0c2.424-1.81 4.893-3.645 7.281-5.42l1.107-.823v9.475c0 .5-.153.656-.655.656H3.1M17.4 3.165l-1.44 1.068c-1.534 1.14-3.119 2.319-4.677 3.482C9.261 6.2 7.2 4.674 5.211 3.193l-.986-.733h14.119l-.947.706" transform="translate(0 .001)" style="fill:#10a7f5"/>
+        </g>
+    </g>
+</svg>

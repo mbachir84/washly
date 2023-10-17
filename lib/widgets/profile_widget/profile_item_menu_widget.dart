@@ -8,32 +8,39 @@ import 'package:get/get.dart';
 import 'package:washly/views/screens/auth/verify_phone.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
 import 'package:washly/views/screens/client/my_coupons_page.dart';
+import 'package:washly/views/screens/client/support_screen.dart';
+import 'package:washly/views/screens/client/wallet_screen.dart';
 import 'package:washly/widgets/profile_widget/card_save_washes_widget.dart';
 import 'package:washly/widgets/profile_widget/item_profiel_widget.dart';
 
 class ProfileItemMenuWidget extends StatelessWidget {
   const ProfileItemMenuWidget({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ItemProfileMenu(
+        ItemProfileMenu(
           title: "wallet",
           iconPath: 'assets/images/wallet-select.svg',
           data: "500 Dhs",
+          onTap: () => Get.to(() => const WalletScreen(),
+              transition: Transition.fadeIn,
+              duration: const Duration(milliseconds: 500)),
         ),
         ItemProfileMenu(
           title: "addresses",
           iconPath: 'assets/images/location-select-icon.svg',
           data: "",
-          onTap: () => Get.to(() => const AddressesListScreen()),
+          onTap: () => Get.to(() => const AddressesListScreen(),
+              transition: Transition.fadeIn,
+              duration: const Duration(milliseconds: 500)),
         ),
-        const ItemProfileMenu(
+        ItemProfileMenu(
           title: "creditcard",
           iconPath: 'assets/images/wallet-select.svg',
+          onTap: () {},
         ),
         const ItemProfileMenu(
           title: "washhistory",
@@ -49,9 +56,10 @@ class ProfileItemMenuWidget extends StatelessWidget {
                 duration: const Duration(milliseconds: 500));
           },
         ),
-        const ItemProfileMenu(
+        ItemProfileMenu(
           title: "support",
           iconPath: 'assets/images/support-select-icon .svg',
+          onTap: ()=>Get.to(()=>SupportScreen()),
         ),
         5.verticalSpace,
         Padding(
