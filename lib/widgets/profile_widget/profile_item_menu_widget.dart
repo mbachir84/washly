@@ -59,7 +59,8 @@ class ProfileItemMenuWidget extends StatelessWidget {
         ItemProfileMenu(
           title: "support",
           iconPath: 'assets/images/support-select-icon .svg',
-          onTap: ()=>Get.to(()=>SupportScreen()),
+          onTap: ()=>Get.to(()=>SupportScreen(),transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 500)),
         ),
         5.verticalSpace,
         Padding(
