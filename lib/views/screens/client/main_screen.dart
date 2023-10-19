@@ -232,7 +232,7 @@ class MainScreen extends StatelessWidget {
                                               controller.update();
                                             },
                                             child: Container(
-                                                width: 184.w,
+                                                width: 185.w,
                                                 height: 94.h,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,

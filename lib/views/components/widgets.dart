@@ -276,7 +276,7 @@ Future showBottomDialog<T>(
                 child: DatePicker(
                   DateTime.now(),
                   width: 70.w,
-                  height: 90.w,
+                  height: 100.w,
                   dateTextStyle: TextStyle(
                       fontSize: 24.sp,
                       color: const Color(0xff030303),
@@ -298,6 +298,7 @@ Future showBottomDialog<T>(
                   onDateChange: (date) {
                     setInnerState(() {
                       dateValue = date;
+                      
                     });
                   },
                 ),
@@ -354,6 +355,7 @@ Future showBottomDialog<T>(
                                           child: Center(
                                             child: Text("washnow",
                                                     style: TextStyle(
+                                                      
                                                         fontSize: 14.sp,
                                                         color: selectedTime ==
                                                                 index
