@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,11 +41,16 @@ class CheckoutScreen extends StatelessWidget {
                                     onTap: () {
                                       Get.back();
                                     },
-                                    child: SizedBox(
-                                        height: 20.h,
-                                        width: 20.w,
+                                    child: Container(
+                                      padding: EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey,
+                                        shape: BoxShape.circle
+                                      ),
+                                        height: 40.h,
+                                        width: 40.w,
                                         child: SvgPicture.asset(
-                                            'assets/images/arrow-back.svg'))),
+                                            'assets/images/arrow-back.svg',))),
                                 16.horizontalSpace,
                                 Text(
                                   'washsummary',
@@ -224,13 +231,13 @@ class CheckoutScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('April 24, 2023',
+                                      Text(controller.dateFormat,
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.bold,
                                             color: const Color(0xff030303),
                                           )).tr(),
-                                      Text('Wash Now',
+                                      Text(controller.hourSelected,
                                           style: TextStyle(
                                             fontSize: 13.sp,
                                             fontWeight: FontWeight.bold,

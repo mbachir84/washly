@@ -195,6 +195,7 @@ class MainScreen extends StatelessWidget {
                               size: 70.0.sp,
                             ),
                           )
+                          //error
                         : Expanded(
                             child: Container(
                                 width: double.infinity,

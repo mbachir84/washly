@@ -220,25 +220,28 @@ class PayScreen extends StatelessWidget {
                           ),
                         ),
                         15.horizontalSpace,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'cash',
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xff030303)),
-                            ).tr(),
-                            5.verticalSpace,
-                            Text(
-                              'beinperson',
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff698695)),
-                            ).tr(),
-                          ],
+                        Flexible (
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'cash',
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)),
+                              ).tr(),
+                              5.verticalSpace,
+                              Text(
+                                'beinperson',
+                                // overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff698695)),
+                              ).tr(),
+                            ],
+                          ),
                         ),
                       ],
                     ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:washly/views/components/widgets.dart';
@@ -9,6 +10,12 @@ class CheckoutController extends GetxController {
   String snackBarSubTitle = "";
   String buttonText = "Apply";
   bool state = false;
+  bool isToday = true;
+  String dateFormat = "";
+  int counter = 0;
+  String hourSelected = "";
+  DateTime currentTime = DateTime.now();
+
   void apply() {
     if (couponController.text.isNotEmpty) {
       height = 137;
@@ -36,5 +43,35 @@ class CheckoutController extends GetxController {
 
   infoClick() {
     showDetailDialog(context: Get.context!, allowBackNavigation: true);
+  }
+
+  getHourSelected() {
+    // for (int i = 1; i < 15; i++) {
+    if (counter == 0) {
+      //dateFormat == curentime
+      if (DateTime.now().minute + 15 >= 60) {
+        hourSelected =
+            "${(currentTime.hour + 1).toString()} : ${((currentTime.minute + 15) - 60).toString()}";
+      }
+      hourSelected =
+          "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(DateTime.now().minute + 15).toString()} ";
+      print("mouad $hourSelected");
+    } else {
+      for (int i = 1; i < 14; i++) {
+        if (counter == i) {
+          hourSelected = "${07 + i}:00 - ${08 + i}:00";
+          print("mouad $hourSelected");
+        }
+      }
+    }
+    // }
+  }
+
+  @override
+  void onInit() {
+    getHourSelected();
+    dateFormat = DateFormat.yMMMMd().format(currentTime);
+    // TODO: implement onInit
+    super.onInit();
   }
 }

@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:washly/controllers/client/add_car_controller.dart';
 import 'package:washly/controllers/client/add_manually_controller.dart';
 import 'package:washly/controllers/client/appoitment_controller.dart';
+import 'package:washly/controllers/client/checkout_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
@@ -228,6 +229,7 @@ Future showBottomDialog<T>(
     {required BuildContext context,
     bool allowBackNavigation = false,
     bool checkoutClick = true}) {
+  final controller = Get.put(CheckoutController());
   int selectedTime = 0;
   DateTime dateValue = DateTime.now();
   return showModalBottomSheet(
@@ -298,7 +300,15 @@ Future showBottomDialog<T>(
                   onDateChange: (date) {
                     setInnerState(() {
                       dateValue = date;
-                      
+
+                      controller.dateFormat =
+                          DateFormat.yMMMMd().format(dateValue);
+                      if (controller.dateFormat !=
+                          DateFormat.yMMMMd().format(controller.currentTime)) {
+                        controller.isToday = false;
+                      }else{
+                        controller.isToday = false;
+                      }
                     });
                   },
                 ),
@@ -330,6 +340,14 @@ Future showBottomDialog<T>(
                           onTap: () {
                             setInnerState(() {
                               selectedTime = index;
+                              controller.counter = index;
+                              // condition if date format=current
+                              // if (controller.isToday == false) {
+                              //   index == 1;
+                              //   selectedTime == 1;
+                              // }
+                              controller.getHourSelected();
+                              controller.update();
                             });
                           },
                           child: index == 0
@@ -342,7 +360,14 @@ Future showBottomDialog<T>(
                                           height: 42.h,
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                  color: index == selectedTime
+                                                  color: (index ==
+                                                              selectedTime &&
+                                                          controller
+                                                                  .dateFormat ==
+                                                              DateFormat
+                                                                      .yMMMMd()
+                                                                  .format(controller
+                                                                      .currentTime))
                                                       ? primaryColor
                                                       : Colors.transparent,
                                                   width: 2),
@@ -355,10 +380,15 @@ Future showBottomDialog<T>(
                                           child: Center(
                                             child: Text("washnow",
                                                     style: TextStyle(
-                                                      
                                                         fontSize: 14.sp,
-                                                        color: selectedTime ==
-                                                                index
+                                                        color: (index ==
+                                                                    selectedTime &&
+                                                                controller
+                                                                        .dateFormat ==
+                                                                    DateFormat
+                                                                            .yMMMMd()
+                                                                        .format(controller
+                                                                            .currentTime))
                                                             ? primaryColor
                                                             : const Color(
                                                                 0xff030303),
