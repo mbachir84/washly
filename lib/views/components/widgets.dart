@@ -231,7 +231,7 @@ Future showBottomDialog<T>(
     bool checkoutClick = true}) {
   final controller = Get.put(CheckoutController());
   int selectedTime = 0;
-  DateTime dateValue = DateTime.now();
+
   return showModalBottomSheet(
     backgroundColor: const Color(0xffeaeff0),
     context: context,
@@ -293,21 +293,30 @@ Future showBottomDialog<T>(
                       color: const Color(0xff8aa7b7),
                       decorationStyle: TextDecorationStyle.solid,
                       fontWeight: FontWeight.w500),
-                  initialSelectedDate: DateTime.now(),
+                  initialSelectedDate: controller.dateValue,
                   deactivatedColor: Colors.white,
                   selectionColor: primaryColor,
                   selectedTextColor: Colors.white,
                   onDateChange: (date) {
                     setInnerState(() {
-                      dateValue = date;
+                      controller.dateValue = date;
 
                       controller.dateFormat =
-                          DateFormat.yMMMMd().format(dateValue);
+                          DateFormat.yMMMMd().format(controller.dateValue);
+
                       if (controller.dateFormat !=
                           DateFormat.yMMMMd().format(controller.currentTime)) {
                         controller.isToday = false;
-                      }else{
-                        controller.isToday = false;
+                        controller.counter = 1;
+                        selectedTime = 1;
+                        controller.getHourSelected();
+                        controller.update();
+                      } else {
+                        controller.isToday = true;
+                        controller.counter = 0;
+                        selectedTime = 0;
+                        controller.getHourSelected();
+                        controller.update();
                       }
                     });
                   },
@@ -341,12 +350,9 @@ Future showBottomDialog<T>(
                             setInnerState(() {
                               selectedTime = index;
                               controller.counter = index;
-                              // condition if date format=current
-                              // if (controller.isToday == false) {
-                              //   index == 1;
-                              //   selectedTime == 1;
-                              // }
+
                               controller.getHourSelected();
+
                               controller.update();
                             });
                           },
@@ -400,17 +406,24 @@ Future showBottomDialog<T>(
                                       Container(
                                           height: 20.h,
                                           decoration: BoxDecoration(
-                                              // border: Border(
-                                              //   bottom: BorderSide(
-                                              //       width: 2.0,
-                                              //       color: primaryColor),
-                                              // ),
-                                              borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(6.8.r),
-                                                  bottomRight:
-                                                      Radius.circular(6.8.r)),
-                                              color: primaryColor),
+                                            // border: Border(
+                                            //   bottom: BorderSide(
+                                            //       width: 2.0,
+                                            //       color: primaryColor),
+                                            // ),
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(6.8.r),
+                                                bottomRight:
+                                                    Radius.circular(6.8.r)),
+                                            color: (index == selectedTime &&
+                                                    controller.dateFormat ==
+                                                        DateFormat.yMMMMd()
+                                                            .format(controller
+                                                                .currentTime))
+                                                ? primaryColor
+                                                : const Color(0xff030303),
+                                          ),
                                           child: Center(
                                             child: Text("waiting",
                                                     style: TextStyle(
@@ -1872,7 +1885,7 @@ class ChargeMethode extends StatelessWidget {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text(paymentType!), Text("number")],
+                  children: [Text(paymentType!), const Text("number")],
                 ),
                 170.horizontalSpace,
                 Icon(

@@ -10,11 +10,12 @@ class CheckoutController extends GetxController {
   String snackBarSubTitle = "";
   String buttonText = "Apply";
   bool state = false;
-  bool isToday = true;
+  bool isToday = false;
   String dateFormat = "";
   int counter = 0;
   String hourSelected = "";
   DateTime currentTime = DateTime.now();
+  DateTime dateValue = DateTime.now();
 
   void apply() {
     if (couponController.text.isNotEmpty) {
@@ -45,17 +46,22 @@ class CheckoutController extends GetxController {
     showDetailDialog(context: Get.context!, allowBackNavigation: true);
   }
 
-  getHourSelected() {
-    // for (int i = 1; i < 15; i++) {
+  selectHour() {
     if (counter == 0) {
       //dateFormat == curentime
-      if (DateTime.now().minute + 15 >= 60) {
+      if ((currentTime.minute + 15) >= 60) {
+        if (((currentTime.minute + 15) - 60) < 10) {
+          hourSelected =
+              "${(currentTime.hour + 1).toString()} :0${((currentTime.minute + 15) - 60).toString()} -${(currentTime.hour + 1).toString()}:${((currentTime.minute + 15) - 60).toString()}";
+        } else {
+          hourSelected =
+              "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(currentTime.minute + 15).toString()} ";
+        }
+      } else {
         hourSelected =
-            "${(currentTime.hour + 1).toString()} : ${((currentTime.minute + 15) - 60).toString()}";
+            "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(currentTime.minute + 15).toString()} ";
+        print("mouad $hourSelected");
       }
-      hourSelected =
-          "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(DateTime.now().minute + 15).toString()} ";
-      print("mouad $hourSelected");
     } else {
       for (int i = 1; i < 14; i++) {
         if (counter == i) {
@@ -64,12 +70,41 @@ class CheckoutController extends GetxController {
         }
       }
     }
+  }
+
+  getHourSelected() async {
+    // for (int i = 1; i < 15; i++) {
+    if (isToday) {
+      await selectHour();
+    } else {
+      if (counter == 0) {
+        //dateFormat == curentime
+        if ((currentTime.minute + 15) >= 60) {
+          if (((currentTime.minute + 15) - 60) < 10) {
+            hourSelected = "";
+          } else {
+            hourSelected = " ";
+          }
+        } else {
+          hourSelected = " ";
+          print("mouad $hourSelected");
+        }
+      } else {
+        for (int i = 1; i < 14; i++) {
+          if (counter == i) {
+            hourSelected = "${07 + i}:00 - ${08 + i}:00";
+            print("mouad $hourSelected");
+          }
+        }
+      }
+    }
     // }
   }
 
   @override
   void onInit() {
-    getHourSelected();
+    selectHour();
+
     dateFormat = DateFormat.yMMMMd().format(currentTime);
     // TODO: implement onInit
     super.onInit();
