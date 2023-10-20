@@ -52,10 +52,10 @@ class CheckoutController extends GetxController {
       if ((currentTime.minute + 15) >= 60) {
         if (((currentTime.minute + 15) - 60) < 10) {
           hourSelected =
-              "${(currentTime.hour + 1).toString()} :0${((currentTime.minute + 15) - 60).toString()} -${(currentTime.hour + 1).toString()}:${((currentTime.minute + 15) - 60).toString()}";
+              "${(currentTime.hour).toString()} :0${((currentTime.minute + 15) - 60).toString()} -${(currentTime.hour+1).toString()}:${((currentTime.minute + 15) - 60).toString()}";
         } else {
           hourSelected =
-              "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(currentTime.minute + 15).toString()} ";
+              "${currentTime.hour.toString()}:${((currentTime.minute + 15)-60).toString()} -${(currentTime.hour + 1).toString()}:${((currentTime.minute + 15)-60).toString()} ";
         }
       } else {
         hourSelected =
