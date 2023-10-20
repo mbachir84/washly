@@ -48,7 +48,7 @@ class CheckoutController extends GetxController {
 
   selectHour() {
     if (counter == 0) {
-      //dateFormat == curentime
+      //change to wash now
       if ((currentTime.minute + 15) >= 60) {
         if (((currentTime.minute + 15) - 60) < 10) {
           hourSelected =
