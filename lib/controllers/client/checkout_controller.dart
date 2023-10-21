@@ -48,20 +48,21 @@ class CheckoutController extends GetxController {
 
   selectHour() {
     if (counter == 0) {
+      hourSelected = "Wash now";
       //change to wash now
-      if ((currentTime.minute + 15) >= 60) {
-        if (((currentTime.minute + 15) - 60) < 10) {
-          hourSelected =
-              "${(currentTime.hour).toString()} :0${((currentTime.minute + 15) - 60).toString()} -${(currentTime.hour+1).toString()}:${((currentTime.minute + 15) - 60).toString()}";
-        } else {
-          hourSelected =
-              "${currentTime.hour.toString()}:${((currentTime.minute + 15)-60).toString()} -${(currentTime.hour + 1).toString()}:${((currentTime.minute + 15)-60).toString()} ";
-        }
-      } else {
-        hourSelected =
-            "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(currentTime.minute + 15).toString()} ";
-        print("mouad $hourSelected");
-      }
+      // if ((currentTime.minute + 15) >= 60) {
+      //   if (((currentTime.minute + 15) - 60) < 10) {
+      //     hourSelected =
+      //         "${(currentTime.hour).toString()} :0${((currentTime.minute + 15) - 60).toString()} -${(currentTime.hour+1).toString()}:${((currentTime.minute + 15) - 60).toString()}";
+      //   } else {
+      //     hourSelected =
+      //         "${currentTime.hour.toString()}:${((currentTime.minute + 15)-60).toString()} -${(currentTime.hour + 1).toString()}:${((currentTime.minute + 15)-60).toString()} ";
+      //   }
+      // } else {
+      //   hourSelected =
+      //       "${currentTime.hour.toString()}:${(currentTime.minute + 15).toString()} -${(currentTime.hour + 1).toString()}:${(currentTime.minute + 15).toString()} ";
+      //   print("mouad $hourSelected");
+      // }
     } else {
       for (int i = 1; i < 14; i++) {
         if (counter == i) {
