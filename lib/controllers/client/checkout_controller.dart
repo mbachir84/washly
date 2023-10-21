@@ -16,6 +16,7 @@ class CheckoutController extends GetxController {
   String hourSelected = "";
   DateTime currentTime = DateTime.now();
   DateTime dateValue = DateTime.now();
+  bool isIgnored = false;
 
   void apply() {
     if (couponController.text.isNotEmpty) {

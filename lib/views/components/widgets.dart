@@ -332,6 +332,7 @@ Future showBottomDialog<T>(
                         child: InkWell(
                           onTap: () {
                             setInnerState(() {
+                              print("inndex $index");
                               selectedTime = index;
                               controller.counter = index;
 
@@ -339,7 +340,7 @@ Future showBottomDialog<T>(
                                       DateFormat.yMMMMd()
                                           .format(controller.currentTime) &&
                                   selectedTime != 0) {
-                                controller.isToday == true;
+                                // controller.isToday == true;
                                 controller.getHourSelected();
                                 controller.update();
                               } else if (controller.dateFormat ==
@@ -352,7 +353,9 @@ Future showBottomDialog<T>(
                             });
                           },
                           child: index == 0
-                              ? SizedBox(
+                              ? Visibility(
+                                visible: controller.isToday,
+                                child: SizedBox(
                                   width: 123.w,
                                   child: Column(
                                     children: [
@@ -362,7 +365,11 @@ Future showBottomDialog<T>(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: (index ==
-                                                          controller.counter && controller.isToday == true)
+                                                              controller
+                                                                  .counter &&
+                                                          controller
+                                                                  .isToday ==
+                                                              true)
                                                       ? primaryColor
                                                       : Colors.transparent,
                                                   width: 2),
@@ -377,7 +384,11 @@ Future showBottomDialog<T>(
                                                     style: TextStyle(
                                                         fontSize: 14.sp,
                                                         color: (index ==
-                                                          controller.counter && controller.isToday == true)
+                                                                    controller
+                                                                        .counter &&
+                                                                controller
+                                                                        .isToday ==
+                                                                    true)
                                                             ? primaryColor
                                                             : const Color(
                                                                 0xff030303),
@@ -400,7 +411,9 @@ Future showBottomDialog<T>(
                                                 bottomRight:
                                                     Radius.circular(6.8.r)),
                                             color: (index ==
-                                                          controller.counter && controller.isToday == true)
+                                                        controller.counter &&
+                                                    controller.isToday ==
+                                                        true)
                                                 ? primaryColor
                                                 : const Color(0xff030303),
                                           ),
@@ -415,7 +428,8 @@ Future showBottomDialog<T>(
                                           )),
                                     ],
                                   ),
-                                )
+                                ),
+                              )
                               : Container(
                                   width: 123.w,
                                   decoration: BoxDecoration(
