@@ -301,23 +301,7 @@ Future showBottomDialog<T>(
                     setInnerState(() {
                       controller.dateValue = date;
 
-                      controller.dateFormat =
-                          DateFormat.yMMMMd().format(controller.dateValue);
-
-                      if (controller.dateFormat !=
-                          DateFormat.yMMMMd().format(controller.currentTime)) {
-                        controller.isToday = false;
-                        controller.counter = 1;
-                        selectedTime = 1;
-                        controller.getHourSelected();
-                        controller.update();
-                      } else {
-                        controller.isToday = true;
-                        controller.counter = 0;
-                        selectedTime = 0;
-                        controller.getHourSelected();
-                        controller.update();
-                      }
+                      controller.checkDay();
                     });
                   },
                 ),
@@ -351,9 +335,20 @@ Future showBottomDialog<T>(
                               selectedTime = index;
                               controller.counter = index;
 
-                              controller.getHourSelected();
-
-                              controller.update();
+                              if (controller.dateFormat !=
+                                      DateFormat.yMMMMd()
+                                          .format(controller.currentTime) &&
+                                  selectedTime != 0) {
+                                controller.isToday == true;
+                                controller.getHourSelected();
+                                controller.update();
+                              } else if (controller.dateFormat ==
+                                      DateFormat.yMMMMd()
+                                          .format(controller.currentTime) &&
+                                  selectedTime == controller.counter) {
+                                controller.getHourSelected();
+                                controller.update();
+                              }
                             });
                           },
                           child: index == 0
@@ -367,13 +362,7 @@ Future showBottomDialog<T>(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: (index ==
-                                                              selectedTime &&
-                                                          controller
-                                                                  .dateFormat ==
-                                                              DateFormat
-                                                                      .yMMMMd()
-                                                                  .format(controller
-                                                                      .currentTime))
+                                                          controller.counter && controller.isToday == true)
                                                       ? primaryColor
                                                       : Colors.transparent,
                                                   width: 2),
@@ -388,13 +377,7 @@ Future showBottomDialog<T>(
                                                     style: TextStyle(
                                                         fontSize: 14.sp,
                                                         color: (index ==
-                                                                    selectedTime &&
-                                                                controller
-                                                                        .dateFormat ==
-                                                                    DateFormat
-                                                                            .yMMMMd()
-                                                                        .format(controller
-                                                                            .currentTime))
+                                                          controller.counter && controller.isToday == true)
                                                             ? primaryColor
                                                             : const Color(
                                                                 0xff030303),
@@ -416,11 +399,8 @@ Future showBottomDialog<T>(
                                                     Radius.circular(6.8.r),
                                                 bottomRight:
                                                     Radius.circular(6.8.r)),
-                                            color: (index == selectedTime &&
-                                                    controller.dateFormat ==
-                                                        DateFormat.yMMMMd()
-                                                            .format(controller
-                                                                .currentTime))
+                                            color: (index ==
+                                                          controller.counter && controller.isToday == true)
                                                 ? primaryColor
                                                 : const Color(0xff030303),
                                           ),
@@ -440,7 +420,9 @@ Future showBottomDialog<T>(
                                   width: 123.w,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: selectedTime == index
+                                          color: (index == controller.counter &&
+                                                  controller
+                                                      .dateFormat.isNotEmpty)
                                               ? primaryColor
                                               : Colors.transparent,
                                           width: 2),
@@ -452,9 +434,12 @@ Future showBottomDialog<T>(
                                         "${07 + index} :00 - ${7 + index + 1} :00  ",
                                         style: TextStyle(
                                             fontSize: 14.sp,
-                                            color: selectedTime == index
-                                                ? primaryColor
-                                                : const Color(0xff030303),
+                                            color:
+                                                (index == controller.counter &&
+                                                        controller.dateFormat
+                                                            .isNotEmpty)
+                                                    ? primaryColor
+                                                    : const Color(0xff030303),
                                             fontWeight: FontWeight.bold)),
                                   )),
                         ),

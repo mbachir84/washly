@@ -102,12 +102,25 @@ class CheckoutController extends GetxController {
     // }
   }
 
+  checkDay() {
+    dateFormat = DateFormat.yMMMMd().format(dateValue);
+
+    if (dateFormat != DateFormat.yMMMMd().format(currentTime)) {
+      isToday = false;
+      getHourSelected();
+      update();
+    } else {
+      isToday = true;
+      getHourSelected();
+      update();
+    }
+  }
+
   @override
   void onInit() {
     selectHour();
 
-    dateFormat = DateFormat.yMMMMd().format(currentTime);
-    // TODO: implement onInit
+    dateFormat = DateFormat.yMMMMd().format(dateValue);
     super.onInit();
   }
 }
