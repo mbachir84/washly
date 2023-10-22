@@ -14,6 +14,7 @@ class AddressesListController extends GetxController {
   String snackBarSubTitle = "";
   bool state = false;
   Address selectedAddress = Address();
+  bool isSelected = false;
   Map<String, String> addressSelectedMap = {};
 
   showScnackbar(text, subtext, status) {
@@ -35,6 +36,7 @@ class AddressesListController extends GetxController {
     await getUserFromSession().then((value) {
       user = value;
       selectedAddress = user.addresses![0];
+      isSelected = true;
       isLoading.toggle();
 
       update();

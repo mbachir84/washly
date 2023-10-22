@@ -10,9 +10,10 @@ class CheckoutController extends GetxController {
   String snackBarSubTitle = "";
   String buttonText = "Apply";
   bool state = false;
-  bool isToday = false;
+  bool isToday = true;
   String dateFormat = "";
   int counter = 0;
+  int selectedTime = 0;
   String hourSelected = "";
   DateTime currentTime = DateTime.now();
   DateTime dateValue = DateTime.now();
@@ -112,6 +113,19 @@ class CheckoutController extends GetxController {
       update();
     } else {
       isToday = true;
+      getHourSelected();
+      update();
+    }
+  }
+
+  selectingController() {
+    if (dateFormat != DateFormat.yMMMMd().format(currentTime) &&
+        selectedTime != 0) {
+      // controller.isToday == true;
+      getHourSelected();
+      update();
+    } else if (dateFormat == DateFormat.yMMMMd().format(currentTime) &&
+        selectedTime == counter) {
       getHourSelected();
       update();
     }

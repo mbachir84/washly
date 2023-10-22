@@ -230,7 +230,6 @@ Future showBottomDialog<T>(
     bool allowBackNavigation = false,
     bool checkoutClick = true}) {
   final controller = Get.put(CheckoutController());
-  int selectedTime = 0;
 
   return showModalBottomSheet(
     backgroundColor: const Color(0xffeaeff0),
@@ -333,103 +332,90 @@ Future showBottomDialog<T>(
                           onTap: () {
                             setInnerState(() {
                               print("inndex $index");
-                              selectedTime = index;
+                              controller.selectedTime = index;
                               controller.counter = index;
 
-                              if (controller.dateFormat !=
-                                      DateFormat.yMMMMd()
-                                          .format(controller.currentTime) &&
-                                  selectedTime != 0) {
-                                // controller.isToday == true;
-                                controller.getHourSelected();
-                                controller.update();
-                              } else if (controller.dateFormat ==
-                                      DateFormat.yMMMMd()
-                                          .format(controller.currentTime) &&
-                                  selectedTime == controller.counter) {
-                                controller.getHourSelected();
-                                controller.update();
-                              }
+                              controller.selectingController();
                             });
                           },
                           child: index == 0
                               ? Visibility(
-                                visible: controller.isToday,
-                                child: SizedBox(
-                                  width: 123.w,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                          width: 123.w,
-                                          height: 42.h,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: (index ==
-                                                              controller
-                                                                  .counter &&
-                                                          controller
-                                                                  .isToday ==
-                                                              true)
-                                                      ? primaryColor
-                                                      : Colors.transparent,
-                                                  width: 2),
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft:
-                                                      Radius.circular(6.8.r),
-                                                  topRight:
-                                                      Radius.circular(6.8.r)),
-                                              color: Colors.white),
-                                          child: Center(
-                                            child: Text("washnow",
-                                                    style: TextStyle(
-                                                        fontSize: 14.sp,
-                                                        color: (index ==
-                                                                    controller
-                                                                        .counter &&
+                                  visible: controller.isToday,
+                                  child: SizedBox(
+                                    width: 123.w,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            width: 123.w,
+                                            height: 42.h,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: (index ==
                                                                 controller
-                                                                        .isToday ==
-                                                                    true)
-                                                            ? primaryColor
-                                                            : const Color(
-                                                                0xff030303),
-                                                        fontWeight:
-                                                            FontWeight.bold))
-                                                .tr(),
-                                          )),
-                                      0.verticalSpace,
-                                      Container(
-                                          height: 20.h,
-                                          decoration: BoxDecoration(
-                                            // border: Border(
-                                            //   bottom: BorderSide(
-                                            //       width: 2.0,
-                                            //       color: primaryColor),
-                                            // ),
-                                            borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(6.8.r),
-                                                bottomRight:
-                                                    Radius.circular(6.8.r)),
-                                            color: (index ==
-                                                        controller.counter &&
-                                                    controller.isToday ==
-                                                        true)
-                                                ? primaryColor
-                                                : const Color(0xff030303),
-                                          ),
-                                          child: Center(
-                                            child: Text("waiting",
-                                                    style: TextStyle(
-                                                        fontSize: 9.sp,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w500))
-                                                .tr(),
-                                          )),
-                                    ],
+                                                                    .counter &&
+                                                            controller
+                                                                    .isToday ==
+                                                                true)
+                                                        ? primaryColor
+                                                        : Colors.transparent,
+                                                    width: 2),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(6.8.r),
+                                                    topRight:
+                                                        Radius.circular(6.8.r)),
+                                                color: Colors.white),
+                                            child: Center(
+                                              child: Text("washnow",
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          color: (index ==
+                                                                      controller
+                                                                          .counter &&
+                                                                  controller
+                                                                          .isToday ==
+                                                                      true)
+                                                              ? primaryColor
+                                                              : const Color(
+                                                                  0xff030303),
+                                                          fontWeight:
+                                                              FontWeight.bold))
+                                                  .tr(),
+                                            )),
+                                        0.verticalSpace,
+                                        Container(
+                                            height: 20.h,
+                                            decoration: BoxDecoration(
+                                              // border: Border(
+                                              //   bottom: BorderSide(
+                                              //       width: 2.0,
+                                              //       color: primaryColor),
+                                              // ),
+                                              borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(6.8.r),
+                                                  bottomRight:
+                                                      Radius.circular(6.8.r)),
+                                              color: (index ==
+                                                          controller.counter &&
+                                                      controller.isToday ==
+                                                          true)
+                                                  ? primaryColor
+                                                  : const Color(0xff030303),
+                                            ),
+                                            child: Center(
+                                              child: Text("waiting",
+                                                      style: TextStyle(
+                                                          fontSize: 9.sp,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500))
+                                                  .tr(),
+                                            )),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              )
+                                )
                               : Container(
                                   width: 123.w,
                                   decoration: BoxDecoration(

@@ -81,14 +81,16 @@ class VerifyCodeScreen extends StatelessWidget {
                               GetBuilder<VerifyCodeController>(
                                   init: VerifyCodeController(),
                                   builder: (controller) {
-                                    return Text(
-                                      plural('codesent', 0,
-                                          args: [controller.phoneNumber]),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17.sp,
-                                      ),
-                                    ).tr();
+                                    return Flexible(
+                                      child: Text(
+                                        plural('codesent', 0,
+                                            args: [controller.phoneNumber]),
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17.sp,
+                                        ),
+                                      ).tr(),
+                                    );
                                   }),
                             ],
                           ),
