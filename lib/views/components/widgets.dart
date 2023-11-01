@@ -15,6 +15,7 @@ import 'package:washly/controllers/client/add_car_controller.dart';
 import 'package:washly/controllers/client/add_manually_controller.dart';
 import 'package:washly/controllers/client/appoitment_controller.dart';
 import 'package:washly/controllers/client/checkout_controller.dart';
+import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
@@ -481,6 +482,7 @@ Future showDetailDialog<T>({
   required BuildContext context,
   bool allowBackNavigation = false,
 }) {
+  final controller = Get.put(MainController());
   return showModalBottomSheet(
     backgroundColor: const Color(0xffeaeff0),
     context: context,
@@ -498,100 +500,103 @@ Future showDetailDialog<T>({
         child: WillPopScope(
           onWillPop: () async => allowBackNavigation,
           child: StatefulBuilder(builder: (context, setInnerState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.r),
-                      topRight: Radius.circular(20.r),
-                    ),
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          height: 149.h,
-                          child: Image.asset(
-                            'assets/images/washing.jpg',
-                            fit: BoxFit.cover,
+            return SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.r),
+                        topRight: Radius.circular(20.r),
+                      ),
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            height: 149.h,
+                            child: Image.asset(
+                              'assets/images/washing.jpg',
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Positioned(
-                          top: 51,
-                          left: 41,
-                          child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "basicwash",
-                                    style: TextStyle(
-                                        fontSize: 33.sp,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w900),
-                                  ).tr(),
-                                  10.verticalSpace,
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        CupertinoIcons.time,
-                                        color: Colors.white,
-                                        size: 15.sp,
-                                      ),
-                                      10.horizontalSpace,
-                                      Text(
-                                        "aroundtime",
-                                        style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      ).tr(),
-                                    ],
-                                  ),
-                                ],
-                              )),
-                        ),
-                      ],
+                          Positioned(
+                            top: 51,
+                            left: 41,
+                            child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      controller.typeWash(),
+                                      style: TextStyle(
+                                          fontSize: 33.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900),
+                                    ).tr(),
+                                    10.verticalSpace,
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          CupertinoIcons.time,
+                                          color: Colors.white,
+                                          size: 15.sp,
+                                        ),
+                                        10.horizontalSpace,
+                                        Text(
+                                          "aroundtime",
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600),
+                                        ).tr(),
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                23.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.only(left: 44.0.w),
-                  child: Text("washincludes",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: const Color(0xff8aa7b7),
-                              fontWeight: FontWeight.w600))
-                      .tr(),
-                ),
-                14.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 44.0.w),
-                  child: Text("desc",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              color: const Color(0xff030303),
-                              fontWeight: FontWeight.w600))
-                      .tr(),
-                ),
-                78.verticalSpace,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 44.0.w),
-                  child: GradientButton(
-                    text: "understood",
-                    onpress: () {
-                      Get.back();
-                    },
+                  23.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.only(left: 44.0.w),
+                    child: Text("washincludes",
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                color: const Color(0xff8aa7b7),
+                                fontWeight: FontWeight.w600))
+                        .tr(),
                   ),
-                ),
-                41.verticalSpace,
-              ],
+                  14.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 44.0.w),
+                    child: Text("desc",
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                color: const Color(0xff030303),
+                                fontWeight: FontWeight.w600))
+                        .tr(),
+                  ),
+                  65.verticalSpace,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 44.0.w),
+                    child: GradientButton(
+                      text: "understood",
+                      onpress: () {
+                        Get.back();
+                      },
+                    ),
+                  ),
+                  41.verticalSpace,
+                ],
+              ),
             );
           }),
         ),
@@ -705,7 +710,8 @@ Future showPayementStatusDialog<T>(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xff030303)))
                             .tr()
-                        : Text('checkorchange',
+                        : Text('Please double check or change your\n payment method',
+                        textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,

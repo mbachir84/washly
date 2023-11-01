@@ -499,7 +499,7 @@ class MainScreen extends StatelessWidget {
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
-                                                      children: [
+                                                      children: [                                        
                                                         Text('Premium Wash',
                                                             style: TextStyle(
                                                                 color: const Color(
@@ -717,7 +717,7 @@ class MainScreen extends StatelessWidget {
                                                                 Text(
                                                                   cont.selectedAddress
                                                                           .name ??
-                                                                      'Select address', // Use ?. and provide a fallback value
+                                                                      '', // Use ?. and provide a fallback value
 
                                                                   style: TextStyle(
                                                                       color: const Color(

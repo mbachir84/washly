@@ -1,12 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/controllers/client/pay_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/components/widgets.dart';
+import 'package:washly/views/screens/client/add_funds_screen.dart';
 
 class PayScreen extends StatelessWidget {
   const PayScreen({super.key});
@@ -105,13 +109,16 @@ class PayScreen extends StatelessWidget {
                           ],
                         ),
                         const Spacer(),
-                        Text(
-                          "addfunds",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w600,
-                              color: primaryColor),
-                        ).tr()
+                        InkWell(
+                          onTap: () => Get.to(() => AddFundsScreeen()),
+                          child: Text(
+                            "addfunds",
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w600,
+                                color: primaryColor),
+                          ).tr(),
+                        )
                       ],
                     ),
                   ),
@@ -220,7 +227,7 @@ class PayScreen extends StatelessWidget {
                           ),
                         ),
                         15.horizontalSpace,
-                        Flexible (
+                        Flexible(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -252,6 +259,58 @@ class PayScreen extends StatelessWidget {
                     width: 1.sw,
                     color: const Color(0xff698695).withOpacity(0.2),
                   ),
+                  22.verticalSpace,
+                  Row(children: [
+                    GetBuilder<PayController>(
+                        builder: (cont) => Transform.scale(
+                              scale: 1.5,
+                              child: Checkbox(
+                                  activeColor: Color(0xFF43e293),
+                                  value: cont.checkBoxValue,
+                                  onChanged: ((value) {
+                                    cont.checkBoxValue = value!;
+                                  })),
+                            )),
+                    Flexible(
+                      child: Text(
+                        "I don't have anything valuable in my car",
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w800,
+                            color: const Color(0xff698695)),
+                      ),
+                    ),
+                    Text(
+                      "*",
+                      style: TextStyle(color: Colors.red),
+                    )
+                  ]),
+                  27.verticalSpace,
+                  Container(
+                    width: 383.h,
+                    height: 76.h,
+                    padding: EdgeInsets.symmetric(horizontal: 21,vertical:16 ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(9),
+                      color: const Color.fromARGB(255, 241, 204, 148),
+                    ),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          "assets/images/Group-514.svg",
+                          height: 32.h,
+                          width: 29.w,
+                        ),
+                        14.horizontalSpace,
+                        Flexible(child: Text("We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
+                        style: TextStyle(
+                            height: 1.5,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff698695)),))
+                      ],
+                    ),
+                  ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -275,48 +334,53 @@ class PayScreen extends StatelessWidget {
                     ],
                   ),
                   8.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'subtotal',
-                        style: TextStyle(
-                          color: const Color(0xff698695),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).tr(),
-                      Text(
-                        '20 MAD',
-                        style: TextStyle(
-                          color: const Color(0xff698695),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ).tr(),
-                    ],
+                  GetBuilder<MainController>(
+                    init: MainController(),
+                    builder: (cont) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'subtotal',
+                          style: TextStyle(
+                            color: const Color(0xff698695),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).tr(),
+                        Text(
+                          '${cont.priceWash()} MAD',
+                          style: TextStyle(
+                            color: const Color(0xff698695),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).tr(),
+                      ],
+                    ),
                   ),
                   8.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'totaltopay',
-                        style: TextStyle(
-                          color: const Color(0xff030303),
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ).tr(),
-                      Text(
-                        '20 MAD',
-                        style: TextStyle(
-                          color: const Color(0xff030303),
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ).tr(),
-                    ],
+                  GetBuilder<MainController>(
+                    builder: (cont) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'totaltopay',
+                          style: TextStyle(
+                            color: const Color(0xff030303),
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ).tr(),
+                        Text(
+                          '${cont.priceWash()} MAD',
+                          style: TextStyle(
+                            color: const Color(0xff030303),
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ).tr(),
+                      ],
+                    ),
                   ),
                   29.verticalSpace,
                   GradientButton(
