@@ -277,7 +277,7 @@ class PayScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w800,
-                            color: const Color(0xff698695)),
+                            color: const Color(0xff030303)),
                       ),
                     ),
                     Text(
@@ -292,7 +292,7 @@ class PayScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 21,vertical:16 ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(9),
-                      color: const Color.fromARGB(255, 241, 204, 148),
+                      color: Color.fromARGB(255, 242, 229, 209),
                     ),
                     child: Row(
                       children: [
@@ -307,7 +307,7 @@ class PayScreen extends StatelessWidget {
                             height: 1.5,
                             fontSize: 12.sp,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xff698695)),))
+                            color: const Color(0xffff8d41)),))
                       ],
                     ),
                   ),

@@ -19,7 +19,7 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: Padding(
-          padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 24.w),
           child: GradientButton(
             text: '+ Add funds',
             onpress: () {
