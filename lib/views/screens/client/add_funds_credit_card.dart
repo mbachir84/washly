@@ -18,25 +18,25 @@ class AddFundsCreditCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
-          child: GradientButton(
-            text: '+ Add funds',
-            onpress: () {
-              Get.to(
-                () => const AddFundsScreeen(),
-                duration: const Duration(milliseconds: 500),
-                transition: Transition.rightToLeftWithFade,
-              );
-            },
-          ),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
+        child: GradientButton(
+          text: '+ Add funds',
+          onpress: () {
+            Get.to(
+              () => const AddFundsScreeen(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeftWithFade,
+            );
+          },
         ),
-      backgroundColor: Color(0xFFFeaeff0),
+      ),
+      backgroundColor: Color(0xfffeaeff0),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
-          children: [Stack(
+        child: Column(children: [
+          Stack(
             children: [
               Container(
                 height: 320.h,
@@ -50,8 +50,8 @@ class AddFundsCreditCard extends StatelessWidget {
                       begin: Alignment.bottomRight,
                       end: Alignment.topLeft,
                       colors: [
-                        Color(0xFFF4cf166),
-                        Color(0xFFF20b1ee),
+                        Color(0xfff4cf166),
+                        Color(0xfff20b1ee),
                       ]),
                 ),
                 child: Padding(
@@ -111,84 +111,79 @@ class AddFundsCreditCard extends StatelessWidget {
                                     ),
                                   ),
                                 ]),
-                                Text("MAD",
-                                style: TextStyle(fontSize: 13.sp,color: Colors.white,fontWeight: FontWeight.bold),)
+                            Text(
+                              "MAD",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
                           ])
                     ],
                   ),
                 ),
               ),
-              
-              
             ],
           ),
           25.verticalSpace,
           Container(
-                  width: 382.w,
-                  height: 97.h,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(71, 96, 108, 0.1),
-                          offset: Offset(
-                              0, 8), // (0, 8) corresponds to the x and y offset
-                          blurRadius: 16,
-                        ),
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(9)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                                'assets/images/credit-card-icon.svg'),
-                            20.horizontalSpace,
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Credit Card",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.bold)),
-                                5.verticalSpace,
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                        'assets/images/mastercard.svg'),
-                                    Text(
-                                      "  ***5488",
-                                      style: TextStyle(
-                                          fontSize: 15.sp,
-                                          color: Color(0xfff698695)),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              color: const Color(0xff313131),
-                              size: 16.sp,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+            width: 382.w,
+            height: 97.h,
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(71, 96, 108, 0.1),
+                offset:
+                    Offset(0, 8), // (0, 8) corresponds to the x and y offset
+                blurRadius: 16,
+              ),
+            ], color: Colors.white, borderRadius: BorderRadius.circular(9)),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset('assets/images/credit-card-icon.svg'),
+                      20.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Credit Card",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold)),
+                          5.verticalSpace,
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/images/mastercard.svg'),
+                              Text(
+                                "  ***5488",
+                                style: TextStyle(
+                                    fontSize: 15.sp, color: Color(0xfff698695)),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-          
-          ]
-        ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: const Color(0xff313131),
+                        size: 16.sp,
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }

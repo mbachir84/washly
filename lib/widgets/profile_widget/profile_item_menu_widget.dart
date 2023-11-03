@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:washly/views/screens/auth/verify_phone.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
+import 'package:washly/views/screens/client/credit_card_screen.dart';
 import 'package:washly/views/screens/client/my_coupons_page.dart';
 import 'package:washly/views/screens/client/support_screen.dart';
 import 'package:washly/views/screens/client/wallet_screen.dart';
@@ -40,7 +41,9 @@ class ProfileItemMenuWidget extends StatelessWidget {
         ItemProfileMenu(
           title: "creditcard",
           iconPath: 'assets/images/wallet-select.svg',
-          onTap: () {},
+          onTap: () {
+            Get.to(() =>const CreditCardScreen());
+          },
         ),
         const ItemProfileMenu(
           title: "washhistory",
@@ -59,8 +62,9 @@ class ProfileItemMenuWidget extends StatelessWidget {
         ItemProfileMenu(
           title: "support",
           iconPath: 'assets/images/support-select-icon .svg',
-          onTap: ()=>Get.to(()=>SupportScreen(),transition: Transition.fadeIn,
-                duration: const Duration(milliseconds: 500)),
+          onTap: () => Get.to(() => SupportScreen(),
+              transition: Transition.fadeIn,
+              duration: const Duration(milliseconds: 500)),
         ),
         5.verticalSpace,
         Padding(
