@@ -325,14 +325,14 @@ Future showBottomDialog<T>(
                   child: ListView.separated(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: 14,
+                    itemCount: controller.isToday? 20-controller.startingDate:14,
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {},
                         child: InkWell(
                           onTap: () {
                             setInnerState(() {
-                              print("inndex $index");
+                              print(21-controller.startingDate);
                               controller.selectedTime = index;
                               controller.counter = index;
 
@@ -432,7 +432,11 @@ Future showBottomDialog<T>(
                                       color: Colors.white),
                                   child: Center(
                                     child: Text(
-                                        "${07 + index} :00 - ${7 + index + 1} :00  ",
+                                        // "${07 + index} :00 - ${7 + index + 1} :00  ",
+                                        (controller.isToday &&
+                                                controller.startingDate < 21)
+                                            ? "${controller.startingDate.toInt() + index+1}:00 -${controller.startingDate.toInt() + index + 2}:00"
+                                            : "${07 + index} :00 - ${7 + index + 1} :00  ",
                                         style: TextStyle(
                                             fontSize: 14.sp,
                                             color:
@@ -711,7 +715,7 @@ Future showPayementStatusDialog<T>(
                                     color: const Color(0xff030303)))
                             .tr()
                         : Text('Please double check or change your\n payment method',
-                        textAlign: TextAlign.center,
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,

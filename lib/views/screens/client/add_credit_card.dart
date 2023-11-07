@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 
 class AddCreditCard extends StatelessWidget {
@@ -15,6 +16,20 @@ class AddCreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.symmetric(vertical: 41.h, horizontal: 24.w),
+        child: GradientButton(
+          text: 'Save Card',
+          onpress: () {
+            Get.to(
+              () => const AddCreditCard(),
+              duration: const Duration(milliseconds: 500),
+              transition: Transition.rightToLeftWithFade,
+            );
+          },
+        ),
+      ),
       backgroundColor: Color(0xFFEAEFF0),
       body: SingleChildScrollView(
         child: Padding(
@@ -73,6 +88,7 @@ class AddCreditCard extends StatelessWidget {
                   ),
                   12.verticalSpace,
                   TextField(),
+                  
                 ],
               ),
             )

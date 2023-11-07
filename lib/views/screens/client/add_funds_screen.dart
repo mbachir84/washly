@@ -77,8 +77,8 @@ class AddFundsScreeen extends StatelessWidget {
                         Row(
                           children: [
                             SvgPicture.asset(
-                                'assets/images/credit-card-icon.svg'),
-                            20.horizontalSpace,
+                                'assets/images/credit-card-icon.svg',height: 42,),
+                            18.horizontalSpace,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +92,7 @@ class AddFundsScreeen extends StatelessWidget {
                                 Row(
                                   children: [
                                     SvgPicture.asset(
-                                        'assets/images/mastercard.svg'),
+                                        'assets/images/mastercard.svg',),
                                     Text(
                                       "  ***5488",
                                       style: TextStyle(
@@ -143,7 +143,7 @@ class AddFundsScreeen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            SvgPicture.asset('assets/images/money-icon.svg'),
+                            SvgPicture.asset('assets/images/money-icon.svg',height: 42,),
                             20.horizontalSpace,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

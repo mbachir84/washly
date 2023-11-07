@@ -18,6 +18,8 @@ class CheckoutController extends GetxController {
   DateTime currentTime = DateTime.now();
   DateTime dateValue = DateTime.now();
   bool isIgnored = false;
+  int startingDate = 0;
+
 
   void apply() {
     if (couponController.text.isNotEmpty) {
@@ -86,10 +88,10 @@ class CheckoutController extends GetxController {
           if (((currentTime.minute + 15) - 60) < 10) {
             hourSelected = "";
           } else {
-            hourSelected = " ";
+            hourSelected = "";
           }
         } else {
-          hourSelected = " ";
+          hourSelected = "";
           print("mouad $hourSelected");
         }
       } else {
@@ -102,6 +104,21 @@ class CheckoutController extends GetxController {
       }
     }
     // }
+  }
+
+  getHourLeft(){
+    if (counter == 0) {
+      hourSelected = "Wash now";
+    
+    } else {
+      for (int i = 1; i < 21-startingDate; i++) {
+        if (counter == i) {
+          hourSelected = "${startingDate.toInt() + i+1}:00 -${startingDate.toInt() + i + 2}:00";
+          print("mouad $hourSelected");
+        }
+      }
+    }
+
   }
 
   checkDay() {
@@ -126,7 +143,7 @@ class CheckoutController extends GetxController {
       update();
     } else if (dateFormat == DateFormat.yMMMMd().format(currentTime) &&
         selectedTime == counter) {
-      getHourSelected();
+      getHourLeft();
       update();
     }
   }
@@ -134,7 +151,7 @@ class CheckoutController extends GetxController {
   @override
   void onInit() {
     selectHour();
-
+    startingDate = DateTime.now().hour;
     dateFormat = DateFormat.yMMMMd().format(dateValue);
     super.onInit();
   }
