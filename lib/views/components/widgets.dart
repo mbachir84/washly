@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors
 import 'dart:ui';
 
 import 'package:date_picker_timeline/date_picker_timeline.dart';
@@ -231,8 +231,11 @@ Future showBottomDialog<T>(
     bool allowBackNavigation = false,
     bool checkoutClick = true}) {
   final controller = Get.put(CheckoutController());
+  controller.isClicked = true;
 
   return showModalBottomSheet(
+    isScrollControlled: true,
+    
     backgroundColor: const Color(0xffeaeff0),
     context: context,
     shape: RoundedRectangleBorder(
@@ -275,35 +278,49 @@ Future showBottomDialog<T>(
               10.verticalSpace,
               Padding(
                 padding: EdgeInsets.only(left: 24.0.w),
-                child: DatePicker(
-                  DateTime.now(),
-                  width: 70.w,
-                  height: 100.w,
-                  dateTextStyle: TextStyle(
-                      fontSize: 24.sp,
-                      color: const Color(0xff030303),
-                      fontWeight: FontWeight.bold),
-                  dayTextStyle: TextStyle(
-                      fontSize: 12.sp,
-                      color: const Color(0xff8aa7b7),
-                      decorationStyle: TextDecorationStyle.solid,
-                      fontWeight: FontWeight.w500),
-                  monthTextStyle: TextStyle(
-                      fontSize: 12.sp,
-                      color: const Color(0xff8aa7b7),
-                      decorationStyle: TextDecorationStyle.solid,
-                      fontWeight: FontWeight.w500),
-                  initialSelectedDate: controller.dateValue,
-                  deactivatedColor: Colors.white,
-                  selectionColor: primaryColor,
-                  selectedTextColor: Colors.white,
-                  onDateChange: (date) {
-                    setInnerState(() {
-                      controller.dateValue = date;
-
-                      controller.checkDay();
-                    });
-                  },
+                child: GetBuilder<CheckoutController>(
+                  builder: (controller) => DatePicker(
+                    (controller.startingDate.toInt() < 20)
+                        ? DateTime
+                            .now() //before 21:00 the first date is current time
+                        : DateTime.now().add(Duration(
+                            days:
+                                1)), //after 21:00 the first date is tomorrows date
+                    width: 70.w,
+                    controller: controller.datePickerController,
+                    height: 100.w,
+                    dateTextStyle: TextStyle(
+                        fontSize: 24.sp,
+                        color: const Color(0xff030303),
+                        fontWeight: FontWeight.bold),
+                    dayTextStyle: TextStyle(
+                        fontSize: 12.sp,
+                        color: const Color(0xff8aa7b7),
+                        decorationStyle: TextDecorationStyle.solid,
+                        fontWeight: FontWeight.w500),
+                    monthTextStyle: TextStyle(
+                        fontSize: 12.sp,
+                        color: const Color(0xff8aa7b7),
+                        decorationStyle: TextDecorationStyle.solid,
+                        fontWeight: FontWeight.w500),
+                    initialSelectedDate: (controller.startingDate.toInt() < 20)
+                        ? controller.dateValue
+                        : controller.tomorowDate!,
+                    // controller.date ,
+                    deactivatedColor: Colors.white,
+                    selectionColor: primaryColor,
+                    selectedTextColor: Colors.white,
+                    onDateChange: (date) {
+                      setInnerState(() {
+                        controller.date = date;
+                        controller.dateValue = date;
+                        controller.tomorowDate = date;
+                        controller.checkDay();
+                        controller.datePickerController
+                            .setDateAndAnimate(controller.date!);
+                      });
+                    },
+                  ),
                 ),
               ),
               29.verticalSpace,
@@ -323,16 +340,18 @@ Future showBottomDialog<T>(
                 child: SizedBox(
                   height: 62.w,
                   child: ListView.separated(
+                    
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: controller.isToday? 20-controller.startingDate:14,
+                    itemCount:
+                        controller.isToday ? 21 - controller.startingDate : 14,
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {},
                         child: InkWell(
                           onTap: () {
                             setInnerState(() {
-                              print(21-controller.startingDate);
+                              print(controller.startingDate.toInt());
                               controller.selectedTime = index;
                               controller.counter = index;
 
@@ -341,7 +360,8 @@ Future showBottomDialog<T>(
                           },
                           child: index == 0
                               ? Visibility(
-                                  visible: controller.isToday,
+                                  visible: (controller.isToday &&
+                                      controller.startingDate.toInt() + 1 < 21),
                                   child: SizedBox(
                                     width: 123.w,
                                     child: Column(
@@ -433,9 +453,8 @@ Future showBottomDialog<T>(
                                   child: Center(
                                     child: Text(
                                         // "${07 + index} :00 - ${7 + index + 1} :00  ",
-                                        (controller.isToday &&
-                                                controller.startingDate < 21)
-                                            ? "${controller.startingDate.toInt() + index+1}:00 -${controller.startingDate.toInt() + index + 2}:00"
+                                        (controller.isToday)
+                                            ? "${controller.startingDate.toInt() + index}:00 -${controller.startingDate.toInt() + index + 1}:00"
                                             : "${07 + index} :00 - ${7 + index + 1} :00  ",
                                         style: TextStyle(
                                             fontSize: 14.sp,
@@ -762,7 +781,7 @@ Future showOrderSheet<T>({required BuildContext context, bool status = true}) {
       ),
     ),
     isDismissible: false,
-    isScrollControlled: false,
+    isScrollControlled: true,
     builder: (context) => Padding(
       padding: const EdgeInsets.all(0),
       child: WillPopScope(

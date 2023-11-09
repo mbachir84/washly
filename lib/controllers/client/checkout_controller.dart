@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +22,10 @@ class CheckoutController extends GetxController {
   DateTime dateValue = DateTime.now();
   bool isIgnored = false;
   int startingDate = 0;
-
+  DateTime? tomorowDate;
+  DatePickerController datePickerController = DatePickerController();
+  DateTime? date;
+  bool isClicked = false;
 
   void apply() {
     if (couponController.text.isNotEmpty) {
@@ -106,19 +112,18 @@ class CheckoutController extends GetxController {
     // }
   }
 
-  getHourLeft(){
+  getHourLeft() {
     if (counter == 0) {
       hourSelected = "Wash now";
-    
     } else {
-      for (int i = 1; i < 21-startingDate; i++) {
+      for (int i = 1; i < 21 - startingDate; i++) {
         if (counter == i) {
-          hourSelected = "${startingDate.toInt() + i+1}:00 -${startingDate.toInt() + i + 2}:00";
+          hourSelected =
+              "${startingDate.toInt() + i}:00 -${startingDate.toInt() + i + 1}:00";
           print("mouad $hourSelected");
         }
       }
     }
-
   }
 
   checkDay() {
@@ -152,6 +157,11 @@ class CheckoutController extends GetxController {
   void onInit() {
     selectHour();
     startingDate = DateTime.now().hour;
+    tomorowDate = DateTime.now().add(Duration(days: 1));
+    if (startingDate.toInt() + 1 >= 20) {
+      isToday = false;
+    }
+
     dateFormat = DateFormat.yMMMMd().format(dateValue);
     super.onInit();
   }

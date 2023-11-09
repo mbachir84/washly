@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:washly/controllers/client/addresses_list_controller.dart';
+import 'package:washly/controllers/client/checkout_controller.dart';
 import 'package:washly/controllers/client/choose_car_controller.dart';
 import 'package:washly/controllers/client/home_controller.dart';
 import 'package:washly/utils/buttons.dart';
@@ -783,6 +784,9 @@ class MainScreen extends StatelessWidget {
                                                   : true,
                                           text: 'next',
                                           onpress: () {
+                                            final cont = Get.put(CheckoutController());
+                                            
+
                                             controller.showDialog(context);
                                           },
                                         ),
