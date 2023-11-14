@@ -11,6 +11,7 @@ import 'package:washly/views/screens/client/credit_card_screen.dart';
 import 'package:washly/views/screens/client/my_coupons_page.dart';
 import 'package:washly/views/screens/client/support_screen.dart';
 import 'package:washly/views/screens/client/wallet_screen.dart';
+import 'package:washly/views/screens/client/wash_history.dart';
 import 'package:washly/widgets/profile_widget/card_save_washes_widget.dart';
 import 'package:washly/widgets/profile_widget/item_profiel_widget.dart';
 
@@ -42,12 +43,19 @@ class ProfileItemMenuWidget extends StatelessWidget {
           title: "creditcard",
           iconPath: 'assets/images/wallet-select.svg',
           onTap: () {
-            Get.to(() =>const CreditCardScreen());
+            Get.to(() => const CreditCardScreen(),
+                transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 500));
           },
         ),
-        const ItemProfileMenu(
+        ItemProfileMenu(
           title: "washhistory",
           iconPath: 'assets/images/wash-history-select.svg',
+          onTap: () {
+            Get.to(() => const WashHistoryScreen(),
+                transition: Transition.fadeIn,
+                duration: const Duration(milliseconds: 500));
+          },
         ),
         ItemProfileMenu(
           title: "mycoupons",
@@ -62,7 +70,7 @@ class ProfileItemMenuWidget extends StatelessWidget {
         ItemProfileMenu(
           title: "support",
           iconPath: 'assets/images/support-select-icon .svg',
-          onTap: () => Get.to(() => SupportScreen(),
+          onTap: () => Get.to(() => const SupportScreen(),
               transition: Transition.fadeIn,
               duration: const Duration(milliseconds: 500)),
         ),

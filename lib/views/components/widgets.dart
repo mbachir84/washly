@@ -235,7 +235,6 @@ Future showBottomDialog<T>(
 
   return showModalBottomSheet(
     isScrollControlled: true,
-    
     backgroundColor: const Color(0xffeaeff0),
     context: context,
     shape: RoundedRectangleBorder(
@@ -306,7 +305,7 @@ Future showBottomDialog<T>(
                     initialSelectedDate: (controller.startingDate.toInt() < 20)
                         ? controller.dateValue
                         : controller.tomorowDate!,
-                    // controller.date ,
+                    // controller.dateValue ,
                     deactivatedColor: Colors.white,
                     selectionColor: primaryColor,
                     selectedTextColor: Colors.white,
@@ -314,8 +313,9 @@ Future showBottomDialog<T>(
                       setInnerState(() {
                         controller.date = date;
                         controller.dateValue = date;
-                        controller.tomorowDate = date;
+                        // controller.tomorowDate = date;
                         controller.checkDay();
+                        // controller.selectingController();
                         controller.datePickerController
                             .setDateAndAnimate(controller.date!);
                       });
@@ -340,7 +340,6 @@ Future showBottomDialog<T>(
                 child: SizedBox(
                   height: 62.w,
                   child: ListView.separated(
-                    
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount:
@@ -351,6 +350,7 @@ Future showBottomDialog<T>(
                         child: InkWell(
                           onTap: () {
                             setInnerState(() {
+                              controller.allowed = true;
                               print(controller.startingDate.toInt());
                               controller.selectedTime = index;
                               controller.counter = index;
@@ -361,7 +361,7 @@ Future showBottomDialog<T>(
                           child: index == 0
                               ? Visibility(
                                   visible: (controller.isToday &&
-                                      controller.startingDate.toInt() + 1 < 21),
+                                      controller.startingDate.toInt() < 20),
                                   child: SizedBox(
                                     width: 123.w,
                                     child: Column(
@@ -480,6 +480,7 @@ Future showBottomDialog<T>(
                 child: SizedBox(
                   width: 382.w,
                   child: GradientButton(
+                    allowed: controller.allowed,
                     text: 'checkout',
                     onpress: () {
                       Get.back();
@@ -1662,6 +1663,229 @@ Future showCancelAppointment<T>({
         child: WillPopScope(
           onWillPop: () async => allowBackNavigation,
           child: StatefulBuilder(builder: (context, setInnerState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 42.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 110.w,
+                        width: 110.w,
+                        decoration: BoxDecoration(
+                          color: const Color(0xfffff0e6),
+                          borderRadius: BorderRadius.circular(55.r),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              CupertinoIcons.exclamationmark_triangle_fill,
+                              color: const Color(0xffff8d41),
+                              size: 49.sp,
+                            ),
+                          ],
+                        ),
+                      ),
+                      22.verticalSpace,
+                      Text('cancelappointment',
+                              style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black))
+                          .tr(),
+                      10.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 60.w),
+                        child: Text('nomoney',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
+                      ),
+                      45.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          colors: const [Color(0xff698695), Color(0xffa7c5d6)],
+                          text: "cancelappointment",
+                          onpress: () {
+                            Get.back();
+                            appointmentCanceled(context: context);
+                          },
+                        ),
+                      ),
+                      23.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          text: "close",
+                          onpress: () {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                      45.verticalSpace,
+                    ],
+                  )
+                ],
+              ),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future getreceipt<T>(
+    {required BuildContext context, bool allowBackNavigation = false}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    // isDismissible: false,
+    // enableDrag: false,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 42.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    29.verticalSpace,
+                    Text('Get Receipt',
+                            style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black))
+                        .tr(),
+                    39.verticalSpace,
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 18.0.w),
+                        child: Column(
+                          children: [
+                            Row(children: [
+                              SvgPicture.asset(
+                                  "assets/images/download-icon.svg"),
+                              20.horizontalSpace,
+                              Text(
+                                "Download Receipt",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17.sp,
+                                    color: Color(0xff10a7f5)),
+                              )
+                            ]),
+                            25.verticalSpace,
+                            Row(children: [
+                              SvgPicture.asset("assets/images/email-icon.svg"),
+                              20.horizontalSpace,
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                  receiptSent(context: context);
+                                },
+                                child: Text(
+                                  "Email Receipt",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17.sp,
+                                      color: Color(0xff10a7f5)),
+                                ),
+                              )
+                            ]),
+                          ],
+                        )),
+                    49.verticalSpace,
+                    SizedBox(
+                      width: 382.w,
+                      child: GradientButton(
+                        text: "close",
+                        onpress: () {
+                          Get.back();
+
+                          final con = Get.put(AppointementController());
+                          con.appointmentShow = false;
+                          con.update();
+                        },
+                      ),
+                    ),
+                    45.verticalSpace,
+                  ],
+                )
+              ],
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future receiptSent<T>(
+    {required BuildContext context, bool allowBackNavigation = false}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    // isDismissible: false,
+    // enableDrag: false,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1686,23 +1910,37 @@ Future showCancelAppointment<T>({
                       height: 110.w,
                       width: 110.w,
                       decoration: BoxDecoration(
-                        color: const Color(0xfffff0e6),
+                        color: const Color(0xffcbf4df),
                         borderRadius: BorderRadius.circular(55.r),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            CupertinoIcons.exclamationmark_triangle_fill,
-                            color: const Color(0xffff8d41),
-                            size: 49.sp,
-                          ),
+                          Container(
+                            width: 44.w,
+                            height: 44.w,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff39d788),
+                              borderRadius: BorderRadius.circular(55.r),
+                            ),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
                     29.verticalSpace,
-                    Text('cancelappointment',
+                    Text('Receipt Sent',
                             style: TextStyle(
                                 fontSize: 22.sp,
                                 fontWeight: FontWeight.bold,
@@ -1710,34 +1948,29 @@ Future showCancelAppointment<T>({
                         .tr(),
                     10.verticalSpace,
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 60.w),
-                      child: Text('nomoney',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xff030303)))
-                          .tr(),
-                    ),
-                    45.verticalSpace,
-                    SizedBox(
-                      width: 382.w,
-                      child: GradientButton(
-                        colors: const [Color(0xff698695), Color(0xffa7c5d6)],
-                        text: "cancelappointment",
-                        onpress: () {
-                          Get.back();
-                          appointmentCanceled(context: context);
-                        },
+                      padding: EdgeInsets.symmetric(horizontal: 48.0.w),
+                      child: Center(
+                        child: Text(
+                                'We just sent you the receipt to:ahmed23@gmail.com',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
                       ),
                     ),
-                    23.verticalSpace,
+                    49.verticalSpace,
                     SizedBox(
                       width: 382.w,
                       child: GradientButton(
                         text: "close",
                         onpress: () {
                           Get.back();
+
+                          final con = Get.put(AppointementController());
+                          con.appointmentShow = false;
+                          con.update();
                         },
                       ),
                     ),

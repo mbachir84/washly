@@ -26,6 +26,7 @@ class CheckoutController extends GetxController {
   DatePickerController datePickerController = DatePickerController();
   DateTime? date;
   bool isClicked = false;
+  bool allowed = false;
 
   void apply() {
     if (couponController.text.isNotEmpty) {
@@ -83,34 +84,35 @@ class CheckoutController extends GetxController {
     }
   }
 
-  getHourSelected() async {
+//  getHourSelected() async {
     // for (int i = 1; i < 15; i++) {
-    if (isToday) {
-      await selectHour();
-    } else {
-      if (counter == 0) {
-        //dateFormat == curentime
-        if ((currentTime.minute + 15) >= 60) {
-          if (((currentTime.minute + 15) - 60) < 10) {
-            hourSelected = "";
-          } else {
-            hourSelected = "";
-          }
-        } else {
-          hourSelected = "";
-          print("mouad $hourSelected");
-        }
-      } else {
-        for (int i = 1; i < 14; i++) {
-          if (counter == i) {
-            hourSelected = "${07 + i}:00 - ${08 + i}:00";
-            print("mouad $hourSelected");
-          }
-        }
-      }
-    }
+    // if (isToday) {
+      // await selectHour();
+   // } 
+    // else {
+    //   if (counter == 0) {
+    //     //dateFormat == curentime
+    //     if ((currentTime.minute + 15) >= 60) {
+    //       if (((currentTime.minute + 15) - 60) < 10) {
+    //         hourSelected = "";
+    //       } else {
+    //         hourSelected = "";
+    //       }
+    //     } else {
+    //       hourSelected = "";
+    //       print("mouad $hourSelected");
+    //     }
+    //   } else {
+    //     for (int i = 1; i < 14; i++) {
+    //       if (counter == i) {
+    //         hourSelected = "${07 + i}:00 - ${08 + i}:00";
+    //         print("mouad $hourSelected");
+    //       }
+    //     }
+    //   }
     // }
-  }
+    // }
+  //}
 
   getHourLeft() {
     if (counter == 0) {
@@ -131,20 +133,19 @@ class CheckoutController extends GetxController {
 
     if (dateFormat != DateFormat.yMMMMd().format(currentTime)) {
       isToday = false;
-      getHourSelected();
       update();
     } else {
       isToday = true;
-      getHourSelected();
       update();
     }
+    selectingController();
+    update();
   }
 
   selectingController() {
     if (dateFormat != DateFormat.yMMMMd().format(currentTime) &&
         selectedTime != 0) {
-      // controller.isToday == true;
-      getHourSelected();
+      selectHour();
       update();
     } else if (dateFormat == DateFormat.yMMMMd().format(currentTime) &&
         selectedTime == counter) {

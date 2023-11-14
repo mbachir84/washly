@@ -14,6 +14,7 @@ import 'add_car_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,9 @@ class HomeScreen extends StatelessWidget {
                                     height: 67.h,
                                     child: GradientButton(
                                       text: 'schedulewash',
-                                      onpress: () {},
+                                      onpress: () {
+                                        final cont = Get.put(HomeController());
+                                        cont.changeScreen(0);},
                                     ),
                                   ),
                                 )
