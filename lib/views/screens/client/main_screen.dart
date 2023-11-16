@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -500,7 +502,7 @@ class MainScreen extends StatelessWidget {
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
-                                                      children: [                                        
+                                                      children: [
                                                         Text('Premium Wash',
                                                             style: TextStyle(
                                                                 color: const Color(
@@ -609,9 +611,9 @@ class MainScreen extends StatelessWidget {
                                                                       .start,
                                                               children: [
                                                                 Text(
-                                                                  contr
-                                                                      .selectedCar
-                                                                      .make ?? 'Select car',
+                                                                  contr.selectedCar
+                                                                          .make ??
+                                                                      'Select car',
                                                                   style: TextStyle(
                                                                       color: const Color(
                                                                           0xff313131),
@@ -623,9 +625,9 @@ class MainScreen extends StatelessWidget {
                                                                 ),
                                                                 4.verticalSpace,
                                                                 Text(
-                                                                  contr
-                                                                      .selectedCar
-                                                                      .licencePlate ??'',
+                                                                  contr.selectedCar
+                                                                          .licencePlate ??
+                                                                      '',
                                                                   style:
                                                                       TextStyle(
                                                                     color:
@@ -784,10 +786,16 @@ class MainScreen extends StatelessWidget {
                                                   : true,
                                           text: 'next',
                                           onpress: () {
-                                            final cont = Get.put(CheckoutController());
-                                            
+                                            final cont =
+                                                Get.put(CheckoutController());
 
                                             controller.showDialog(context);
+                                            Timer(const Duration(milliseconds: 200),
+                                                () {
+                                                  cont.datePickerController
+                                                .setDateAndAnimate(cont.date!);
+                                            });
+                                            
                                           },
                                         ),
                                       ],

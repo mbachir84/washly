@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,15 +44,15 @@ class CheckoutScreen extends StatelessWidget {
                                       Get.back();
                                     },
                                     child: Container(
-                                      padding: EdgeInsets.all(6),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey,
-                                        shape: BoxShape.circle
-                                      ),
+                                        padding: EdgeInsets.all(6),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            shape: BoxShape.circle),
                                         height: 40.h,
                                         width: 40.w,
                                         child: SvgPicture.asset(
-                                            'assets/images/arrow-back.svg',))),
+                                          'assets/images/arrow-back.svg',
+                                        ))),
                                 16.horizontalSpace,
                                 Text(
                                   'washsummary',
@@ -216,11 +218,16 @@ class CheckoutScreen extends StatelessWidget {
                             18.5.verticalSpace,
                             InkWell(
                               onTap: () {
+                                final cont = Get.put(CheckoutController());
                                 showBottomDialog(
                                   context: context,
                                   allowBackNavigation: true,
                                   checkoutClick: false,
                                 );
+                                Timer(const Duration(milliseconds: 200), () {
+                                  cont.datePickerController
+                                      .setDateAndAnimate(cont.date!);
+                                });
                               },
                               child: Row(
                                 children: [

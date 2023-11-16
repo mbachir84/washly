@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/components/widgets.dart';
+import 'package:washly/views/screens/client/contact_washer.dart';
 
 class WashDetailsScreen extends StatelessWidget {
   const WashDetailsScreen({super.key});
@@ -24,18 +25,15 @@ class WashDetailsScreen extends StatelessWidget {
                 Color(0xffa7c5d6),
               ],
               text: "contactwasher",
-              onpress: () {},
+              onpress: () {
+                Get.to(() => const ContactWasherScreen());
+              },
             ),
             10.verticalSpace,
             GradientButton(
               text: 'Get receipt',
               onpress: () {
                 getreceipt(context: context);
-                // Get.to(
-                //   () => const AddFundsScreeen(),
-                //   duration: const Duration(milliseconds: 500),
-                //   transition: Transition.rightToLeftWithFade,
-                // );
               },
             ),
           ]),
@@ -113,8 +111,8 @@ class WashDetailsScreen extends StatelessWidget {
                             height: 83.h,
                             width: 83.w,
                             fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                const Center(child: CircularProgressIndicator()),
+                            placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator()),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),

@@ -232,6 +232,7 @@ Future showBottomDialog<T>(
     bool checkoutClick = true}) {
   final controller = Get.put(CheckoutController());
   controller.isClicked = true;
+  
 
   return showModalBottomSheet(
     isScrollControlled: true,
