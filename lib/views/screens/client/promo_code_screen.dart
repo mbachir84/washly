@@ -5,6 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:washly/utils/buttons.dart';
+import 'package:washly/views/components/widgets.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PromoCodeScreen extends StatelessWidget {
   const PromoCodeScreen({super.key});
@@ -144,8 +146,11 @@ class PromoCodeScreen extends StatelessWidget {
                   allowed: true,
                   fontColor: const Color(0xFF5d69e2),
                   text: 'inviteAFreind',
-                  onpress: () {
+                  onpress: () async {
                     // controller.showDialog(context);
+                    // shareApp();
+                    print("hello word");
+                    await Share.share("hello word");
                   }),
             )
           ],

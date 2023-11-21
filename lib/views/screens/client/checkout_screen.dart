@@ -224,7 +224,7 @@ class CheckoutScreen extends StatelessWidget {
                                   allowBackNavigation: true,
                                   checkoutClick: false,
                                 );
-                                Timer(const Duration(milliseconds: 200), () {
+                                Timer(const Duration(milliseconds: 100), () {
                                   cont.datePickerController
                                       .setDateAndAnimate(cont.date!);
                                 });

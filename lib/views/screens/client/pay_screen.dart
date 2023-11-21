@@ -33,7 +33,7 @@ class PayScreen extends StatelessWidget {
                           Get.back();
                         },
                         child: SizedBox(
-                            height: 20.h,
+                            height: 20.h, 
                             width: 20.w,
                             child: SvgPicture.asset(
                                 'assets/images/arrow-back.svg'))),
@@ -289,7 +289,7 @@ class PayScreen extends StatelessWidget {
                   Container(
                     width: 383.h,
                     height: 76.h,
-                    padding: EdgeInsets.symmetric(horizontal: 21,vertical:16 ),
+                    padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(9),
                       color: Color.fromARGB(255, 242, 229, 209),
@@ -302,12 +302,15 @@ class PayScreen extends StatelessWidget {
                           width: 29.w,
                         ),
                         14.horizontalSpace,
-                        Flexible(child: Text("We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
-                        style: TextStyle(
-                            height: 1.5,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xffff8d41)),))
+                        Flexible(
+                            child: Text(
+                          "We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
+                          style: TextStyle(
+                              height: 1.5,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xffff8d41)),
+                        ))
                       ],
                     ),
                   ),

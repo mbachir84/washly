@@ -25,7 +25,6 @@ class CheckoutController extends GetxController {
   DateTime? tomorowDate;
   DatePickerController datePickerController = DatePickerController();
   DateTime? date;
-  bool isClicked = false;
   bool allowed = false;
 
   void apply() {

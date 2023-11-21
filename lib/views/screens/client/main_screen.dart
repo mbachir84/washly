@@ -790,7 +790,7 @@ class MainScreen extends StatelessWidget {
                                                 Get.put(CheckoutController());
 
                                             controller.showDialog(context);
-                                            Timer(const Duration(milliseconds: 200),
+                                            Timer(const Duration(milliseconds: 100),
                                                 () {
                                                   cont.datePickerController
                                                 .setDateAndAnimate(cont.date!);
