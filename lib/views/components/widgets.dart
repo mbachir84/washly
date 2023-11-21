@@ -15,11 +15,14 @@ import 'package:washly/controllers/client/add_car_controller.dart';
 import 'package:washly/controllers/client/add_manually_controller.dart';
 import 'package:washly/controllers/client/appoitment_controller.dart';
 import 'package:washly/controllers/client/checkout_controller.dart';
+import 'package:washly/controllers/client/contact_washer_controller.dart';
 import 'package:washly/controllers/client/main_controller.dart';
+import 'package:washly/controllers/client/opinion_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
 import 'package:washly/views/screens/client/home_screen.dart';
+import 'package:washly/views/screens/client/main_screen.dart';
 
 import '../screens/client/order_screen.dart';
 import '../screens/client/washer_found_screen.dart';
@@ -861,11 +864,12 @@ Future showOrderSheet<T>({required BuildContext context, bool status = true}) {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(
-                            () => const WasherFoundScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: 500.milliseconds,
-                          );
+                          // Get.to(
+                          //   () => const WasherFoundScreen(),
+                          //   transition: Transition.rightToLeft,
+                          //   duration: 500.milliseconds,
+                          // );
+                          showCancelWash(context: context);
                         },
                         child: Text(
                           'cancelwash',
@@ -1643,6 +1647,370 @@ class AppointmentWidget extends StatelessWidget {
   }
 }
 
+Future showOpinionDialog<T>({
+  required BuildContext context,
+  bool allowBackNavigation = true,
+}) {
+  // final controller = Get.put(OpinionController());
+
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    isScrollControlled: true,
+    isDismissible: allowBackNavigation,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 32.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        22.verticalSpace,
+                        Text('Your opinion matters',
+                                style: TextStyle(
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black))
+                            .tr(),
+                        10.verticalSpace,
+                        Text('Please tell us why you cancelled the wash?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
+                        37.verticalSpace,
+                        Divider(
+                          thickness: 1,
+                        ),
+                        10.verticalSpace,
+                        GetBuilder<OpinionController>(
+                          init: OpinionController(),
+                          builder: (controller) => InkWell(
+                            onTap: () {
+                              controller.opinion = Opinion.urgent;
+                              controller.update();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Transform.scale(
+                                  scale: 1.5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Radio<Opinion>(
+                                        fillColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => controller
+                                                            .opinion ==
+                                                        Opinion.urgent
+                                                    ? primaryColor
+                                                    : const Color(0xff698695)),
+                                        activeColor: Colors.white,
+                                        value: Opinion.urgent,
+                                        groupValue: controller.opinion,
+                                        onChanged: (value) {
+                                          controller.opinion = value!;
+                                          controller.update();
+                                        }),
+                                  ),
+                                ),
+                                15.horizontalSpace,
+                                Text(
+                                  "Something urgent happened",
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        10.verticalSpace,
+                        Divider(
+                          thickness: 1,
+                        ),
+                        GetBuilder<OpinionController>(
+                          init: OpinionController(),
+                          builder: (controller) => InkWell(
+                            onTap: () {
+                              controller.opinion = Opinion.wrongAddress;
+                              controller.update();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Transform.scale(
+                                  scale: 1.5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(0),
+                                    child: Radio<Opinion>(
+                                        fillColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => controller
+                                                            .opinion ==
+                                                        Opinion.wrongAddress
+                                                    ? primaryColor
+                                                    : const Color(0xff698695)),
+                                        activeColor: Colors.white,
+                                        value: Opinion.wrongAddress,
+                                        groupValue: controller.opinion,
+                                        onChanged: (value) {
+                                          controller.opinion = value!;
+                                          controller.update();
+                                        }),
+                                  ),
+                                ),
+                                15.horizontalSpace,
+                                Text(
+                                  "I added wrong address",
+                                  style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        10.verticalSpace,
+                        Divider(
+                          thickness: 1,
+                        ),
+                        20.verticalSpace,
+                        Container(
+                          height: 160.h,
+                          width: 360.w,
+                          padding: EdgeInsets.only(left: 10.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Color(0xff698695)),
+                          ),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              // contentPadding:
+                              //     EdgeInsets.symmetric(vertical: 12.5, horizontal: 9.0),
+                              hintText: 'Type you cancelling reason here',
+                              hintStyle: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.italic,
+                                color: Color(0xFF698695),
+                              ),
+                            ),
+                          ),
+                        ),
+                        20.verticalSpace,
+                        SizedBox(
+                          width: 382.w,
+                          child: GradientButton(
+                            colors: const [
+                              Color(0xff698695),
+                              Color(0xffa7c5d6)
+                            ],
+                            text: "Submit and Cancel",
+                            onpress: () {
+                              Get.back();
+                              feedbackSubmited(context: context);
+                              // appointmentCanceled(context: context);
+                            },
+                          ),
+                        ),
+                        23.verticalSpace,
+                        SizedBox(
+                          width: 382.w,
+                          child: GradientButton(
+                            text: "close",
+                            onpress: () {
+                              Get.back();
+                              Get.offAll(
+                            () => const HomeScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: 500.milliseconds,
+                          );
+                            },
+                          ),
+                        ),
+                        45.verticalSpace,
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future showWashCanceled<T>({
+  required BuildContext context,
+  bool allowBackNavigation = true,
+}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    isDismissible: allowBackNavigation,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 42.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 110.w,
+                        width: 110.w,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffcbf4df),
+                          borderRadius: BorderRadius.circular(55.r),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 44.w,
+                              height: 44.w,
+                              decoration: BoxDecoration(
+                                color: const Color(0xff39d788),
+                                borderRadius: BorderRadius.circular(55.r),
+                              ),
+                              child: const Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      22.verticalSpace,
+                      Text('Your wash has been canceled',
+                              style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black))
+                          .tr(),
+                      10.verticalSpace,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 60.w),
+                        child: Text(
+                                'Would you like to tell us why you canceled it?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
+                      ),
+                      45.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          text: "Leave Feedback",
+                          onpress: () {
+                            Get.back();
+                            showOpinionDialog(context: context);
+                            // appointmentCanceled(context: context);
+                          },
+                        ),
+                      ),
+                      23.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          colors: const [Color(0xff698695), Color(0xffa7c5d6)],
+                          text: "close",
+                          onpress: () {
+                            Get.back();
+                            Get.offAll(
+                            () => const HomeScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: 500.milliseconds,
+                          );
+                          },
+                        ),
+                      ),
+                      45.verticalSpace,
+                    ],
+                  )
+                ],
+              ),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
 Future showCancelAppointment<T>({
   required BuildContext context,
   bool allowBackNavigation = true,
@@ -1829,7 +2197,7 @@ Future showCancelWash<T>({
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 60.w),
                         child: Text(
-                                'Please note you won\'t get your money back in case of canceling',
+                                'Please note that you won\'t get your money back in case of canceling',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15.sp,
@@ -1841,15 +2209,19 @@ Future showCancelWash<T>({
                       SizedBox(
                         width: 382.w,
                         child: GradientButton(
-                          colors: const [Color(0xff698695), Color(0xffa7c5d6)],
                           text: "Don't cancel",
                           onpress: () {
+                            // Get.to(
+                            //   () => const WasherFoundScreen(),
+                            //   transition: Transition.rightToLeft,
+                            //   duration: 500.milliseconds,
+                            // );
+                            Get.back();
                             Get.to(
-                              () => const WasherFoundScreen(),
-                              transition: Transition.rightToLeft,
-                              duration: 500.milliseconds,
-                            );
-                            // Get.back();
+                            () => const WasherFoundScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: 500.milliseconds,
+                          );
                             // appointmentCanceled(context: context);
                           },
                         ),
@@ -1858,9 +2230,11 @@ Future showCancelWash<T>({
                       SizedBox(
                         width: 382.w,
                         child: GradientButton(
+                          colors: const [Color(0xff698695), Color(0xffa7c5d6)],
                           text: "Cancel Anyway",
                           onpress: () {
-                            // Get.back();
+                            Get.back();
+                            showWashCanceled(context: context);
                           },
                         ),
                       ),
@@ -2088,9 +2462,131 @@ Future requestSent<T>(
                         onpress: () {
                           Get.back();
 
-                          final con = Get.put(AppointementController());
-                          con.appointmentShow = false;
-                          con.update();
+                          // final con = Get.put(AppointementController());
+                          // con.appointmentShow = false;
+                          // con.update();
+                        },
+                      ),
+                    ),
+                    45.verticalSpace,
+                  ],
+                )
+              ],
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future feedbackSubmited<T>(
+    {required BuildContext context, bool allowBackNavigation = false}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    // isDismissible: false,
+    // enableDrag: false,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 42.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 110.w,
+                      width: 110.w,
+                      decoration: BoxDecoration(
+                        color: const Color(0xffcbf4df),
+                        borderRadius: BorderRadius.circular(55.r),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 44.w,
+                            height: 44.w,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff39d788),
+                              borderRadius: BorderRadius.circular(55.r),
+                            ),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    29.verticalSpace,
+                    Text('Thanks for your feedback!',
+                            style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black))
+                        .tr(),
+                    10.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 48.0.w),
+                      child: Center(
+                        child: Text(
+                                'We\'re doing our best to provide the best customer experience',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
+                      ),
+                    ),
+                    49.verticalSpace,
+                    SizedBox(
+                      width: 382.w,
+                      child: GradientButton(
+                        text: "close",
+                        onpress: () {
+                          Get.back();
+
+                          Get.offAll(
+                            () => const HomeScreen(),
+                            transition: Transition.rightToLeft,
+                            duration: 500.milliseconds,
+                          );
                         },
                       ),
                     ),

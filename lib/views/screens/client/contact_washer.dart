@@ -150,37 +150,35 @@ class ContactWasherScreen extends StatelessWidget {
                     controller.comment = Comment.notWashedProperly;
                     controller.update();
                   },
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Radio<Comment>(
-                                fillColor: MaterialStateColor.resolveWith(
-                                    (states) => controller.comment ==
-                                            Comment.notWashedProperly
-                                        ? primaryColor
-                                        : const Color(0xff698695)),
-                                activeColor: Colors.white,
-                                value: Comment.notWashedProperly,
-                                groupValue: controller.comment,
-                                onChanged: (value) {
-                                  controller.comment = value!;
-                                  controller.update();
-                                }),
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Transform.scale(
+                        scale: 1.5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Radio<Comment>(
+                              fillColor: MaterialStateColor.resolveWith(
+                                  (states) => controller.comment ==
+                                          Comment.notWashedProperly
+                                      ? primaryColor
+                                      : const Color(0xff698695)),
+                              activeColor: Colors.white,
+                              value: Comment.notWashedProperly,
+                              groupValue: controller.comment,
+                              onChanged: (value) {
+                                controller.comment = value!;
+                                controller.update();
+                              }),
                         ),
-                        15.horizontalSpace,
-                        Text(
-                          "Car wasn't washed properly",
-                          style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                      ),
+                      15.horizontalSpace,
+                      Text(
+                        "Car wasn't washed properly",
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ),
                 ),
                 10.verticalSpace,
@@ -193,37 +191,35 @@ class ContactWasherScreen extends StatelessWidget {
                     controller.comment = Comment.newDamages;
                     controller.update();
                   },
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Radio<Comment>(
-                                fillColor: MaterialStateColor.resolveWith(
-                                    (states) =>
-                                        controller.comment == Comment.newDamages
-                                            ? primaryColor
-                                            : const Color(0xff698695)),
-                                activeColor: Colors.white,
-                                value: Comment.newDamages,
-                                groupValue: controller.comment,
-                                onChanged: (value) {
-                                  controller.comment = value!;
-                                  controller.update();
-                                }),
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Transform.scale(
+                        scale: 1.5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Radio<Comment>(
+                              fillColor: MaterialStateColor.resolveWith(
+                                  (states) =>
+                                      controller.comment == Comment.newDamages
+                                          ? primaryColor
+                                          : const Color(0xff698695)),
+                              activeColor: Colors.white,
+                              value: Comment.newDamages,
+                              groupValue: controller.comment,
+                              onChanged: (value) {
+                                controller.comment = value!;
+                                controller.update();
+                              }),
                         ),
-                        15.horizontalSpace,
-                        Text(
-                          "I see new damages after wash",
-                          style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                      ),
+                      15.horizontalSpace,
+                      Text(
+                        "I see new damages after wash",
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      )
+                    ],
                   ),
                 ),
                 10.verticalSpace,
