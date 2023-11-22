@@ -20,6 +20,7 @@ import 'package:washly/views/screens/client/choose_car_screen.dart';
 import 'package:washly/views/screens/client/my_coupons_page.dart';
 import 'package:washly/views/screens/client/notifications_screen.dart';
 import 'package:washly/views/screens/client/promo_code_screen.dart';
+import 'package:washly/views/screens/client/rate_experience_screen.dart';
 import 'package:washly/views/screens/client/select_address.dart';
 import 'package:washly/views/screens/client/wallet_screen.dart';
 
@@ -173,7 +174,8 @@ class MainScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(8.r))),
                                   onPressed: () {
-                                    Get.to(() => const PromoCodeScreen());
+                                    // Get.to(() => const PromoCodeScreen());
+                                    Get.to(() =>const RateExperienceScreen());
                                   },
                                   child: Center(
                                     child: Text(
@@ -790,12 +792,13 @@ class MainScreen extends StatelessWidget {
                                                 Get.put(CheckoutController());
 
                                             controller.showDialog(context);
-                                            Timer(const Duration(milliseconds: 100),
-                                                () {
-                                                  cont.datePickerController
-                                                .setDateAndAnimate(cont.date!);
+                                            Timer(
+                                                const Duration(
+                                                    milliseconds: 100), () {
+                                              cont.datePickerController
+                                                  .setDateAndAnimate(
+                                                      cont.date!);
                                             });
-                                            
                                           },
                                         ),
                                       ],

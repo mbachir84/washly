@@ -23,6 +23,7 @@ import 'package:washly/utils/constants.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
 import 'package:washly/views/screens/client/home_screen.dart';
 import 'package:washly/views/screens/client/main_screen.dart';
+import 'package:washly/views/screens/loading_screen.dart';
 
 import '../screens/client/order_screen.dart';
 import '../screens/client/washer_found_screen.dart';
@@ -869,6 +870,7 @@ Future showOrderSheet<T>({required BuildContext context, bool status = true}) {
                           //   transition: Transition.rightToLeft,
                           //   duration: 500.milliseconds,
                           // );
+                          // Get.to(() => LoadingWidget());
                           showCancelWash(context: context);
                         },
                         child: Text(
@@ -1816,6 +1818,8 @@ Future showOpinionDialog<T>({
                             border: Border.all(color: Color(0xff698695)),
                           ),
                           child: TextField(
+                            maxLines: 10, 
+                            minLines: 1,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               // contentPadding:
@@ -1855,10 +1859,10 @@ Future showOpinionDialog<T>({
                             onpress: () {
                               Get.back();
                               Get.offAll(
-                            () => const HomeScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: 500.milliseconds,
-                          );
+                                () => const HomeScreen(),
+                                transition: Transition.rightToLeft,
+                                duration: 500.milliseconds,
+                              );
                             },
                           ),
                         ),
@@ -1991,10 +1995,10 @@ Future showWashCanceled<T>({
                           onpress: () {
                             Get.back();
                             Get.offAll(
-                            () => const HomeScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: 500.milliseconds,
-                          );
+                              () => const HomeScreen(),
+                              transition: Transition.rightToLeft,
+                              duration: 500.milliseconds,
+                            );
                           },
                         ),
                       ),
@@ -2218,10 +2222,10 @@ Future showCancelWash<T>({
                             // );
                             Get.back();
                             Get.to(
-                            () => const WasherFoundScreen(),
-                            transition: Transition.rightToLeft,
-                            duration: 500.milliseconds,
-                          );
+                              () => const WasherFoundScreen(),
+                              transition: Transition.rightToLeft,
+                              duration: 500.milliseconds,
+                            );
                             // appointmentCanceled(context: context);
                           },
                         ),
@@ -2446,6 +2450,125 @@ Future requestSent<T>(
                       padding: EdgeInsets.symmetric(horizontal: 48.0.w),
                       child: Center(
                         child: Text('We just sent the request to the washer',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff030303)))
+                            .tr(),
+                      ),
+                    ),
+                    49.verticalSpace,
+                    SizedBox(
+                      width: 382.w,
+                      child: GradientButton(
+                        text: "close",
+                        onpress: () {
+                          Get.back();
+
+                          // final con = Get.put(AppointementController());
+                          // con.appointmentShow = false;
+                          // con.update();
+                        },
+                      ),
+                    ),
+                    45.verticalSpace,
+                  ],
+                )
+              ],
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future photoRequested<T>(
+    {required BuildContext context, bool allowBackNavigation = false}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    // isDismissible: false,
+    // enableDrag: false,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 42.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24.r),
+                      topRight: Radius.circular(24.r),
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 110.w,
+                      width: 110.w,
+                      decoration: BoxDecoration(
+                        color: const Color(0xffcbf4df),
+                        borderRadius: BorderRadius.circular(55.r),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 44.w,
+                            height: 44.w,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff39d788),
+                              borderRadius: BorderRadius.circular(55.r),
+                            ),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    29.verticalSpace,
+                    Text('Photo Requested',
+                            style: TextStyle(
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black))
+                        .tr(),
+                    10.verticalSpace,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 48.0.w),
+                      child: Center(
+                        child: Text('We will notify you once washer sends you a photo of your washed car',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15.sp,
