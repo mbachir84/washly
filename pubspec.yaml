@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_custom_dropdown: ^1.5.0
   cached_network_image: ^3.2.3
   cloud_firestore: ^4.4.3
   credit_card_type_detector: ^3.0.0
@@ -35,18 +36,19 @@ dependencies:
   date_picker_timeline: ^1.2.3
   easy_localization: ^3.0.1
   firebase_auth: ^4.2.9
-  firebase_core:
-  firebase_crashlytics:
-  firebase_performance:
-  firebase_storage:
+  firebase_core: null
+  firebase_crashlytics: null
+  firebase_performance: null
+  firebase_storage: null
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.12.0
   flutter_native_splash: ^2.2.16
+  flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.6.0
   flutter_session_manager: ^1.0.3
   flutter_spinkit: ^5.2.0
-  flutter_svg:
+  flutter_svg: null
   flutter_switch: ^0.3.2
   geocoding: ^2.0.5
   geolocator: ^9.0.2
@@ -59,12 +61,9 @@ dependencies:
   intl_phone_field: ^3.1.0
   permission_handler: ^10.2.0
   pin_code_fields: ^7.4.0
-  animated_custom_dropdown: ^1.5.0
   share_plus: ^2.1.4
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -72,10 +71,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -99,13 +99,10 @@ flutter_icons:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

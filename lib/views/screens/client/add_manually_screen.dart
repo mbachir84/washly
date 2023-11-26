@@ -22,7 +22,7 @@ class AddManuallyScreen extends StatelessWidget {
                 child: GradientButton(
                   loading: controller.loading.value,
                   allowed: controller.isVerified,
-                  text: "requestadding",
+                  text: "Save Car",
                   onpress: () {
                     controller.submit();
                   },

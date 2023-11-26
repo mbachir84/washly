@@ -1137,7 +1137,8 @@ Future showOrderDialog<T>({required BuildContext context, bool status = true}) {
                           //   transition: Transition.rightToLeft,
                           //   duration: 500.milliseconds,
                           // );
-                          Get.back();
+                          // Get.back();
+                          // showOrderSheet(context: context, status: true);
                           showCancelWash(context: context);
                         },
                         child: Text(
@@ -1818,7 +1819,7 @@ Future showOpinionDialog<T>({
                             border: Border.all(color: Color(0xff698695)),
                           ),
                           child: TextField(
-                            maxLines: 10, 
+                            maxLines: 10,
                             minLines: 1,
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -2568,7 +2569,8 @@ Future photoRequested<T>(
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 48.0.w),
                       child: Center(
-                        child: Text('We will notify you once washer sends you a photo of your washed car',
+                        child: Text(
+                                'We will notify you once washer sends you a photo of your washed car',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15.sp,

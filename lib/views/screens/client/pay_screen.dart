@@ -33,7 +33,7 @@ class PayScreen extends StatelessWidget {
                           Get.back();
                         },
                         child: SizedBox(
-                            height: 20.h, 
+                            height: 20.h,
                             width: 20.w,
                             child: SvgPicture.asset(
                                 'assets/images/arrow-back.svg'))),
@@ -262,6 +262,7 @@ class PayScreen extends StatelessWidget {
                   22.verticalSpace,
                   Row(children: [
                     GetBuilder<PayController>(
+                        // init: PayController(),
                         builder: (cont) => Transform.scale(
                               scale: 1.5,
                               child: Checkbox(
@@ -269,6 +270,8 @@ class PayScreen extends StatelessWidget {
                                   value: cont.checkBoxValue,
                                   onChanged: ((value) {
                                     cont.checkBoxValue = value!;
+                                    cont.verify();
+                                    cont.update();
                                   })),
                             )),
                     Flexible(
@@ -286,34 +289,37 @@ class PayScreen extends StatelessWidget {
                     )
                   ]),
                   27.verticalSpace,
-                  Container(
-                    width: 383.h,
-                    height: 76.h,
-                    padding: EdgeInsets.symmetric(horizontal: 21, vertical: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(9),
-                      color: Color.fromARGB(255, 242, 229, 209),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
+                      width: 383.h,
+                      height: 76.h,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 21, vertical: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(9),
+                        color: Color.fromARGB(255, 242, 229, 209),
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            "assets/images/Group-514.svg",
+                            height: 32.h,
+                            width: 29.w,
+                          ),
+                          14.horizontalSpace,
+                          Flexible(
+                              child: Text(
+                            "We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
+                            style: TextStyle(
+                                height: 1.5,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xffff8d41)),
+                          ))
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          "assets/images/Group-514.svg",
-                          height: 32.h,
-                          width: 29.w,
-                        ),
-                        14.horizontalSpace,
-                        Flexible(
-                            child: Text(
-                          "We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
-                          style: TextStyle(
-                              height: 1.5,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xffff8d41)),
-                        ))
-                      ],
-                    ),
-                  ),
+                  ]),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

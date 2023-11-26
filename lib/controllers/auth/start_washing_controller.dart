@@ -29,7 +29,7 @@ class StartWashingController extends GetxController {
             duration: const Duration(milliseconds: 500));
       });
       });
-     
+    
     });
   }
 }
