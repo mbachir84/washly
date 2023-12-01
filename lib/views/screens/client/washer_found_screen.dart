@@ -35,7 +35,13 @@ class WasherFoundScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       70.verticalSpace,
-                      Text("washerontheway",
+                      controller.washStarted
+                      ?Text("The Wash Started",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w900)).tr()
+                      :Text("washerontheway",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 22.sp,

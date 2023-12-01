@@ -19,7 +19,7 @@ class AddAddressController extends GetxController {
   Address address = Address();
   bool endContainer = false, allowed = false;
   List<AutocompletePrediction> predictions = [];
-  GooglePlace googlePlace = GooglePlace(mapKey);
+  GooglePlace googlePlace = GooglePlace(newMapKey);
   bool suffixIconEnabled = false;
   RxBool loading = false.obs;
   bool switchValue = false;
@@ -40,7 +40,7 @@ class AddAddressController extends GetxController {
   void autoCompleteSearch(String value) async {
     try {
       var result = await googlePlace.autocomplete
-          .get(value, language: 'fr', region: 'MA', sessionToken: mapKey);
+          .get(value, language: 'fr', region: 'MA', sessionToken: newMapKey);
       if (result != null && result.predictions != null) {
         predictions = result.predictions!;
         update();

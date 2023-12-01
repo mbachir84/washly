@@ -4,10 +4,12 @@ import 'dart:ui';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:easy_localization/easy_localization.dart' as u;
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +22,7 @@ import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/controllers/client/opinion_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
+import 'package:washly/views/screens/auth/verify_phone.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
 import 'package:washly/views/screens/client/home_screen.dart';
 import 'package:washly/views/screens/client/main_screen.dart';
@@ -353,12 +356,12 @@ Future showBottomDialog<T>(
                         child: InkWell(
                           onTap: () {
                             setInnerState(() {
-                              controller.allowed = true;
                               print(controller.startingDate.toInt());
                               controller.selectedTime = index;
                               controller.counter = index;
 
                               controller.selectingController();
+                              controller.allowed = true;
                             });
                           },
                           child: index == 0
@@ -456,7 +459,10 @@ Future showBottomDialog<T>(
                                   child: Center(
                                     child: Text(
                                         // "${07 + index} :00 - ${7 + index + 1} :00  ",
-                                        (controller.isToday)
+                                        (controller.isToday &&
+                                                controller.startingDate
+                                                        .toInt() >
+                                                    7)
                                             ? "${controller.startingDate.toInt() + index}:00 -${controller.startingDate.toInt() + index + 1}:00"
                                             : "${07 + index} :00 - ${7 + index + 1} :00  ",
                                         style: TextStyle(
@@ -480,19 +486,21 @@ Future showBottomDialog<T>(
               ),
               44.verticalSpace,
               Center(
-                child: SizedBox(
-                  width: 382.w,
-                  child: GradientButton(
-                    allowed: controller.allowed,
-                    text: 'checkout',
-                    onpress: () {
-                      Get.back();
-                      checkoutClick
-                          ? Get.to(() => const CheckoutScreen(),
-                              transition: Transition.fadeIn,
-                              duration: const Duration(milliseconds: 500))
-                          : null;
-                    },
+                child: GetBuilder<CheckoutController>(
+                  builder: (controller) => SizedBox(
+                    width: 382.w,
+                    child: GradientButton(
+                      allowed: controller.allowed,
+                      text: 'checkout',
+                      onpress: () {
+                        Get.back();
+                        checkoutClick
+                            ? Get.to(() => const CheckoutScreen(),
+                                transition: Transition.fadeIn,
+                                duration: const Duration(milliseconds: 500))
+                            : null;
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -1020,6 +1028,7 @@ Future showOrderDialog<T>({required BuildContext context, bool status = true}) {
                     ],
                   ),
                 ),
+                ///////////
                 23.verticalSpace,
                 Container(
                   height: 42.h,
@@ -1114,6 +1123,261 @@ Future showOrderDialog<T>({required BuildContext context, bool status = true}) {
                   ),
                 ),
                 39.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                  child: SizedBox(
+                    width: 382.w,
+                    height: 67.h,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all(
+                            const Color(0xfff2f5f6),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(33.r),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          // Get.offAll(
+                          //   () => const HomeScreen(),
+                          //   transition: Transition.rightToLeft,
+                          //   duration: 500.milliseconds,
+                          // );
+                          // Get.back();
+                          // showOrderSheet(context: context, status: true);
+                          showCancelWash(context: context);
+                        },
+                        child: Text(
+                          'cancelwash',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff698695),
+                          ),
+                        ).tr()),
+                  ),
+                ),
+                43.verticalSpace,
+              ],
+            ),
+          );
+        }),
+      ),
+    ),
+  );
+}
+
+Future showWashStarted<T>({required BuildContext context, bool status = true}) {
+  return showModalBottomSheet(
+    barrierColor: Colors.transparent,
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    isDismissible: false,
+    isScrollControlled: false,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: StatefulBuilder(builder: (context, setInnerState) {
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Container(
+                //   height: 29.h,
+                //   width: double.infinity,
+                //   decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     borderRadius: BorderRadius.only(
+                //       topLeft: Radius.circular(20.r),
+                //       topRight: Radius.circular(20.r),
+                //     ),
+                //   ),
+                // ),
+                Container(
+                  height: 42.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
+                        color: Color(0xffe5e5e5),
+                        offset: Offset(0, -12.0),
+                        blurRadius: 25.0,
+                      ),
+                    ],
+                    color: const Color(0xfff2f5f6),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'addressunder',
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xff698695),
+                      ),
+                    ).tr(),
+                  ),
+                ),
+                14.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                          'assets/images/location-select-icon.svg'),
+                      14.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Home',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xff030303),
+                              )).tr(),
+                          Text('Rez de, 443 Bd Al Hassan Al Alaoui',
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xff698695),
+                              )).tr(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                9.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                  child: Container(
+                    height: 1,
+                    width: 1.sw,
+                    color: const Color(0xff698695).withOpacity(0.2),
+                  ),
+                ),
+                9.verticalSpace,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset('assets/images/car-select-icon.svg'),
+                      14.horizontalSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Mercedes-Benz',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xff030303),
+                              )).tr(),
+                          Text('57631 | 8',
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xff698695),
+                              )).tr(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                26.verticalSpace,
+                //////
+                Container(
+                  padding: EdgeInsets.all(15.w),
+                  decoration: BoxDecoration(
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
+                        color: Color(0xffe5e5e5),
+                        offset: Offset(0, -12.0),
+                        blurRadius: 25.0,
+                      ),
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                      topRight: Radius.circular(20.r),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/default.png',
+                          width: 66.w,
+                          height: 66.h,
+                        ),
+                        18.horizontalSpace,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('washer',
+                                style: TextStyle(
+                                  color: const Color(0xff698695),
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            Text('Khalid Bennani',
+                                style: TextStyle(
+                                  color: const Color(0xff030303),
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: primaryColor,
+                                  size: 15.sp,
+                                ),
+                                Text(
+                                  '4.7 Rating',
+                                  style: TextStyle(
+                                    color: const Color(0xff698695),
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        const Spacer(),
+                        SvgPicture.asset(
+                          'assets/images/message.svg',
+                          height: 44.h,
+                          width: 44.w,
+                        ),
+                        14.horizontalSpace,
+                        SvgPicture.asset(
+                          'assets/images/phone.svg',
+                          height: 44.h,
+                          width: 44.w,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                ///////////
+                23.verticalSpace,
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                   child: SizedBox(
@@ -2114,6 +2378,133 @@ Future showCancelAppointment<T>({
                           text: "close",
                           onpress: () {
                             Get.back();
+                          },
+                        ),
+                      ),
+                      45.verticalSpace,
+                    ],
+                  )
+                ],
+              ),
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+}
+
+Future showSignOut<T>({
+  required BuildContext context,
+  bool allowBackNavigation = true,
+}) {
+  return showModalBottomSheet(
+    backgroundColor: Colors.white,
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.r),
+        topRight: Radius.circular(24.r),
+      ),
+    ),
+    isDismissible: allowBackNavigation,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+        child: WillPopScope(
+          onWillPop: () async => allowBackNavigation,
+          child: StatefulBuilder(builder: (context, setInnerState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 42.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.r),
+                        topRight: Radius.circular(24.r),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Container(
+                      //   height: 110.w,
+                      //   width: 110.w,
+                      //   decoration: BoxDecoration(
+                      //     color: const Color(0xfffff0e6),
+                      //     borderRadius: BorderRadius.circular(55.r),
+                      //   ),
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: [
+                      //       Icon(
+                      //         CupertinoIcons.exclamationmark_triangle_fill,
+                      //         color: const Color(0xffff8d41),
+                      //         size: 49.sp,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      22.verticalSpace,
+                      Text('Do you want to sign out?',
+                              style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black))
+                          .tr(),
+                      10.verticalSpace,
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: 60.w),
+                      //   child: Text(
+                      //           'Please note that you won\'t get your money back in case of canceling',
+                      //           textAlign: TextAlign.center,
+                      //           style: TextStyle(
+                      //               fontSize: 15.sp,
+                      //               fontWeight: FontWeight.bold,
+                      //               color: const Color(0xff030303)))
+                      //       .tr(),
+                      // ),
+                      45.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          colors: const [Color(0xff698695), Color(0xffa7c5d6)],
+                          text: "Sign Out",
+                          onpress: () {
+                            FirebaseAuth.instance.signOut();
+
+                            SessionManager().destroy();
+                            Get.offAll(() => const VerifyPhoneScreen(),
+                                transition: Transition.fadeIn,
+                                duration: const Duration(milliseconds: 500));
+                            // Get.to(
+                            //   () => const WasherFoundScreen(),
+                            //   transition: Transition.rightToLeft,
+                            //   duration: 500.milliseconds,
+                            // );
+
+                            // appointmentCanceled(context: context);
+                          },
+                        ),
+                      ),
+                      23.verticalSpace,
+                      SizedBox(
+                        width: 382.w,
+                        child: GradientButton(
+                          text: "Cancel",
+                          onpress: () {
+                            Get.back();
+                            // showWashCanceled(context: context);
                           },
                         ),
                       ),

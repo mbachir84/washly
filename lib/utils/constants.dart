@@ -9,8 +9,9 @@ const Color darkColor2 = Color(0xFF313131);
 const Color redColor = Color(0xFFCC0000);
 const Color dark = Color(0xFF3D3D3D);
 const Color titleColor = Color(0xFF8aa7b7);
-const facebookKey = "735840538094501"; 
+const facebookKey = "735840538094501";
 const mapKey = "AIzaSyCLpksOVCc6DXZ6Y9DU0QRIpzzqT9-QPSw";
+const newMapKey = "AIzaSyCOPXevOznJAYc2tjvuaPreSZYnpYsqFCU";
 const successGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
@@ -32,7 +33,7 @@ final supportedLocales = [
   const Locale('fr'),
 ];
 
-const jsonCars = [ 
+const jsonCars = [
   {
     "brand": "Seat",
     "models": [

@@ -21,11 +21,11 @@ class CheckoutController extends GetxController {
   DateTime currentTime = DateTime.now();
   DateTime dateValue = DateTime.now();
   bool isIgnored = false;
-  int startingDate = 0;
+  int startingDate = DateTime.now().hour;
   DateTime? tomorowDate;
   DatePickerController datePickerController = DatePickerController();
   DateTime? date;
-  bool allowed = false;
+  bool allowed = true;
 
   void apply() {
     if (couponController.text.isNotEmpty) {
@@ -75,6 +75,8 @@ class CheckoutController extends GetxController {
       // }
     } else {
       for (int i = 1; i < 14; i++) {
+        
+        update();
         if (counter == i) {
           hourSelected = "${07 + i}:00 - ${08 + i}:00";
           print("mouad $hourSelected");
@@ -84,33 +86,33 @@ class CheckoutController extends GetxController {
   }
 
 //  getHourSelected() async {
-    // for (int i = 1; i < 15; i++) {
-    // if (isToday) {
-      // await selectHour();
-   // } 
-    // else {
-    //   if (counter == 0) {
-    //     //dateFormat == curentime
-    //     if ((currentTime.minute + 15) >= 60) {
-    //       if (((currentTime.minute + 15) - 60) < 10) {
-    //         hourSelected = "";
-    //       } else {
-    //         hourSelected = "";
-    //       }
-    //     } else {
-    //       hourSelected = "";
-    //       print("mouad $hourSelected");
-    //     }
-    //   } else {
-    //     for (int i = 1; i < 14; i++) {
-    //       if (counter == i) {
-    //         hourSelected = "${07 + i}:00 - ${08 + i}:00";
-    //         print("mouad $hourSelected");
-    //       }
-    //     }
-    //   }
-    // }
-    // }
+  // for (int i = 1; i < 15; i++) {
+  // if (isToday) {
+  // await selectHour();
+  // }
+  // else {
+  //   if (counter == 0) {
+  //     //dateFormat == curentime
+  //     if ((currentTime.minute + 15) >= 60) {
+  //       if (((currentTime.minute + 15) - 60) < 10) {
+  //         hourSelected = "";
+  //       } else {
+  //         hourSelected = "";
+  //       }
+  //     } else {
+  //       hourSelected = "";
+  //       print("mouad $hourSelected");
+  //     }
+  //   } else {
+  //     for (int i = 1; i < 14; i++) {
+  //       if (counter == i) {
+  //         hourSelected = "${07 + i}:00 - ${08 + i}:00";
+  //         print("mouad $hourSelected");
+  //       }
+  //     }
+  //   }
+  // }
+  // }
   //}
 
   getHourLeft() {
@@ -132,9 +134,17 @@ class CheckoutController extends GetxController {
 
     if (dateFormat != DateFormat.yMMMMd().format(currentTime)) {
       isToday = false;
+      if (counter == 0 ) {
+        print("counter $counter");
+        allowed = false;
+        update();
+      }
+      
       update();
     } else {
       isToday = true;
+      allowed = true;
+
       update();
     }
     selectingController();
@@ -147,8 +157,12 @@ class CheckoutController extends GetxController {
       selectHour();
       update();
     } else if (dateFormat == DateFormat.yMMMMd().format(currentTime) &&
-        selectedTime == counter) {
+        selectedTime == counter &&
+        startingDate.toInt() > 7) {
       getHourLeft();
+      update();
+    } else {
+      selectHour();
       update();
     }
   }

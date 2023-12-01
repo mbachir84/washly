@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/views/components/widgets.dart';
 import 'package:washly/views/screens/auth/verify_phone.dart';
 import 'package:washly/views/screens/client/addresses_list_screen.dart';
 import 'package:washly/views/screens/client/credit_card_screen.dart';
@@ -91,12 +92,8 @@ class ProfileItemMenuWidget extends StatelessWidget {
             16.5.horizontalSpace,
             InkWell(
               onTap: () {
-                FirebaseAuth.instance.signOut();
-
-                SessionManager().destroy();
-                Get.offAll(() => const VerifyPhoneScreen(),
-                    transition: Transition.fadeIn,
-                    duration: const Duration(milliseconds: 500));
+                showSignOut(context: context);
+                
               },
               child: Text('signout',
                   style: TextStyle(

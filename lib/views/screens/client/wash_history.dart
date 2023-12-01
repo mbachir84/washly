@@ -107,7 +107,7 @@ class WashHistoryScreen extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
-                                            itemCount: 3,
+                                            itemCount: 2,
                                             separatorBuilder:
                                                 (BuildContext context,
                                                         int index) =>

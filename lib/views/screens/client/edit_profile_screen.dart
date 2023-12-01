@@ -34,7 +34,7 @@ class EditProfileScreen extends StatelessWidget {
                   GradientButton(
                     loading: controller.isLoading,
                     allowed: controller.isVerified,
-                    text: "save",
+                    text: "Save Changes",
                     onpress: () {
                       controller.updateProfile();
                       // print('all');
