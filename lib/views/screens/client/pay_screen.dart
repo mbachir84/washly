@@ -1,22 +1,31 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/appoitment_controller.dart';
+import 'package:washly/controllers/client/checkout_controller.dart';
+import 'package:washly/controllers/client/home_controller.dart';
 import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/controllers/client/pay_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
 import 'package:washly/views/components/widgets.dart';
 import 'package:washly/views/screens/client/add_funds_screen.dart';
+import 'package:washly/views/screens/client/home_screen.dart';
+import 'package:washly/views/screens/client/order_screen.dart';
 
 class PayScreen extends StatelessWidget {
   const PayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cont = Get.put(CheckoutController());
+    final contr = Get.put(MainController());
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0.w),
@@ -198,96 +207,105 @@ class PayScreen extends StatelessWidget {
                   ),
                   21.verticalSpace,
                   InkWell(
-                    onTap: () {
-                      controller.payementWay = PayementWay.cash;
-                      controller.verify();
-                      controller.update();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Radio<PayementWay>(
-                                fillColor: MaterialStateColor.resolveWith(
-                                    (states) => controller.payementWay ==
-                                            PayementWay.cash
-                                        ? primaryColor
-                                        : const Color(0xff698695)),
-                                activeColor: Colors.white,
-                                value: PayementWay.cash,
-                                groupValue: controller.payementWay,
-                                onChanged: (value) {
-                                  controller.payementWay = value!;
-                                  controller.verify();
-                                  controller.update();
-                                }),
-                          ),
-                        ),
-                        15.horizontalSpace,
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'cash',
-                                style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xff030303)),
-                              ).tr(),
-                              5.verticalSpace,
-                              Text(
-                                'beinperson',
-                                // overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xff698695)),
-                              ).tr(),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  21.verticalSpace,
-                  Container(
-                    height: 1,
-                    width: 1.sw,
-                    color: const Color(0xff698695).withOpacity(0.2),
-                  ),
+                      onTap: () {
+                        controller.payementWay = PayementWay.cash;
+                        controller.verify();
+                        controller.update();
+                      },
+                      child: (cont.isToday && cont.hourSelected == "Wash now")
+                          ? Column(children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Transform.scale(
+                                    scale: 1.5,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: Radio<PayementWay>(
+                                          fillColor:
+                                              MaterialStateColor.resolveWith(
+                                                  (states) =>
+                                                      controller.payementWay ==
+                                                              PayementWay.cash
+                                                          ? primaryColor
+                                                          : const Color(
+                                                              0xff698695)),
+                                          activeColor: Colors.white,
+                                          value: PayementWay.cash,
+                                          groupValue: controller.payementWay,
+                                          onChanged: (value) {
+                                            controller.payementWay = value!;
+                                            controller.verify();
+                                            controller.update();
+                                          }),
+                                    ),
+                                  ),
+                                  15.horizontalSpace,
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'cash',
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xff030303)),
+                                        ).tr(),
+                                        5.verticalSpace,
+                                        Text(
+                                          'beinperson',
+                                          // overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: const Color(0xff698695)),
+                                        ).tr(),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              21.verticalSpace,
+                              Container(
+                                height: 1,
+                                width: 1.sw,
+                                color: const Color(0xff698695).withOpacity(0.2),
+                              ),
+                            ])
+                          : Container()),
                   22.verticalSpace,
-                  Row(children: [
-                    GetBuilder<PayController>(
-                        // init: PayController(),
-                        builder: (cont) => Transform.scale(
-                              scale: 1.5,
-                              child: Checkbox(
-                                  activeColor: Color(0xFF43e293),
-                                  value: cont.checkBoxValue,
-                                  onChanged: ((value) {
-                                    cont.checkBoxValue = value!;
-                                    cont.verify();
-                                    cont.update();
-                                  })),
-                            )),
-                    Flexible(
-                      child: Text(
-                        "I don't have anything valuable in my car",
-                        style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w800,
-                            color: const Color(0xff030303)),
-                      ),
-                    ),
-                    Text(
-                      "*",
-                      style: TextStyle(color: Colors.red),
-                    )
-                  ]),
+                  contr.washType != WashType.basic
+                      ? Row(children: [
+                          GetBuilder<PayController>(
+                              // init: PayController(),
+                              builder: (cont) => Transform.scale(
+                                    scale: 1.5,
+                                    child: Checkbox(
+                                        activeColor: Color(0xFF43e293),
+                                        value: cont.checkBoxValue,
+                                        onChanged: ((value) {
+                                          cont.checkBoxValue = value!;
+                                          cont.verify();
+                                          cont.update();
+                                        })),
+                                  )),
+                          Flexible(
+                            child: Text(
+                              "I don't have anything valuable in my car",
+                              style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w800,
+                                  color: const Color(0xff030303)),
+                            ),
+                          ),
+                          Text(
+                            "*",
+                            style: TextStyle(color: Colors.red),
+                          )
+                        ])
+                      : Container(),
                   27.verticalSpace,
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Container(
@@ -394,12 +412,51 @@ class PayScreen extends StatelessWidget {
                   29.verticalSpace,
                   GradientButton(
                     allowed: controller.allowed,
-                    text: 'paynow',
-                    onpress: () {
-                      showPayementStatusDialog(
-                          context: Get.context!,
-                          allowBackNavigation: true,
-                          status: false);
+                    text: 'Confirm',
+                    onpress: () async {
+                      if (cont.isToday && cont.hourSelected == "Wash now") {
+                        showPayementStatusDialog(
+                            context: Get.context!,
+                            allowBackNavigation: true,
+                            status: true);
+                        Get.back();
+                        Get.to(
+                          () => const OrderScreen(),
+                          transition: Transition.rightToLeft,
+                          duration: 500.milliseconds,
+                        );
+                      } else {
+                        //appointement
+                        Get.defaultDialog(title: "License-Plate Missing",
+                        middleText: "You forgot to enter the license plate field\nChoose one of the options:",
+                        textCancel: "Meet the washer",
+                        textConfirm: "Submit ",
+                        );
+                        
+                        
+                        
+                        
+                        // final controller = Get.put(AppointementController());
+                        // showPayementStatusDialog(
+                        //     context: Get.context!,
+                        //     allowBackNavigation: true,
+                        //     status: true);
+                        // await controller.submit();
+                        // Timer(const Duration(seconds: 1), () {
+                        //   Get.back();
+                        //   final cont = Get.put(HomeController());
+                        //   cont.changeScreen(2);
+                        //   Get.off(
+                        //     () => const HomeScreen(),
+                        //     transition: Transition.rightToLeft,
+                        //     duration: 500.milliseconds,
+                        //   );
+                        //   cont.update();
+
+                        //   Get.snackbar("Success", "Appointement Added",
+                        //       backgroundColor: Colors.green);
+                        // });
+                      }
 
                       // controller.pay();
                     },

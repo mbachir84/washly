@@ -218,15 +218,15 @@ class CheckoutScreen extends StatelessWidget {
                             18.5.verticalSpace,
                             InkWell(
                               onTap: () {
-                                final cont = Get.put(CheckoutController());
+                                // final cont = Get.put(CheckoutController());
                                 showBottomDialog(
                                   context: context,
                                   allowBackNavigation: true,
                                   checkoutClick: false,
                                 );
                                 Timer(const Duration(milliseconds: 100), () {
-                                  cont.datePickerController
-                                      .setDateAndAnimate(cont.date!);
+                                  controller.datePickerController
+                                      .setDateAndAnimate(controller.date!);
                                 });
                               },
                               child: Row(
@@ -504,6 +504,7 @@ class CheckoutScreen extends StatelessWidget {
                             GradientButton(
                               text: 'confirmandpay',
                               onpress: () {
+                                cont.addToAppointment();
                                 Get.to(
                                   () => const PayScreen(),
                                   transition: Transition.fadeIn,

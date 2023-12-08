@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/main_controller.dart';
+import 'package:washly/utils/models/appointment.dart';
 import 'package:washly/utils/models/w_user.dart';
 import 'package:washly/utils/services.dart';
 
@@ -14,13 +17,16 @@ class AppointementController extends GetxController {
   String snackBarSubTitle = "";
   bool paid = false;
   bool state = false;
+  // final mainController = Get.put(MainController());
+  // String typeWash ="";
+  // wash =  mainController.typeWash();
   infoClick() {
     showDetailDialog(context: Get.context!, allowBackNavigation: true);
   }
 
   showScnackbar(text, subtext, status) {
     height = 137;
-  snackBarTitle = text;
+    snackBarTitle = text;
     snackBarSubTitle = subtext;
     state = status;
     update();
@@ -28,6 +34,17 @@ class AppointementController extends GetxController {
       height = 0;
       update();
     });
+  }
+
+  Appointment appointment = Appointment( //date,carDetails,
+      uid: "uid",
+      status: "scheduled",
+      paymentInformation: "Credit Card");
+      
+  submit() {
+    FirebaseFirestore.instance
+        .collection("appointment")
+        .add(appointment.toJson());
   }
 
   @override

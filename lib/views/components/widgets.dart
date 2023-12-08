@@ -311,7 +311,7 @@ Future showBottomDialog<T>(
                     initialSelectedDate: (controller.startingDate.toInt() < 20)
                         ? controller.dateValue
                         : controller.tomorowDate!,
-                    // controller.dateValue ,
+                  
                     deactivatedColor: Colors.white,
                     selectionColor: primaryColor,
                     selectedTextColor: Colors.white,
@@ -319,9 +319,7 @@ Future showBottomDialog<T>(
                       setInnerState(() {
                         controller.date = date;
                         controller.dateValue = date;
-                        // controller.tomorowDate = date;
                         controller.checkDay();
-                        // controller.selectingController();
                         controller.datePickerController
                             .setDateAndAnimate(controller.date!);
                       });
@@ -2123,7 +2121,7 @@ Future showOpinionDialog<T>({
                             text: "close",
                             onpress: () {
                               Get.back();
-                              Get.offAll(
+                              Get.off(
                                 () => const HomeScreen(),
                                 transition: Transition.rightToLeft,
                                 duration: 500.milliseconds,
@@ -2259,7 +2257,7 @@ Future showWashCanceled<T>({
                           text: "close",
                           onpress: () {
                             Get.back();
-                            Get.offAll(
+                            Get.off(
                               () => const HomeScreen(),
                               transition: Transition.rightToLeft,
                               duration: 500.milliseconds,
@@ -3098,7 +3096,7 @@ Future feedbackSubmited<T>(
                         onpress: () {
                           Get.back();
 
-                          Get.offAll(
+                          Get.off(
                             () => const HomeScreen(),
                             transition: Transition.rightToLeft,
                             duration: 500.milliseconds,

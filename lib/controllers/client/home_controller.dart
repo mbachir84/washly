@@ -9,6 +9,10 @@ import 'package:washly/views/screens/client/profile_screen.dart';
 import '../../utils/services.dart';
 
 class HomeController extends GetxController {
+  // double height = 0;
+  // String snackBarTitle = "";
+  // String snackBarSubTitle = "";
+  bool state = false;
   List<Widget> screens = [
     const MainScreen(),
     const CarsListScreen(),
@@ -24,6 +28,17 @@ class HomeController extends GetxController {
     currentIndex = index;
     update();
   }
+  // showScnackbar(text, subtext, status) {
+  //   height = 137;
+  //   snackBarTitle = text;
+  //   snackBarSubTitle = subtext;
+  //   state = status;
+  //   update();
+  //   Future.delayed(const Duration(seconds: 2), () {
+  //     height = 0;
+  //     update();
+  //   });
+  // }
 
   @override
   void onInit() {

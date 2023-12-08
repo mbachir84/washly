@@ -93,24 +93,39 @@ class AddFundsCreditCard extends StatelessWidget {
                               ]),
                         ],
                       ),
-                      32.verticalSpace,
+                      22.verticalSpace,
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    child: Text(
-                                      "0",
-                                      style: TextStyle(
-                                          fontSize: 77.sp,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                  Expanded(
+                                    child: SizedBox(
+                                        // width: 200.w,
+                                        height: 100.h,
+                                        child: TextField(
+                                          keyboardType: TextInputType.number,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            
+                                                  color: Colors.white,
+                                                  fontSize: 60.sp,
+                                                  fontWeight: FontWeight.bold),
+                                          decoration: InputDecoration(
+                                            
+                                            // border: OutlineInputBorder(),
+                                            border: InputBorder.none,
+                                              hintText: "0",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 60.sp,
+                                                  fontWeight: FontWeight.bold)),
+                                        )),
                                   ),
                                 ]),
+                            22.verticalSpace,
                             Text(
                               "MAD",
                               style: TextStyle(

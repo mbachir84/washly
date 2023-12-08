@@ -78,9 +78,11 @@ class AddCarController extends GetxController {
       isVerified = false;
     } else if (modelController.text.isEmpty) {
       isVerified = false;
-    } else if (licencePlateController.text.isEmpty) {
-      isVerified = false;
-    } else if (file == null || image == null) {
+    } 
+    // else if (licencePlateController.text.isEmpty) {
+    //   isVerified = false;
+    //} 
+    else if (file == null || image == null) {
       isVerified = false;
     } else {
       isVerified = true;
@@ -102,7 +104,7 @@ class AddCarController extends GetxController {
               uid: generateRandomString(20),
               make: makeController.text,
               model: modelController.text,
-              licencePlate: licencePlateController.text,
+              licencePlate: licencePlateController.text ?? "",
               image: value));
           await FirebaseFirestore.instance
               .collection('w_users')

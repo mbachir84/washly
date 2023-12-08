@@ -66,7 +66,9 @@ class AddAddressScreen extends StatelessWidget {
                         ).tr(),
                         const Spacer(),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.back();
+                            },
                             child: Text('cancel',
                                     style: TextStyle(
                                         fontSize: 16.sp,
@@ -116,11 +118,13 @@ class AddAddressScreen extends StatelessWidget {
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.r),
                                 borderSide: BorderSide(
-                                    color: const Color(0xff698695), width: 1.w)),
+                                    color: const Color(0xff698695),
+                                    width: 1.w)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.r),
                                 borderSide: BorderSide(
-                                    color: const Color(0xff698695), width: 1.w))),
+                                    color: const Color(0xff698695),
+                                    width: 1.w))),
                       ),
                     ),
                     35.verticalSpace,

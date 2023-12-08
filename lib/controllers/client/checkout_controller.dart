@@ -135,7 +135,7 @@ class CheckoutController extends GetxController {
     if (dateFormat != DateFormat.yMMMMd().format(currentTime)) {
       isToday = false;
       if (counter == 0 ) {
-        print("counter $counter");
+        
         allowed = false;
         update();
       }
@@ -170,7 +170,7 @@ class CheckoutController extends GetxController {
   @override
   void onInit() {
     selectHour();
-    startingDate = DateTime.now().hour;
+    // startingDate = DateTime.now().hour;
     tomorowDate = DateTime.now().add(Duration(days: 1));
     if (startingDate.toInt() + 1 >= 20) {
       isToday = false;

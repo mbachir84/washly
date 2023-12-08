@@ -7,12 +7,13 @@ class Appointment {
   String? contactInformation;
   String? carDetails;
   String? washType;
-  DateTime? appointmentDateTime;
-  String? status;                        //scheduled ,in progress, completed, canceled
+  String? appointmentDateTime;
+  String? status;                        //scheduled ,in progress, completed, canceled, waiting
   String? paymentInformation;
-  String? specialRequests; ///
+  String? specialRequests; //
   String? assignedWasher;
 
+  
   Appointment({
     this.uid,
     this.customerName,
@@ -26,18 +27,26 @@ class Appointment {
     this.assignedWasher,
   });
 
+ 
+
+  
+
+  String appointmentToJson() => json.encode(toJson());
+
+  Appointment fromJson(String source) => Appointment.fromJson(json.decode(source) as Map<String, dynamic>);
+
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'uid': uid,
       'customerName': customerName,
       'contactInformation': contactInformation,
       'carDetails': carDetails,
-      'serviceType': washType,
-      'appointmentDateTime': appointmentDateTime?.millisecondsSinceEpoch,
+      'washType': washType,
+      'appointmentDateTime': appointmentDateTime,
       'status': status,
       'paymentInformation': paymentInformation,
       'specialRequests': specialRequests,
-      'assignedStaff': assignedWasher,
+      'assignedWasher': assignedWasher,
     };
   }
 
@@ -48,7 +57,7 @@ class Appointment {
       contactInformation: map['contactInformation'] != null ? map['contactInformation'] as String : null,
       carDetails: map['carDetails'] != null ? map['carDetails'] as String : null,
       washType: map['washType'] != null ? map['washType'] as String : null,
-      appointmentDateTime: map['appointmentDateTime'] != null ? DateTime.fromMillisecondsSinceEpoch(map['appointmentDateTime'] as int) : null,
+      appointmentDateTime: map['appointmentDateTime'] != null ? map['appointmentDateTime'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,
       paymentInformation: map['paymentInformation'] != null ? map['paymentInformation'] as String : null,
       specialRequests: map['specialRequests'] != null ? map['specialRequests'] as String : null,
@@ -56,7 +65,5 @@ class Appointment {
     );
   }
 
-  String appointmentToJson() => json.encode(toJson());
 
-  Appointment fromJson(String source) => Appointment.fromJson(json.decode(source) as Map<String, dynamic>);
 }

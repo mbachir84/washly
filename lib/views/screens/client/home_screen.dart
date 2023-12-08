@@ -14,7 +14,6 @@ import 'add_car_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,10 @@ class HomeScreen extends StatelessWidget {
                                       text: 'schedulewash',
                                       onpress: () {
                                         final cont = Get.put(HomeController());
-                                        cont.changeScreen(0);},
+                                        print("${cont.currentIndex}");
+                                        cont.changeScreen(0);
+                                        cont.update();
+                                      },
                                     ),
                                   ),
                                 )

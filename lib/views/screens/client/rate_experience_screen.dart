@@ -27,7 +27,7 @@ class RateExperienceScreen extends StatelessWidget {
               GradientButton(
                 text: "Submit",
                 onpress: () {
-                  requestSent(context: context);
+                  feedbackSubmited(context: context);
                 },
               ),
               10.verticalSpace,
@@ -36,7 +36,7 @@ class RateExperienceScreen extends StatelessWidget {
                   Color(0xff698695),
                   Color(0xffa7c5d6),
                 ],
-                text: 'skip',
+                text: 'Skip',
                 onpress: () {
                   Get.back();
                   //getreceipt(context: context);
