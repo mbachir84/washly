@@ -18,91 +18,99 @@ class AppointmentScreen extends StatelessWidget {
         init: AppointementController(),
         builder: (controller) {
           return !controller.appointmentShow
-              ? WillPopScope(
-                  onWillPop: () async {
-                    controller.appointmentShow = false;
-                    controller.update();
-                    return false;
-                  },
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24.0.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            85.verticalSpace,
-                            Text(
-                              'yourappointments',
-                              style: TextStyle(
-                                fontSize: 22.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ).tr(),
-                            28.verticalSpace,
-                            controller.isLoading.value
-                                ? Center(
-                                    child: SpinKitDoubleBounce(
-                                    color: primaryColor,
-                                    size: 50.0.sp,
-                                  ))
-                                : Center(
-                                    child: SizedBox(
-                                      height: 1.sh - 100,
-                                      child: controller.user.cars.isNotEmpty
-                                          ? ListView.separated(
-                                              shrinkWrap: true,
-                                              padding: EdgeInsets.zero,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                          int index) =>
-                                                      Center(
-                                                child: Column(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        controller
-                                                                .appointmentShow =
-                                                            true;
-                                                        controller.update();
-                                                      },
-                                                      child: AppointmentWidget(
-                                                        title: "basicwash",
-                                                        status: index == 0
-                                                            ? true
-                                                            : false,
-                                                      ),
-                                                    ),
-                                                    index !=
+              ? SingleChildScrollView(
+                child: WillPopScope(
+                    onWillPop: () async {
+                      controller.appointmentShow = false;
+                      controller.update();
+                      return false;
+                    },
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              85.verticalSpace,
+                              Text(
+                                'yourappointments',
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ).tr(),
+                              18.verticalSpace,
+                              controller.isLoading.value
+                                  ? Center(
+                                      child: SpinKitDoubleBounce(
+                                      color: primaryColor,
+                                      size: 50.0.sp,
+                                    ))
+                                  : Center(
+                                      child: SizedBox(
+                                        height: 1.sh - 100,
+                                        child: controller.user.cars.isNotEmpty
+                                            ? ListView.separated(
+                                                shrinkWrap: true,
+                                                padding: EdgeInsets.zero,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  
+                                                  return Center(
+                                                    child: Column(
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                            controller.myIndex = index;
                                                             controller
-                                                                    .user
-                                                                    .cars
-                                                                    .length 
+                                                                    .appointmentShow =
+                                                                true;
+                                                            controller.update();
+                                                          },
+                                                          child:
+                                                              AppointmentWidget(
+                                                            appointment: controller
+                                                                    .appoitmentList[
+                                                                index],
+                                                          ),
+                                                        ),
+                                                        index !=
+                                                            controller
+                                                                    .appoitmentList.length -
+                                                                1
                                                         ? const SizedBox()
-                                                        : 250.verticalSpace,
-                                                  ],
-                                                ),
-                                              ),
-                                              itemCount: 2,
-                                              separatorBuilder:
-                                                  (BuildContext context,
-                                                          int index) =>
-                                                      17.verticalSpace,
-                                            )
-                                          : Container(),
+                                                        : 150.verticalSpace,
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                itemCount: controller
+                                                    .appoitmentList.length,
+                                                separatorBuilder:
+                                                    (BuildContext context,
+                                                            int index) =>
+                                                        12.verticalSpace,
+                                              )
+                                            : Container(),
+                                            
+                                      ),
                                     ),
-                                  ),
-                          ],
+                                    
+                                    
+                            ],
+                          ),
                         ),
-                      ),
-                      AnimatedSnackbar(
-                          height: controller.height,
-                          title: controller.snackBarTitle,
-                          subtitle: controller.snackBarSubTitle,
-                          state: controller.state),
-                    ],
+                        // AnimatedSnackbar(
+                        //     height: controller.height,
+                        //     title: controller.snackBarTitle,
+                        //     subtitle: controller.snackBarSubTitle,
+                        //     state: controller.state),
+                      ],
+                    ),
                   ),
-                )
+              )
               : WillPopScope(
                   onWillPop: () async {
                     controller.appointmentShow = true;
@@ -158,7 +166,7 @@ class AppointmentScreen extends StatelessWidget {
                             children: [
                               SvgPicture.asset('assets/images/wash-icon.svg'),
                               14.horizontalSpace,
-                              Text('basicwash',
+                              Text(controller.appoitmentList[controller.myIndex].washType!,
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
@@ -173,8 +181,8 @@ class AppointmentScreen extends StatelessWidget {
                                   height: 35.w,
                                   width: 35.w,
                                   decoration: BoxDecoration(
-                                      color:
-                                          const Color(0xff10a7f5).withOpacity(0.07),
+                                      color: const Color(0xff10a7f5)
+                                          .withOpacity(0.07),
                                       borderRadius: BorderRadius.circular(5.r)),
                                   child: Icon(
                                     Icons.info_outline,
@@ -207,7 +215,7 @@ class AppointmentScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Mercedes-Benz',
+                                  Text(controller.appoitmentList[controller.myIndex].carDetails!,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
@@ -281,13 +289,14 @@ class AppointmentScreen extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('April 24, 2023',
+                                  Text(
+                                      controller.appoitmentList[controller.myIndex].appointmentDateTime!,
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: const Color(0xff030303),
                                       )).tr(),
-                                  Text('Wash Now',
+                                  Text(controller.appoitmentList[controller.myIndex].appointmentHour!,
                                       style: TextStyle(
                                         fontSize: 13.sp,
                                         fontWeight: FontWeight.bold,

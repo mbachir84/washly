@@ -22,6 +22,7 @@ import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/controllers/client/opinion_controller.dart';
 import 'package:washly/utils/buttons.dart';
 import 'package:washly/utils/constants.dart';
+import 'package:washly/utils/models/appointment.dart';
 import 'package:washly/views/screens/auth/verify_phone.dart';
 import 'package:washly/views/screens/client/checkout_screen.dart';
 import 'package:washly/views/screens/client/home_screen.dart';
@@ -311,7 +312,7 @@ Future showBottomDialog<T>(
                     initialSelectedDate: (controller.startingDate.toInt() < 20)
                         ? controller.dateValue
                         : controller.tomorowDate!,
-                  
+
                     deactivatedColor: Colors.white,
                     selectionColor: primaryColor,
                     selectedTextColor: Colors.white,
@@ -1372,7 +1373,7 @@ Future showWashStarted<T>({required BuildContext context, bool status = true}) {
                     ),
                   ),
                 ),
-                
+
                 ///////////
                 23.verticalSpace,
 
@@ -1765,16 +1766,11 @@ Future carRequestDialog<T>(
 }
 
 class AppointmentWidget extends StatelessWidget {
-  String title;
-  bool status = true;
-  String? content;
-  String? date;
+  Appointment appointment;
+
   AppointmentWidget({
     super.key,
-    required this.title,
-    this.content,
-    required this.status,
-    this.date,
+    required this.appointment,
   });
 
   @override
@@ -1803,40 +1799,37 @@ class AppointmentWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                status
-                    ? Text(
-                        title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff313131),
-                          fontSize: 18.sp,
-                        ),
-                      ).tr()
-                    : Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/warning.svg',
-                            width: 20.w,
-                            height: 20.w,
-                          ),
-                          10.horizontalSpace,
-                          Text(
-                            title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xffff4141),
-                              fontSize: 18.sp,
-                            ),
-                          ).tr()
-                        ],
-                      ),
+                Text(
+                  appointment.washType!,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xff313131),
+                    fontSize: 18.sp,
+                  ),
+                ).tr(),
+                // : Row(
+                //     children: [
+                //       SvgPicture.asset(
+                //         'assets/images/warning.svg',
+                //         width: 20.w,
+                //         height: 20.w,
+                //       ),
+                //       10.horizontalSpace,
+                //       Text(
+                //         appointment.washType!,
+                //         style: TextStyle(
+                //           fontWeight: FontWeight.bold,
+                //           color: const Color(0xffff4141),
+                //           fontSize: 18.sp,
+                //         ),
+                //       ).tr()
+                //     ],
+                //   ),
                 3.verticalSpace,
                 Text(
-                  'Mercedes-Benz  |  57631  8',
+                  appointment.carDetails!,
                   style: TextStyle(
-                    color: status
-                        ? const Color(0xff698695)
-                        : const Color(0xffb3c2c9),
+                    color: Color(0xff698695),
                     fontWeight: FontWeight.w600,
                     fontSize: 15.sp,
                   ),
@@ -1845,54 +1838,58 @@ class AppointmentWidget extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    status
-                        ? SvgPicture.asset(
-                            'assets/images/app-select-icon.svg',
-                            height: 42.h,
-                            width: 42.h,
-                          )
-                        : Stack(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/images/disabled.svg',
-                                height: 42.h,
-                                width: 42.h,
-                              ),
-                              Container(
-                                height: 42.h,
-                                width: 42.h,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(21.r),
-                                ),
-                              )
-                            ],
-                          ),
+                    SvgPicture.asset(
+                      'assets/images/app-select-icon.svg',
+                      height: 42.h,
+                      width: 42.h,
+                    ),
+                    // : Stack(
+                    //     children: [
+                    //       SvgPicture.asset(
+                    //         'assets/images/disabled.svg',
+                    //         height: 42.h,
+                    //         width: 42.h,
+                    //       ),
+                    //       Container(
+                    //         height: 42.h,
+                    //         width: 42.h,
+                    //         decoration: BoxDecoration(
+                    //           color: Colors.white.withOpacity(0.5),
+                    //           borderRadius: BorderRadius.circular(21.r),
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
                     11.horizontalSpace,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Tue, April 25, 2023',
+                          appointment.appointmentDateTime!,
                           style: TextStyle(
-                            color: status
-                                ? const Color(0xff030303)
-                                : const Color(0xff030303).withOpacity(0.4),
+                            color: const Color(0xff030303),
                             fontWeight: FontWeight.w600,
                             fontSize: 13.sp,
                           ),
                         ).tr(),
                         3.verticalSpace,
                         Text(
-                          '17:00 - 17:30',
+                          appointment.appointmentHour!,
                           style: TextStyle(
-                            color: status
-                                ? const Color(0xff030303)
-                                : const Color(0xff030303).withOpacity(0.4),
+                            color: const Color(0xff030303),
                             fontWeight: FontWeight.w600,
                             fontSize: 13.sp,
                           ),
                         ).tr(),
+                        3.verticalSpace,
+                        Text(
+                          appointment.status!,
+                          style: TextStyle(
+                            color: const Color(0xff030303),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13.sp,
+                          ),
+                        )
                       ],
                     )
                   ],

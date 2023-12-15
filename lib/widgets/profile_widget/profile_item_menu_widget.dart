@@ -81,29 +81,28 @@ class ProfileItemMenuWidget extends StatelessWidget {
           child: const CardSaveWashesWidget(),
         ),
         25.verticalSpace,
-        Row(
-          children: [
-            20.horizontalSpace,
-            SvgPicture.asset(
-              "assets/images/sign-out-select-icon.svg",
-              height: 42.sp,
-              width: 42.sp,
-            ),
-            16.5.horizontalSpace,
-            InkWell(
-              onTap: () {
-                showSignOut(context: context);
-                
-              },
-              child: Text('signout',
+        InkWell(
+          onTap: () {
+            showSignOut(context: context);
+          },
+          child: Row(
+            children: [
+              20.horizontalSpace,
+              SvgPicture.asset(
+                "assets/images/sign-out-select-icon.svg",
+                height: 42.sp,
+                width: 42.sp,
+              ),
+              16.5.horizontalSpace,
+              Text('signout',
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xff030303),
                   )).tr(),
-            ),
-            20.horizontalSpace,
-          ],
+              20.horizontalSpace,
+            ],
+          ),
         )
       ],
     );

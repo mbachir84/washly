@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         builder: (controller) {
                           return !controller.appointmentShow
                               ? Padding(
-                                  padding: EdgeInsets.only(bottom: 100.0.h),
+                                  padding: EdgeInsets.only(bottom: 80.0.h),
                                   child: SizedBox(
                                     width: 382.w,
                                     height: 67.h,

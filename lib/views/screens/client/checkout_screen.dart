@@ -504,6 +504,7 @@ class CheckoutScreen extends StatelessWidget {
                             GradientButton(
                               text: 'confirmandpay',
                               onpress: () {
+                                // print(" yeeear  ${controller.dateValue.year} ${controller.dateValue.month} ${controller.dateValue.day}");
                                 cont.addToAppointment();
                                 Get.to(
                                   () => const PayScreen(),

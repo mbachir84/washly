@@ -1,9 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:washly/controllers/client/home_controller.dart';
 import 'package:washly/controllers/client/main_controller.dart';
 import 'package:washly/utils/models/appointment.dart';
 import 'package:washly/utils/models/w_user.dart';
 import 'package:washly/utils/services.dart';
+import 'package:washly/views/screens/client/home_screen.dart';
 
 import '../../views/components/widgets.dart';
 
@@ -17,6 +23,9 @@ class AppointementController extends GetxController {
   String snackBarSubTitle = "";
   bool paid = false;
   bool state = false;
+  List<Appointment> appoitmentList = [];
+  List<String> appoitment_Id = [];
+  int myIndex = 0;
   // final mainController = Get.put(MainController());
   // String typeWash ="";
   // wash =  mainController.typeWash();
@@ -36,26 +45,72 @@ class AppointementController extends GetxController {
     });
   }
 
-  Appointment appointment = Appointment( //date,carDetails,
+  Appointment appointment = Appointment(
+      //date,carDetails,
       uid: "uid",
       status: "scheduled",
       paymentInformation: "Credit Card");
-      
-  submit() {
-    FirebaseFirestore.instance
+
+  submit() async {
+    await FirebaseFirestore.instance
         .collection("appointment")
         .add(appointment.toJson());
+  }
+
+//storing appoitement_Ids for every user
+  getAppoitment() async {
+    appoitmentList.clear();
+    await FirebaseFirestore.instance
+        .collection('appointment')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        if (doc["uid"] == user.uid) {
+          Appointment appointment =
+              Appointment.fromJson(doc.data()! as Map<String, dynamic>);
+          appoitmentList.add(appointment);
+        }
+      }
+    });
+    // print("helloo  ${appoitmentList[0].customerName}");
+    // appoitment_Id.forEach((element) {
+    //   print(element);
+    // });
+  }
+
+  confirm() async {
+    showPayementStatusDialog(
+        context: Get.context!, allowBackNavigation: true, status: true);
+
+    await submit();
+    await getAppoitment();
+    Timer(const Duration(milliseconds: 500), () {
+      Get.back();
+      final cont = Get.put(HomeController());
+      cont.changeScreen(2);
+      Get.off(
+        () => const HomeScreen(),
+        transition: Transition.rightToLeft,
+        duration: 500.milliseconds,
+      );
+      cont.update();
+
+      Get.snackbar("Success", "Appointement Added",
+          backgroundColor: Colors.green);
+    });
   }
 
   @override
   void onInit() async {
     isLoading.toggle();
     update();
-    await getUserFromSession().then((value) {
+    await getUserFromSession().then((value) async {
       user = value;
+      await getAppoitment();
       isLoading.toggle();
       update();
     });
+
     super.onInit();
   }
 }

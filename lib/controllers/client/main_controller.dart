@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:washly/controllers/client/appoitment_controller.dart';
@@ -34,13 +35,17 @@ class MainController extends GetxController {
   addToAppointment() {
     final appoitmentController = Get.put(AppointementController());
     final chooseCar = Get.put(ChooseCarController());
+    final checkoutController = Get.put(CheckoutController());
+
     appoitmentController.appointment.washType = typeWash();
     appoitmentController.appointment.customerName = user.fullname;
-    final checkoutController = Get.put(CheckoutController());
     appoitmentController.appointment.appointmentDateTime =
+        DateFormat('EEEE, d MMM, yyyy').format(checkoutController.dateValue);
+    appoitmentController.appointment.appointmentHour =
         checkoutController.hourSelected;
     appoitmentController.appointment.contactInformation = user.phoneNumber;
     appoitmentController.appointment.carDetails = chooseCar.selectedCar.make;
+    appoitmentController.appointment.uid = user.uid;
   }
 
   String typeWash() {
@@ -56,7 +61,6 @@ class MainController extends GetxController {
 
       // Provide a default value
     }
-    
   }
 
   String priceWash() {

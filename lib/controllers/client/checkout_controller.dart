@@ -75,7 +75,6 @@ class CheckoutController extends GetxController {
       // }
     } else {
       for (int i = 1; i < 14; i++) {
-        
         update();
         if (counter == i) {
           hourSelected = "${07 + i}:00 - ${08 + i}:00";
@@ -134,12 +133,11 @@ class CheckoutController extends GetxController {
 
     if (dateFormat != DateFormat.yMMMMd().format(currentTime)) {
       isToday = false;
-      if (counter == 0 ) {
-        
+      if (counter == 0) {
         allowed = false;
         update();
       }
-      
+
       update();
     } else {
       isToday = true;
@@ -177,6 +175,7 @@ class CheckoutController extends GetxController {
     }
 
     dateFormat = DateFormat.yMMMMd().format(dateValue);
+    
     super.onInit();
   }
 }

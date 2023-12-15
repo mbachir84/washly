@@ -8,12 +8,12 @@ class Appointment {
   String? carDetails;
   String? washType;
   String? appointmentDateTime;
-  String? status;                        //scheduled ,in progress, completed, canceled, waiting
+  String? appointmentHour;
+  String? status; //scheduled ,in progress, completed, canceled, waiting
   String? paymentInformation;
   String? specialRequests; //
   String? assignedWasher;
 
-  
   Appointment({
     this.uid,
     this.customerName,
@@ -21,19 +21,14 @@ class Appointment {
     this.carDetails,
     this.washType,
     this.appointmentDateTime,
+    this.appointmentHour,
     this.status,
     this.paymentInformation,
     this.specialRequests,
     this.assignedWasher,
   });
 
- 
 
-  
-
-  String appointmentToJson() => json.encode(toJson());
-
-  Appointment fromJson(String source) => Appointment.fromJson(json.decode(source) as Map<String, dynamic>);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -43,6 +38,7 @@ class Appointment {
       'carDetails': carDetails,
       'washType': washType,
       'appointmentDateTime': appointmentDateTime,
+      'appointmentHour': appointmentHour,
       'status': status,
       'paymentInformation': paymentInformation,
       'specialRequests': specialRequests,
@@ -58,12 +54,21 @@ class Appointment {
       carDetails: map['carDetails'] != null ? map['carDetails'] as String : null,
       washType: map['washType'] != null ? map['washType'] as String : null,
       appointmentDateTime: map['appointmentDateTime'] != null ? map['appointmentDateTime'] as String : null,
+      appointmentHour: map['appointmentHour'] != null ? map['appointmentHour'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,
       paymentInformation: map['paymentInformation'] != null ? map['paymentInformation'] as String : null,
       specialRequests: map['specialRequests'] != null ? map['specialRequests'] as String : null,
       assignedWasher: map['assignedWasher'] != null ? map['assignedWasher'] as String : null,
     );
   }
+
+  String appointmentToJson() => json.encode(toJson());
+
+  Appointment fromJson(String source) =>
+      Appointment.fromJson(json.decode(source) as Map<String, dynamic>);
+
+
+
 
 
 }

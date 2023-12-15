@@ -94,10 +94,10 @@ class WashHistoryScreen extends StatelessWidget {
                                                       controller.update();
                                                     },
                                                     child: AppointmentWidget(
-                                                        title: index == 1
-                                                            ? "Full Wash"
-                                                            : "basicwash",
-                                                        status: true),
+                                                      appointment: controller
+                                                              .appoitmentList[
+                                                          index],
+                                                    ),
                                                   ),
                                                   index !=
                                                           controller

@@ -414,6 +414,7 @@ class PayScreen extends StatelessWidget {
                     allowed: controller.allowed,
                     text: 'Confirm',
                     onpress: () async {
+                      //redirect to orderScreen
                       if (cont.isToday && cont.hourSelected == "Wash now") {
                         showPayementStatusDialog(
                             context: Get.context!,
@@ -426,36 +427,10 @@ class PayScreen extends StatelessWidget {
                           duration: 500.milliseconds,
                         );
                       } else {
-                        //appointement
-                        Get.defaultDialog(title: "License-Plate Missing",
-                        middleText: "You forgot to enter the license plate field\nChoose one of the options:",
-                        textCancel: "Meet the washer",
-                        textConfirm: "Submit ",
-                        );
-                        
-                        
-                        
-                        
-                        // final controller = Get.put(AppointementController());
-                        // showPayementStatusDialog(
-                        //     context: Get.context!,
-                        //     allowBackNavigation: true,
-                        //     status: true);
-                        // await controller.submit();
-                        // Timer(const Duration(seconds: 1), () {
-                        //   Get.back();
-                        //   final cont = Get.put(HomeController());
-                        //   cont.changeScreen(2);
-                        //   Get.off(
-                        //     () => const HomeScreen(),
-                        //     transition: Transition.rightToLeft,
-                        //     duration: 500.milliseconds,
-                        //   );
-                        //   cont.update();
+                        //Store appointement
 
-                        //   Get.snackbar("Success", "Appointement Added",
-                        //       backgroundColor: Colors.green);
-                        // });
+                        final controller = Get.put(AppointementController());
+                        controller.confirm();
                       }
 
                       // controller.pay();
