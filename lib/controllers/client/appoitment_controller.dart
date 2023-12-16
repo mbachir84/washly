@@ -46,8 +46,6 @@ class AppointementController extends GetxController {
   }
 
   Appointment appointment = Appointment(
-      //date,carDetails,
-      uid: "uid",
       status: "scheduled",
       paymentInformation: "Credit Card");
 
@@ -57,7 +55,6 @@ class AppointementController extends GetxController {
         .add(appointment.toJson());
   }
 
-//storing appoitement_Ids for every user
   getAppoitment() async {
     appoitmentList.clear();
     await FirebaseFirestore.instance
@@ -72,19 +69,15 @@ class AppointementController extends GetxController {
         }
       }
     });
-    // print("helloo  ${appoitmentList[0].customerName}");
-    // appoitment_Id.forEach((element) {
-    //   print(element);
-    // });
+    
   }
 
   confirm() async {
     showPayementStatusDialog(
         context: Get.context!, allowBackNavigation: true, status: true);
-
     await submit();
-    await getAppoitment();
-    Timer(const Duration(milliseconds: 500), () {
+    Timer(const Duration(milliseconds: 300), () async {
+      await getAppoitment();
       Get.back();
       final cont = Get.put(HomeController());
       cont.changeScreen(2);

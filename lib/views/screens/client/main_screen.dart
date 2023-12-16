@@ -165,7 +165,7 @@ class MainScreen extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              width: 123.w,
+                              width: 124.w,
                               height: 41.h,
                               child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -177,15 +177,13 @@ class MainScreen extends StatelessWidget {
                                     // Get.to(() => const PromoCodeScreen());
                                     Get.to(() =>const RateExperienceScreen());
                                   },
-                                  child: Center(
-                                    child: Text(
-                                      'invitefriend',
-                                      style: TextStyle(
-                                          color: const Color(0xff030303),
-                                          fontSize: 11.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ).tr(),
-                                  )),
+                                  child: Text(
+                                    'invitefriend',
+                                    style: TextStyle(
+                                        color: const Color(0xff030303),
+                                        fontSize: 11.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ).tr()),
                             )
                           ],
                         ),

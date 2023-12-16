@@ -1799,14 +1799,28 @@ class AppointmentWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  appointment.washType!,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xff313131),
-                    fontSize: 18.sp,
-                  ),
-                ).tr(),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        appointment.washType!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xff313131),
+                          fontSize: 18.sp,
+                        ),
+                      ).tr(),
+                      5.horizontalSpace,
+                      Text(
+                        "(${appointment.status!})",
+                        style: TextStyle(
+                          color: const Color(0xff030303),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13.sp,
+                        ),
+                      )
+                    ]),
                 // : Row(
                 //     children: [
                 //       SvgPicture.asset(
@@ -1882,14 +1896,6 @@ class AppointmentWidget extends StatelessWidget {
                           ),
                         ).tr(),
                         3.verticalSpace,
-                        Text(
-                          appointment.status!,
-                          style: TextStyle(
-                            color: const Color(0xff030303),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13.sp,
-                          ),
-                        )
                       ],
                     )
                   ],
