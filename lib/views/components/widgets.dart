@@ -266,7 +266,7 @@ Future showBottomDialog<T>(
                 height: 34.h,
                 width: double.infinity.w,
                 decoration: BoxDecoration(
-                    color: const Color(0xffeaeff0),
+                    //color: const Color(0xffeaeff0),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(24.r),
                         topRight: Radius.circular(24.r))),
@@ -294,7 +294,7 @@ Future showBottomDialog<T>(
                                 1)), //after 21:00 the first date is tomorrows date
                     width: 70.w,
                     controller: controller.datePickerController,
-                    height: 100.w,
+                    height: 110.h,
                     dateTextStyle: TextStyle(
                         fontSize: 24.sp,
                         color: const Color(0xff030303),

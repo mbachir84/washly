@@ -38,6 +38,7 @@ class WelcomeScreen extends StatelessWidget {
             25.verticalSpace,
             Text(
               'carclean',
+              textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 19.sp,

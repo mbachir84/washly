@@ -21,8 +21,8 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await handlerPermission();
   Widget? main;
-  Get.put(AddressesListController()); 
-  Get.put(MainController());
+  //Get.put(AddressesListController());
+  //Get.put(MainController());
   await initWidget().then(
     (value) {
       main = value;

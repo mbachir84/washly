@@ -161,7 +161,7 @@ class VerifyPhoneScreen extends StatelessWidget {
                                       Get.back();
                                     },
                                   ))),
-                          14.horizontalSpace,
+                          10.horizontalSpace,
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -71,9 +71,11 @@ class AddAddressController extends GetxController {
         'addresses': user.addresses!.map((e) => e.toJson()).toList()
       }).then((value) async {
         final addressListController = Get.put(AddressesListController());
+        
         final mainController = Get.put(MainController());
         addressListController.user.addresses = user.addresses!;
         mainController.user.addresses = user.addresses!;
+        saveToSession(user);
         mainController.update();
         addressListController.showScnackbar(
             'New address added', "Super Market address added", true);

@@ -14,14 +14,14 @@ class HomeController extends GetxController {
   // String snackBarSubTitle = "";
   bool state = false;
   List<Widget> screens = [
-    const MainScreen(),
+    MainScreen(),
     const CarsListScreen(),
     const AppointmentScreen(),
     const ProfileScreen()
   ];
   RxBool isLoading = false.obs;
   int currentIndex = 0;
-  Widget currentScreen = const MainScreen();
+  Widget currentScreen =  MainScreen();
 
   void changeScreen(int index) {
     currentScreen = screens[index];
@@ -41,11 +41,11 @@ class HomeController extends GetxController {
   // }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     isLoading.toggle();
     update();
-    getUserFromSession().then((value) {
-      getUserFromDb(value.uid).then((value) {
+    await getUserFromSession().then((value) async {
+      await getUserFromDb(value.uid).then((value) {
         WUser user = value;
         saveToSession(user);
         isLoading.toggle();

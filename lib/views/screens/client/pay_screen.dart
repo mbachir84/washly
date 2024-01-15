@@ -68,152 +68,147 @@ class PayScreen extends StatelessWidget {
                     color: const Color(0xff698695).withOpacity(0.2),
                   ),
                   21.verticalSpace,
-                  InkWell(
-                    onTap: () {
-                      controller.payementWay = PayementWay.wallet;
-                      controller.verify();
-                      controller.update();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Radio<PayementWay>(
-                                fillColor: MaterialStateColor.resolveWith(
-                                    (states) => controller.payementWay ==
-                                            PayementWay.wallet
-                                        ? primaryColor
-                                        : const Color(0xff698695)),
-                                activeColor: Colors.white,
-                                value: PayementWay.wallet,
-                                groupValue: controller.payementWay,
-                                onChanged: (value) {
-                                  controller.payementWay = value!;
-                                  controller.verify();
-                                  controller.update();
-                                }),
-                          ),
-                        ),
-                        15.horizontalSpace,
-                        Column(
-                          children: [
-                            Text(
-                              'wallet',
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xff030303)),
-                            ).tr(),
-                            5.verticalSpace,
-                            Text(
-                              '0 MAD',
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff698695)),
-                            ).tr()
-                          ],
-                        ),
-                        const Spacer(),
-                        InkWell(
-                          onTap: () => Get.to(() => AddFundsScreeen()),
-                          child: Text(
-                            "addfunds",
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w600,
-                                color: primaryColor),
-                          ).tr(),
-                        )
-                      ],
-                    ),
-                  ),
-                  22.verticalSpace,
-                  Container(
-                    height: 1,
-                    width: 1.sw,
-                    color: const Color(0xff698695).withOpacity(0.2),
-                  ),
-                  21.verticalSpace,
-                  InkWell(
-                    onTap: () {
-                      controller.payementWay = PayementWay.creditcard;
-                      controller.verify();
-                      controller.update();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Transform.scale(
-                          scale: 1.5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Radio<PayementWay>(
-                                fillColor: MaterialStateColor.resolveWith(
-                                    (states) => controller.payementWay ==
-                                            PayementWay.creditcard
-                                        ? primaryColor
-                                        : const Color(0xff698695)),
-                                activeColor: Colors.white,
-                                value: PayementWay.creditcard,
-                                groupValue: controller.payementWay,
-                                onChanged: (value) {
-                                  controller.payementWay = value!;
-                                  controller.verify();
-                                  controller.update();
-                                }),
-                          ),
-                        ),
-                        15.horizontalSpace,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Credit Card (get 5% off)',
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xff030303)),
-                            ).tr(),
-                            5.verticalSpace,
-                            Text(
-                              '**** 6589',
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff698695)),
-                            ).tr()
-                          ],
-                        ),
-                        const Spacer(),
-                        Text(
-                          "edit",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w600,
-                              color: primaryColor),
-                        ).tr()
-                      ],
-                    ),
-                  ),
-                  23.verticalSpace,
-                  Container(
-                    height: 1,
-                    width: 1.sw,
-                    color: const Color(0xff698695).withOpacity(0.2),
-                  ),
-                  21.verticalSpace,
+                  // InkWell(
+                  //   onTap: () {
+                  //     controller.payementWay = PayementWay.wallet;
+                  //     controller.verify();
+                  //     controller.update();
+                  //   },
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Transform.scale(
+                  //         scale: 1.5,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.all(0),
+                  //           child: Radio<PayementWay>(
+                  //               fillColor: MaterialStateColor.resolveWith(
+                  //                   (states) => controller.payementWay ==
+                  //                           PayementWay.wallet
+                  //                       ? primaryColor
+                  //                       : const Color(0xff698695)),
+                  //               activeColor: Colors.white,
+                  //               value: PayementWay.wallet,
+                  //               groupValue: controller.payementWay,
+                  //               onChanged: (value) {
+                  //                 controller.payementWay = value!;
+                  //                 controller.verify();
+                  //                 controller.update();
+                  //               }),
+                  //         ),
+                  //       ),
+                  //       15.horizontalSpace,
+                  //       Column(
+                  //         children: [
+                  //           Text(
+                  //             'wallet',
+                  //             style: TextStyle(
+                  //                 fontSize: 16.sp,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: const Color(0xff030303)),
+                  //           ).tr(),
+                  //           5.verticalSpace,
+                  //           Text(
+                  //             '0 MAD',
+                  //             style: TextStyle(
+                  //                 fontSize: 13.sp,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 color: const Color(0xff698695)),
+                  //           ).tr()
+                  //         ],
+                  //       ),
+                  //       const Spacer(),
+                  //       InkWell(
+                  //         onTap: () => Get.to(() => AddFundsScreeen()),
+                  //         child: Text(
+                  //           "addfunds",
+                  //           style: TextStyle(
+                  //               fontSize: 15.sp,
+                  //               fontWeight: FontWeight.w600,
+                  //               color: primaryColor),
+                  //         ).tr(),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // 22.verticalSpace,
+                  // Container(
+                  //   height: 1,
+                  //   width: 1.sw,
+                  //   color: const Color(0xff698695).withOpacity(0.2),
+                  // ),
+                  // 21.verticalSpace,
+                  // InkWell(
+                  //   onTap: () {
+                  //     controller.payementWay = PayementWay.creditcard;
+                  //     controller.verify();
+                  //     controller.update();
+                  //   },
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.start,
+                  //     children: [
+                  //       Transform.scale(
+                  //         scale: 1.5,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.all(0),
+                  //           child: Radio<PayementWay>(
+                  //               fillColor: MaterialStateColor.resolveWith(
+                  //                   (states) => controller.payementWay ==
+                  //                           PayementWay.creditcard
+                  //                       ? primaryColor
+                  //                       : const Color(0xff698695)),
+                  //               activeColor: Colors.white,
+                  //               value: PayementWay.creditcard,
+                  //               groupValue: controller.payementWay,
+                  //               onChanged: (value) {
+                  //                 controller.payementWay = value!;
+                  //                 controller.verify();
+                  //                 controller.update();
+                  //               }),
+                  //         ),
+                  //       ),
+                  //       15.horizontalSpace,
+                  //       Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Credit Card (get 5% off)',
+                  //             style: TextStyle(
+                  //                 fontSize: 16.sp,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: const Color(0xff030303)),
+                  //           ).tr(),
+                  //           5.verticalSpace,
+                  //           Text(
+                  //             '**** 6589',
+                  //             style: TextStyle(
+                  //                 fontSize: 13.sp,
+                  //                 fontWeight: FontWeight.w500,
+                  //                 color: const Color(0xff698695)),
+                  //           ).tr()
+                  //         ],
+                  //       ),
+                  //       const Spacer(),
+                  //       Text(
+                  //         "edit",
+                  //         style: TextStyle(
+                  //             fontSize: 15.sp,
+                  //             fontWeight: FontWeight.w600,
+                  //             color: primaryColor),
+                  //       ).tr()
+                  //     ],
+                  //   ),
+                  // ),
+                  
+                  
                   InkWell(
                       onTap: () {
                         controller.payementWay = PayementWay.cash;
                         controller.verify();
                         controller.update();
                       },
-                      child: (cont.isToday && cont.hourSelected == "Wash now")
-                          ? Column(children: [
+                      child: 
+                          Column(children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -274,7 +269,7 @@ class PayScreen extends StatelessWidget {
                                 color: const Color(0xff698695).withOpacity(0.2),
                               ),
                             ])
-                          : Container()),
+                          ),
                   22.verticalSpace,
                   contr.washType != WashType.basic
                       ? Row(children: [
@@ -325,9 +320,9 @@ class PayScreen extends StatelessWidget {
                             width: 29.w,
                           ),
                           14.horizontalSpace,
-                          Flexible(
+                          Expanded(
                               child: Text(
-                            "We do nt take any responsibilites for the\nloss or theft of belongings left in the car",
+                            "We do nt take any responsibilites for the loss or theft of belongings left in the car",
                             style: TextStyle(
                                 height: 1.5,
                                 fontSize: 12.sp,

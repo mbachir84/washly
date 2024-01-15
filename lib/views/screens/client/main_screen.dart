@@ -27,7 +27,8 @@ import 'package:washly/views/screens/client/wallet_screen.dart';
 import '../../../controllers/client/main_controller.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+  AddressesListController cont = Get.put(AddressesListController());
   // var addressController = Get.put(() => AddAddressController());
 
   @override
@@ -174,14 +175,15 @@ class MainScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(8.r))),
                                   onPressed: () {
-                                    // Get.to(() => const PromoCodeScreen());
-                                    Get.to(() =>const RateExperienceScreen());
+                                    Get.to(() => const PromoCodeScreen());
+                                    // Get.to(() =>const RateExperienceScreen());
                                   },
                                   child: Text(
                                     'invitefriend',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: const Color(0xff030303),
-                                        fontSize: 11.sp,
+                                        fontSize: 10.sp,
                                         fontWeight: FontWeight.bold),
                                   ).tr()),
                             )
@@ -195,7 +197,9 @@ class MainScreen extends StatelessWidget {
                 GetBuilder<MainController>(
                     init: MainController(),
                     builder: (controller) {
-                      return controller.isLoading.value
+                      final cont = Get.put(AddressesListController());
+
+                      return controller.isLoading.value && cont.isLoading.value
                           ? Center(
                               child: SpinKitDoubleBounce(
                                 color: Colors.white,
@@ -240,7 +244,7 @@ class MainScreen extends StatelessWidget {
                                                 controller.update();
                                               },
                                               child: Container(
-                                                  width: 185.w,
+                                                  width: 187.w,
                                                   height: 94.h,
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,
@@ -562,6 +566,7 @@ class MainScreen extends StatelessWidget {
                                         10.verticalSpace,
                                         InkWell(
                                           onTap: () {
+                                            
                                             // final homeController =
                                             //     Get.put(HomeController());
                                             // homeController.changeScreen(1);
@@ -574,46 +579,81 @@ class MainScreen extends StatelessWidget {
                                           child:
                                               GetBuilder<ChooseCarController>(
                                             init: ChooseCarController(),
-                                            builder: (contr) => Container(
-                                                height: 70.h,
-                                                width: double.infinity,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          9.r),
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                        color:
-                                                            Color(0x1a000000),
-                                                        blurRadius: 5)
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 19.w),
-                                                  child: Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                          'assets/images/car-select-icon.svg',
-                                                          height: 42.h,
-                                                          width: 42.w,
-                                                          fit: BoxFit.cover),
-                                                      10.horizontalSpace,
-                                                      controller.user.cars
-                                                              .isNotEmpty
-                                                          ? Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  contr.selectedCar
-                                                                          .make ??
-                                                                      'Select car',
+                                            builder: (contr) => contr
+                                                    .isLoading.value
+                                                ? Center(
+                                                    child: SpinKitDoubleBounce(
+                                                      color: Colors.white,
+                                                      size: 70.0.sp,
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    height: 70.h,
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              9.r),
+                                                      boxShadow: const [
+                                                        BoxShadow(
+                                                            color: Color(
+                                                                0x1a000000),
+                                                            blurRadius: 5)
+                                                      ],
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 19.w),
+                                                      child: Row(
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                              'assets/images/car-select-icon.svg',
+                                                              height: 42.h,
+                                                              width: 42.w,
+                                                              fit:
+                                                                  BoxFit.cover),
+                                                          10.horizontalSpace,
+                                                          contr.user.cars
+                                                                  .isNotEmpty
+                                                              ? Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      contr.selectedCar
+                                                                              .make ??
+                                                                          'Select car',
+                                                                      style: TextStyle(
+                                                                          color: const Color(
+                                                                              0xff313131),
+                                                                          fontSize: 16
+                                                                              .sp,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                    4.verticalSpace,
+                                                                    Text(
+                                                                      contr.selectedCar
+                                                                              .licencePlate ??
+                                                                          '',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color:
+                                                                            titleColor,
+                                                                        fontSize:
+                                                                            13.sp,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              : Text(
+                                                                  'Select Car',
                                                                   style: TextStyle(
                                                                       color: const Color(
                                                                           0xff313131),
@@ -622,43 +662,18 @@ class MainScreen extends StatelessWidget {
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold),
-                                                                ),
-                                                                4.verticalSpace,
-                                                                Text(
-                                                                  contr.selectedCar
-                                                                          .licencePlate ??
-                                                                      '',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color:
-                                                                        titleColor,
-                                                                    fontSize:
-                                                                        13.sp,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          : Text(
-                                                              'Select Car',
-                                                              style: TextStyle(
-                                                                  color: const Color(
-                                                                      0xff313131),
-                                                                  fontSize:
-                                                                      16.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ).tr(),
-                                                      const Spacer(),
-                                                      Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        color: const Color(
-                                                            0xff313131),
-                                                        size: 16.sp,
-                                                      )
-                                                    ],
-                                                  ),
-                                                )),
+                                                                ).tr(),
+                                                          const Spacer(),
+                                                          Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            color: const Color(
+                                                                0xff313131),
+                                                            size: 16.sp,
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )),
                                           ),
                                         ),
                                         16.verticalSpace,
@@ -696,83 +711,85 @@ class MainScreen extends StatelessWidget {
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 19.w),
+
+                                                //should be AddressesListController
                                                 child: GetBuilder<
                                                     AddressesListController>(
-                                                  init:
-                                                      AddressesListController(),
-                                                  builder: (cont) => Row(
-                                                    children: [
-                                                      SvgPicture.asset(
-                                                          'assets/images/location-select-icon.svg',
-                                                          height: 42.h,
-                                                          width: 42.w,
-                                                          fit: BoxFit.cover),
-                                                      10.horizontalSpace,
-                                                      cont.isSelected
-                                                          ? Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  cont.selectedAddress
-                                                                          .name ??
-                                                                      '', // Use ?. and provide a fallback value
-
-                                                                  style: TextStyle(
-                                                                      color: const Color(
-                                                                          0xff313131),
-                                                                      fontSize:
-                                                                          16.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                                4.verticalSpace,
-                                                                SizedBox(
-                                                                  width: 200.w,
-                                                                  child: Text(
-                                                                    cont.selectedAddress
-                                                                            .description ??
-                                                                        '',
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    maxLines: 1,
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color:
-                                                                          titleColor,
-                                                                      fontSize:
-                                                                          13.sp,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                  builder: (cont) =>
+                                                      cont.isLoading.value
+                                                          ? Center(
+                                                              child:
+                                                                  SpinKitDoubleBounce(
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 70.0.sp,
+                                                              ),
                                                             )
-                                                          : Text(
-                                                              'Select address',
-                                                              style: TextStyle(
+                                                          : Row(
+                                                              children: [
+                                                                SvgPicture.asset(
+                                                                    'assets/images/location-select-icon.svg',
+                                                                    height:
+                                                                        42.h,
+                                                                    width: 42.w,
+                                                                    fit: BoxFit
+                                                                        .cover),
+                                                                10.horizontalSpace,
+                                                                cont
+                                                                        .user
+                                                                        .addresses!
+                                                                        .isNotEmpty
+                                                                    //maincontroller
+                                                                    //controller.user.email!.isNotEmpty
+                                                                    ? Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            cont.selectedAddress.name ??
+                                                                                'Select address not empty',
+                                                                            style: TextStyle(
+                                                                                color: const Color(0xff313131),
+                                                                                fontSize: 16.sp,
+                                                                                fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                          4.verticalSpace,
+                                                                          SizedBox(
+                                                                            width:
+                                                                                200.w,
+                                                                            child:
+                                                                                Text(
+                                                                              cont.selectedAddress.description ?? '',
+                                                                              overflow: TextOverflow.ellipsis,
+                                                                              maxLines: 1,
+                                                                              style: TextStyle(
+                                                                                color: titleColor,
+                                                                                fontSize: 13.sp,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : Text(
+                                                                        'Select address',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                const Color(0xff313131),
+                                                                            fontSize: 16.sp,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ).tr(),
+                                                                const Spacer(),
+                                                                Icon(
+                                                                  Icons
+                                                                      .arrow_forward_ios,
                                                                   color: const Color(
                                                                       0xff313131),
-                                                                  fontSize:
-                                                                      16.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ).tr(),
-                                                      const Spacer(),
-                                                      Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        color: const Color(
-                                                            0xff313131),
-                                                        size: 16.sp,
-                                                      )
-                                                    ],
-                                                  ),
+                                                                  size: 16.sp,
+                                                                )
+                                                              ],
+                                                            ),
                                                 ),
                                               )),
                                         ),

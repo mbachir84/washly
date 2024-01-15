@@ -88,17 +88,19 @@ class MainController extends GetxController {
   // }
 
   @override
-  void onInit() {
+  void onInit() async {
     // updateCarsDocument();
     handlerPermission();
     isLoading.toggle();
     update();
-    getUserFromSession().then((value) {
+    await getUserFromSession().then((value) {
+
       user = value;
       getUserFromDb(value.uid).then((value) {
         user = value;
         getUserLocation();
         isLoading.toggle();
+        print("mouad mainc ${user.addresses![0].name}");
         update();
       });
     });
